@@ -1,0 +1,20 @@
+---
+- name: Setup potato
+  hosts: potato
+
+  vars:
+    docker_users: ["{{ homelab_user }}"]
+
+  roles:
+    - common
+    - potato
+
+- name: Setup carrot
+  hosts: carrot
+
+  vars:
+    docker_users: ["{{ homelab_user }}"]
+
+  roles:
+    - common
+    - carrot
