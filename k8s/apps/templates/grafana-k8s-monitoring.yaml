@@ -17,7 +17,7 @@ spec:
       helm:
         releaseName: grafana-k8s-monitoring
         valueFiles:
-          - $values/k8s/apps/grafana-k8s-monitoring/values.yaml
+          - $values/k8s/grafana-k8s-monitoring/values.yaml
     - repoURL: {{ .Values.spec.source.repoURL }}
       targetRevision: {{ .Values.spec.source.targetRevision }}
       ref: values
