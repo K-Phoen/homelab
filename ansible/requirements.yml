@@ -1,10 +1,10 @@
 ---
 roles:
-  - name: artis3n.tailscale
-    version: "4.5.0"
   - name: geerlingguy.docker
     version: "7.4.5"
 
 collections:
+  - name: artis3n.tailscale
+    version: "0.2.1"
   - name: grafana.grafana
     version: "5.7.0"
