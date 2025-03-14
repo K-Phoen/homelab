@@ -15,3 +15,6 @@
     tailscale_tags: ["homelab"]
     tailscale_args: "--ssh --advertise-exit-node"
     tailscale_oauth_ephemeral: false
+
+- name: Setup firewall
+  ansible.builtin.include_tasks: ./ufw.yml

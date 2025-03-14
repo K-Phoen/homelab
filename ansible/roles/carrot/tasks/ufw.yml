@@ -1,0 +1,68 @@
+---
+- name: Install ufw
+  become: true
+  ansible.builtin.apt:
+    name: ufw
+    update_cache: true
+
+- name: Enable logging
+  become: true
+  community.general.ufw:
+    logging: 'medium'
+
+- name: Setup default values
+  become: true
+  ansible.builtin.copy:
+    src: files/ufw
+    dest: /etc/default/ufw
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Allow all access to port 80 - HTTP
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Allow all access to port 443 - HTTPS
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: Allow all access to port 4242 - Custom SSH
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '4242'
+    src: '192.168.1.0/24'
+
+# Needed by k3s
+# See https://docs.k3s.io/installation/requirements?os=debian#operating-systems & https://docs.k3s.io/installation/requirements?os=debian#inbound-rules-for-k3s-nodes
+- name: Allow access to k8s apiserver
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '6443'
+    proto: tcp
+    src: '192.168.1.0/24'
+
+- name: Open pods networking
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '10.42.0.0/16'
+
+- name: Open services networking
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '10.43.0.0/16'
+
+- name: Enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
