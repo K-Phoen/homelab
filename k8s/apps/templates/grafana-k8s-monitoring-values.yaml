@@ -1,0 +1,215 @@
+cluster:
+  name: homelab
+destinations:
+  - name: grafana-cloud-metrics
+    type: prometheus
+    url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+    auth:
+      type: basic
+      usernameKey: gcloud_metrics_user
+      passwordKey: gcloud_metrics_password
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+  - name: grafana-cloud-logs
+    type: loki
+    url: https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push
+    auth:
+      type: basic
+      usernameKey: gcloud_logs_user
+      passwordKey: gcloud_logs_password
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+  - name: grafana-cloud-traces
+    type: otlp
+    url: https://tempo-eu-west-0.grafana.net:443
+    protocol: grpc
+    auth:
+      type: basic
+      usernameKey: gcloud_otlp_password
+      passwordKey: gcloud_otlp_password
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+    metrics:
+      enabled: false
+    logs:
+      enabled: false
+    traces:
+      enabled: true
+clusterMetrics:
+  enabled: true
+annotationAutodiscovery:
+  enabled: true
+clusterEvents:
+  enabled: true
+nodeLogs:
+  enabled: true
+podLogs:
+  enabled: true
+applicationObservability:
+  enabled: true
+  receivers:
+    otlp:
+      grpc:
+        enabled: true
+        port: 4317
+      http:
+        enabled: true
+        port: 4318
+    zipkin:
+      enabled: true
+      port: 9411
+alloy-metrics:
+  enabled: true
+  alloy:
+    extraEnv:
+      - name: GCLOUD_RW_API_KEY
+        valueFrom:
+           secretKeyRef:
+             name: grafana-k8s-monitoring
+             key: gcloud_remote_fleet_management_password
+      - name: CLUSTER_NAME
+        value: homelab
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: GCLOUD_FM_COLLECTOR_ID
+        value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-$(POD_NAME)
+  remoteConfig:
+    enabled: true
+    url: https://fleet-management-prod-003.grafana.net
+    auth:
+      type: basic
+      usernameKey: gcloud_remote_fleet_management_user
+      passwordFrom: sys.env("GCLOUD_RW_API_KEY")
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+alloy-singleton:
+  enabled: true
+  alloy:
+    extraEnv:
+      - name: GCLOUD_RW_API_KEY
+        valueFrom:
+           secretKeyRef:
+             name: grafana-k8s-monitoring
+             key: gcloud_remote_fleet_management_password
+      - name: CLUSTER_NAME
+        value: homelab
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: GCLOUD_FM_COLLECTOR_ID
+        value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-$(POD_NAME)
+  remoteConfig:
+    enabled: true
+    url: https://fleet-management-prod-003.grafana.net
+    auth:
+      type: basic
+      usernameKey: gcloud_remote_fleet_management_user
+      passwordFrom: sys.env("GCLOUD_RW_API_KEY")
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+alloy-logs:
+  enabled: true
+  alloy:
+    extraEnv:
+      - name: GCLOUD_RW_API_KEY
+        valueFrom:
+           secretKeyRef:
+             name: grafana-k8s-monitoring
+             key: gcloud_remote_fleet_management_password
+      - name: CLUSTER_NAME
+        value: homelab
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      - name: GCLOUD_FM_COLLECTOR_ID
+        value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-alloy-logs-$(NODE_NAME)
+  remoteConfig:
+    enabled: true
+    url: https://fleet-management-prod-003.grafana.net
+    auth:
+      type: basic
+      usernameKey: gcloud_remote_fleet_management_user
+      passwordFrom: sys.env("GCLOUD_RW_API_KEY")
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring
+alloy-receiver:
+  enabled: true
+  alloy:
+    extraPorts:
+      - name: otlp-grpc
+        port: 4317
+        targetPort: 4317
+        protocol: TCP
+      - name: otlp-http
+        port: 4318
+        targetPort: 4318
+        protocol: TCP
+      - name: zipkin
+        port: 9411
+        targetPort: 9411
+        protocol: TCP
+    extraEnv:
+      - name: GCLOUD_RW_API_KEY
+        valueFrom:
+           secretKeyRef:
+             name: grafana-k8s-monitoring
+             key: gcloud_remote_fleet_management_password
+      - name: CLUSTER_NAME
+        value: homelab
+      - name: NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      - name: GCLOUD_FM_COLLECTOR_ID
+        value: grafana-k8s-monitoring-$(CLUSTER_NAME)-$(NAMESPACE)-alloy-receiver-$(NODE_NAME)
+  remoteConfig:
+    enabled: true
+    url: https://fleet-management-prod-003.grafana.net
+    auth:
+      type: basic
+      usernameKey: gcloud_remote_fleet_management_user
+      passwordFrom: sys.env("GCLOUD_RW_API_KEY")
+    secret:
+      create: false
+      name: grafana-k8s-monitoring
+      namespace: monitoring

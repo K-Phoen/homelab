@@ -47,3 +47,20 @@ argocd app create apps \
     --path k8s/apps
 argocd app sync apps 
 ```
+
+## Monitoring
+
+Create a few secrets:
+
+```shell
+kubectl create namespace monitoring
+kubectl create secret generic -n monitoring grafana-k8s-monitoring \
+    --from-literal=gcloud_metrics_user='ID' \
+    --from-literal=gcloud_metrics_password='TOKEN' \
+    --from-literal=gcloud_logs_user='ID' \
+    --from-literal=gcloud_logs_password='TOKEN' \
+    --from-literal=gcloud_otlp_user='ID' \
+    --from-literal=gcloud_otlp_password='TOKEN' \
+    --from-literal=gcloud_remote_fleet_management_user='ID' \
+    --from-literal=gcloud_remote_fleet_management_password='TOKEN'
+```

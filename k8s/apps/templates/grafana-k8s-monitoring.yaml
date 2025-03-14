@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-k8s-monitoring
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: monitoring
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    chart: k8s-monitoring
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 2.0.18
+    helm:
+      releaseName: grafana-k8s-monitoring
+      valueFiles:
+        - grafana-k8s-monitoring-values.yaml
