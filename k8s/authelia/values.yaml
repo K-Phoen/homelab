@@ -1,0 +1,4 @@
+# https://github.com/authelia/chartrepo/tree/master/charts/authelia
+
+configMap:
+  disabled: true
