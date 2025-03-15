@@ -20,7 +20,13 @@ spec:
     namespace: traefik
     server: {{ .Values.spec.destination.server }}
 
-  source:
-    path: k8s/traefik
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+  sources:
+    - chart: traefik
+      repoURL: https://traefik.github.io/charts
+      targetRevision: '34.4.1'
+      helm:
+        valueFiles:
+          - $values/k8s/traefik/values.yaml
+    - repoURL: {{ .Values.spec.source.repoURL }}
+      targetRevision: {{ .Values.spec.source.targetRevision }}
+      ref: values

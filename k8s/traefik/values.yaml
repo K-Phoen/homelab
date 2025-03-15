@@ -1,2 +1,8 @@
-image:
-  tag: v3.3.4
+ingressClass:
+  name: traefik
+
+providers:
+  kubernetesCRD:
+    ingressClass: traefik
+  kubernetesIngress:
+    ingressClass: traefik
