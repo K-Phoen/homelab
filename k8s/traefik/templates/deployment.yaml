@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: traefik-deployment
+  name: traefik
   labels:
     app: traefik
 
@@ -15,7 +15,7 @@ spec:
       labels:
         app: traefik
     spec:
-      serviceAccountName: traefik-account
+      serviceAccountName: traefik
       containers:
         - name: traefik
           image: traefik:{{ .Values.image.tag }}
