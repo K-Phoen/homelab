@@ -64,6 +64,9 @@ applicationObservability:
     zipkin:
       enabled: true
       port: 9411
+  connectors:
+    grafanaCloudMetrics:
+      enabled: true
 alloy-metrics:
   enabled: true
   alloy:
@@ -213,3 +216,10 @@ alloy-receiver:
       create: false
       name: grafana-k8s-monitoring
       namespace: monitoring
+
+integrations:
+  alloy:
+    instances:
+      - name: alloy
+        labelSelectors:
+          app.kubernetes.io/name: alloy-metrics

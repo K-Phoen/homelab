@@ -62,6 +62,20 @@ kubectl create secret generic -n 1password op-credentials --from-literal=1passwo
 kubectl create secret generic -n 1password onepassword-token --from-literal=token=token
 ```
 
+Creating a secret: https://developer.1password.com/docs/k8s/k8s-operator/#kubernetes-secret-from-item
+
+```yaml
+apiVersion: onepassword.com/v1
+kind: OnePasswordItem
+metadata:
+  name: secret-name
+  namespace: foo
+spec:
+  itemPath: "vaults/Homelab/items/[ITEM]"
+```
+
+Where `[ITEM]` is the ID or title of the 1password item to synchronize.
+
 ## Monitoring
 
 Create a few secrets:
