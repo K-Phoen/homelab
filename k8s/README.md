@@ -7,7 +7,7 @@ Installed using [K3S](https://docs.k3s.io/)
 Setup k3s with default options:
 
 ```shell
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san carrot.lab" sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san carrot.lab --disable traefik" sh -
 ```
 
 `INSTALL_K3S_EXEC="--tls-san carrot.lab"` ensures that the certificate generated for the API server is valid for `carrot.lab`.
