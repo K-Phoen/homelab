@@ -21,6 +21,7 @@ spec:
           image: traefik:{{ .Values.image.tag }}
           args:
             - --api.insecure
+            - --providers.kubernetescrd
             - --providers.kubernetesingress
           ports:
             - name: web
