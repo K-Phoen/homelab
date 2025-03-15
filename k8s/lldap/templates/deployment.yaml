@@ -18,7 +18,8 @@ spec:
       containers:
         - name: lldap
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-          args: ["run", "--config-file", "/data/lldap_config.toml", "--verbose"]
+          # To run in verbose mode
+          #args: ["run", "--config-file", "/data/lldap_config.toml", "--verbose"]
           env:
             - name: TZ
               value: CET
@@ -47,10 +48,10 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: lldap-data
-          #resources:
-          #  requests:
-          #    memory: "20Mi"
-          #    cpu: "20m"
+          resources:
+            requests:
+              memory: "15Mi"
+              cpu: "20m"
 
       volumes:
         - name: lldap-data
