@@ -21,6 +21,6 @@ spec:
     server: {{ .Values.spec.destination.server }}
 
   source:
-    path: k8s/glance
+    path: k8s/lldap
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
