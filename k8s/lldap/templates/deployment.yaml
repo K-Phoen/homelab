@@ -18,7 +18,7 @@ spec:
       containers:
         - name: lldap
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-          args: ["run", "--config_file", "/data/lldap_config.toml", "--verbose"]
+          args: ["run", "--config-file", "/data/lldap_config.toml", "--verbose"]
           env:
             - name: TZ
               value: CET
