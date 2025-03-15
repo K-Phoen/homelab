@@ -5,7 +5,6 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entryPoints: 'web'
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
-    traefik.ingress.kubernetes.io/router.tls: 'true'
 spec:
   rules:
     - host: 'home.lab'
