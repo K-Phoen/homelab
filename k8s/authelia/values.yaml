@@ -1064,10 +1064,10 @@ configMap:
       -
         ## The subdomain to prefix the domain with. For example using `domain` value `example.com` and `subdomain`
         ## `auth` should yield the URL `https://auth.example.com`. This option does not affect the cookie domain.
-        # subdomain: 'auth'
+        subdomain: 'auth'
 
         ## The domain for cookie and to build the Authelia URL.
-        domain: 'auth.lab'
+        domain: 'home.lab'
 
         ## The path to suffix the domain with. For example using `domain` value `example.com` and `subdomain` value
         ## `auth` and `path` value `auth` should yield the URL `https://auth.example.com/auth`.

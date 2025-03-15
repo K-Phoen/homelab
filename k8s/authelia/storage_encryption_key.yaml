@@ -1,0 +1,6 @@
+apiVersion: onepassword.com/v1
+kind: OnePasswordItem
+metadata:
+  name: storage-encryption-key
+spec:
+  itemPath: "vaults/Homelab/items/Authelia storage encryption key"
