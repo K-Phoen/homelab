@@ -708,7 +708,7 @@ configMap:
       ## Depending on the option here certain other values in this section have a default value, notably all of the
       ## attribute mappings have a default value that this config overrides, you can read more about these default values
       ## at https://www.authelia.com/reference/guides/ldap/#defaults
-      implementation: 'custom'
+      implementation: 'lldap'
 
       ## The address for the ldap server. Format: <scheme>://<address>[:<port>].
       ## Scheme can be ldap or ldaps in the format (port optional).
