@@ -697,7 +697,7 @@ configMap:
     ldap:
 
       ## Enable LDAP Backend.
-      enabled: false
+      enabled: true
 
       ## The LDAP implementation, this affects elements like the attribute utilised for resetting a password.
       ## Acceptable options are as follows:
@@ -708,11 +708,11 @@ configMap:
       ## Depending on the option here certain other values in this section have a default value, notably all of the
       ## attribute mappings have a default value that this config overrides, you can read more about these default values
       ## at https://www.authelia.com/reference/guides/ldap/#defaults
-      implementation: 'activedirectory'
+      implementation: 'custom'
 
       ## The address for the ldap server. Format: <scheme>://<address>[:<port>].
       ## Scheme can be ldap or ldaps in the format (port optional).
-      address: 'ldap://openldap.default.svc.cluster.local'
+      address: 'ldap://lldap.lldap.svc.cluster.local'
 
       ## Connection Timeout.
       timeout: '5 seconds'
@@ -740,10 +740,10 @@ configMap:
         maximum_version: 'TLS1.3'
 
       ## The base dn for every LDAP query.
-      base_dn: 'DC=example,DC=com'
+      base_dn: 'DC=home,DC=lab'
 
       ## An additional dn to define the scope to all users.
-      additional_users_dn: 'OU=Users'
+      #additional_users_dn: 'OU=Users'
 
       ## The users filter used in search queries to find the user profile based on input filled in login form.
       ## Various placeholders are available in the user filter:
@@ -761,10 +761,10 @@ configMap:
       ##
       ## To allow sign in both with username and email, one can use a filter like
       ## (&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))
-      users_filter: ''
+      users_filter: '(&({username_attribute}={input})(objectClass=person))'
 
       ## An additional dn to define the scope of groups.
-      additional_groups_dn: 'OU=Groups'
+      #additional_groups_dn: 'OU=Groups'
 
       ## The groups filter used in search queries to find the groups of the user.
       ## - {input} is a placeholder replaced by what the user inputs in the login form.
@@ -779,7 +779,7 @@ configMap:
       ##
       ## If your groups use the `groupOfUniqueNames` structure use this instead:
       ##    (&(uniquemember={dn})(objectclass=groupOfUniqueNames))
-      groups_filter: ''
+      groups_filter: '(&(uniquemember={dn})(objectclass=groupOfUniqueNames))'
 
       ## Follow referrals returned by the server.
       ## This is especially useful for environments where read-only servers exist. Only implemented for write operations.
@@ -794,7 +794,7 @@ configMap:
       permit_feature_detection_failure: false
 
       ## The username of the admin user.
-      user: 'CN=Authelia,DC=example,DC=com'
+      user: 'CN=Authelia,DC=home,DC=lab'
 
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
@@ -802,7 +802,7 @@ configMap:
 
         ## The secret name. The ~ name is special as it is the secret we generate either automatically or via the
         ## secret_value option below.
-        secret_name: ~
+        secret_name: 'ldap-authelia'
 
         ## The value of a generated secret when using the ~ secret_name.
         value: ''
@@ -826,16 +826,16 @@ configMap:
         username: ''
 
         ## The attribute holding the display name of the user. This will be used to greet an authenticated user.
-        display_name: ''
+        display_name: 'display_name'
 
         ## The attribute holding the mail address of the user. If multiple email addresses are defined for a user, only the
         ## first one returned by the LDAP server is used.
-        mail: ''
+        mail: 'mail'
 
         member_of: ''
 
         ## The attribute holding the name of the group
-        group_name: ''
+        group_name: 'display_name'
 
     ##
     ## File (Authentication Provider)
@@ -849,7 +849,7 @@ configMap:
     ## Important: Kubernetes (or HA) users must read https://www.authelia.com/overview/authorization/statelessness/
     ##
     file:
-      enabled: true
+      enabled: false
       path: '/config/users_database.yml'
       watch: true
       search:
@@ -1730,6 +1730,10 @@ secret:
       items:
         - key: 'password'
           path: 'storage.encryption.key'
+    ldap-authelia:
+      items:
+        - key: 'password'
+          path: 'authentication.ldap.password.txt'
   # additionalSecrets:
   #   example:
   #     items:
