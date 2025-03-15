@@ -1,0 +1,11 @@
+injector:
+  enabled: false
+
+server:
+  logLevel: warn
+
+  dataStorage:
+    size: 2Gi
+
+ui:
+  enabled: true
