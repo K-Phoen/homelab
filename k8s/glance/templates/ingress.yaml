@@ -29,7 +29,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host('home.lab')
+      match:  Host(`home.lab`)
       services:
         - kind: Service
           name: glance-web
