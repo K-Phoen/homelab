@@ -740,7 +740,7 @@ configMap:
         maximum_version: 'TLS1.3'
 
       ## The base dn for every LDAP query.
-      base_dn: 'DC=home,DC=lab'
+      base_dn: 'dc=home,dc=lab'
 
       ## An additional dn to define the scope to all users.
       #additional_users_dn: 'OU=Users'
@@ -794,7 +794,7 @@ configMap:
       permit_feature_detection_failure: false
 
       ## The username of the admin user.
-      user: 'CN=Authelia,DC=home,DC=lab'
+      user: 'cn=Authelia,ou=people,dc=example,dc=com'
 
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
