@@ -20,7 +20,7 @@ spec:
 
       containers:
         - name: glance
-          image: glanceapp/glance:{{ .Values.image.tag }
+          image: glanceapp/glance:{{ .Values.image.tag }}
           ports:
             - name: http
               containerPort: 8080
