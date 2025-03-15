@@ -4,7 +4,7 @@ metadata:
   name: 'glance'
   annotations:
     traefik.ingress.kubernetes.io/router.entryPoints: 'websecure'
-    traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
+    #traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
 spec:
   rules:
     - host: 'home.lab'

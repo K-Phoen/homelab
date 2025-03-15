@@ -6,3 +6,9 @@ providers:
     ingressClass: traefik
   kubernetesIngress:
     ingressClass: traefik
+
+ingressRoute:
+  # Access the dashboard with:
+  # kubectl port-forward $(kubectl get pods -n traefik --selector "app.kubernetes.io/name=traefik" --output=name) 8080:8080
+  dashboard:
+    enabled: true
