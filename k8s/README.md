@@ -48,6 +48,20 @@ argocd app create apps \
 argocd app sync apps 
 ```
 
+## 1password integration
+
+* https://external-secrets.io/main/provider/1password-automation/
+* https://github.com/1Password/connect/blob/a0a5f3d92e68497098d9314721335a7bb68a3b2d/README.md#quick-start
+
+```shell
+op connect server create homelab --vaults Homelab
+op vault list
+op connect token create homelab_k8s --server homelab --vaults o327uryxcflmqtawyqbm3ezzoq,r
+
+kubectl create secret generic -n 1password op-credentials --from-file=1password-credentials.json
+kubectl create secret generic -n 1password onepassword-token --from-literal=token=token
+```
+
 ## Monitoring
 
 Create a few secrets:

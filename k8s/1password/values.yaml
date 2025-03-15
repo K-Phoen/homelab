@@ -1,0 +1,9 @@
+connect:
+  api:
+    logLevel: warn
+
+  sync:
+    logLevel: warn
+
+operator:
+  create: true
