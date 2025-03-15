@@ -25,6 +25,48 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
+### LDAP integration
+
+```shell
+kubectl edit configmap argocd-cm -n argocd
+```
+
+Connectors are managed by [dex](https://dexidp.io/docs/connectors/ldap/)
+
+```yaml
+data:
+  url: https://argocd.example.com
+
+  dex.config: |
+    connectors:
+      - type: ldap
+        id: homelab-ldap
+        name: LDAP Homelab
+        config:
+          host: 'lldap.lldap.svc.cluster.local:3890'
+          insecureNoSSL: true
+          bindDN: "uid=argocd,ou=people,dc=home,dc=lab"
+          bindPW: "$ldap.ldap_password"
+
+          # Ldap user search attributes
+          userSearch:
+            baseDN: "ou=people,dc=home,dc=lab"
+            filter: ""
+            username: user_id
+            idAttr: uuid
+            emailAttr: mail
+            nameAttr: display_name
+
+          # Ldap group search attributes
+          groupSearch:
+            baseDN: "ou=groups,dc=home,dc=lab"
+            filter: "(objectClass=groupOfUniqueNames)"
+            userMatchers:
+            - userAttr: uuid
+              groupAttr: member
+            nameAttr: uuid
+```
+
 ### Accessing the UI
 
 ```shell
