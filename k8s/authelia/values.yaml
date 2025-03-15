@@ -1059,15 +1059,15 @@ configMap:
       ## value, '{secret_name}' is the secret_name above, and '{path}' is this value.
       path: 'session.encryption.key'
 
-    cookies: []
-    # cookies:
-      # -
+    # cookies: []
+    cookies:
+      -
         ## The subdomain to prefix the domain with. For example using `domain` value `example.com` and `subdomain`
         ## `auth` should yield the URL `https://auth.example.com`. This option does not affect the cookie domain.
-        # subdomain: 'auth'
+        subdomain: 'auth'
 
         ## The domain for cookie and to build the Authelia URL.
-        # domain: ''
+        domain: 'kevingomez.fr'
 
         ## The path to suffix the domain with. For example using `domain` value `example.com` and `subdomain` value
         ## `auth` and `path` value `auth` should yield the URL `https://auth.example.com/auth`.
