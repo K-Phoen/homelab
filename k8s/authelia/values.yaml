@@ -972,7 +972,10 @@ configMap:
     #   networks:
     #   - '10.9.0.0/16'
 
-    rules: []
+    rules:
+    - domain_regex: '^home\.lab|home\.kevingomez\.fr$'
+      policy: 'one_factor'
+
     # rules:
     # - domain_regex: '^.*\.example.com$'
     #   policy: 'bypass'
