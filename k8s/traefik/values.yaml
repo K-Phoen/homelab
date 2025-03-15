@@ -9,6 +9,7 @@ providers:
 
 ingressRoute:
   # Access the dashboard with:
-  # kubectl port-forward $(kubectl get pods -n traefik --selector "app.kubernetes.io/name=traefik" --output=name) 8080:8080
+  # kubectl port-forward -n traefik $(kubectl get pods -n traefik --selector "app.kubernetes.io/name=traefik" --output=name) 8080:8080
+  # http://127.0.0.1:8081/dashboard/
   dashboard:
     enabled: true

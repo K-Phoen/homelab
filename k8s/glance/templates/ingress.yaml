@@ -1,19 +1,36 @@
-apiVersion: 'networking.k8s.io/v1'
-kind: 'Ingress'
+#apiVersion: 'networking.k8s.io/v1'
+#kind: 'Ingress'
+#metadata:
+#  name: 'glance'
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.entryPoints: 'websecure'
+#    #traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
+#spec:
+#  rules:
+#    - host: 'home.lab'
+#      http:
+#        paths:
+#          - path: '/'
+#            pathType: 'Prefix'
+#            backend:
+#              service:
+#                name: 'glance-web'
+#                port:
+#                  number: 80
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name: 'glance'
   annotations:
-    traefik.ingress.kubernetes.io/router.entryPoints: 'websecure'
-    #traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
+    kubernetes.io/ingress.class: traefik
+  name: glance
 spec:
-  rules:
-    - host: 'home.lab'
-      http:
-        paths:
-          - path: '/'
-            pathType: 'Prefix'
-            backend:
-              service:
-                name: 'glance-web'
-                port:
-                  number: 80
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/`)
+      services:
+        - kind: Service
+          name: glance-web
+          port: 80
