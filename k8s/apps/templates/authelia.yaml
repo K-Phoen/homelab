@@ -26,7 +26,8 @@ spec:
       targetRevision: '0.9.17'
       helm:
         valueFiles:
-          - $values/k8s/authelia/values.yaml
+          - $values/values.yaml
     - repoURL: {{ .Values.spec.source.repoURL }}
       targetRevision: {{ .Values.spec.source.targetRevision }}
+      path: k8s/authelia
       ref: values
