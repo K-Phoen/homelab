@@ -54,7 +54,7 @@ ingress:
     # hostNameOverride: 'example.com'
 
   traefikCRD:
-    enabled: false
+    enabled: true
 
     ## Use a standard Ingress object, not an IngressRoute.
     disableIngressRoute: false
