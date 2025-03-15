@@ -795,7 +795,7 @@ configMap:
       permit_feature_detection_failure: false
 
       ## The username of the admin user.
-      user: 'uid=authelia,ou=people,dc=example,dc=com'
+      user: 'uid=authelia,ou=people,dc=home,dc=lab'
 
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
