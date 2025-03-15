@@ -1,3 +1,5 @@
+# https://github.com/1Password/connect-helm-charts/tree/main/charts/connect#deploying-1password-connect
+
 connect:
   api:
     logLevel: warn

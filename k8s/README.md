@@ -58,7 +58,7 @@ op connect server create homelab --vaults Homelab
 op vault list
 op connect token create homelab_k8s --server homelab --vaults o327uryxcflmqtawyqbm3ezzoq,r
 
-kubectl create secret generic -n 1password op-credentials --from-file=1password-credentials.json
+kubectl create secret generic -n 1password op-credentials --from-literal=1password-credentials.json=$(cat 1password-credentials.json|base64 -w0)
 kubectl create secret generic -n 1password onepassword-token --from-literal=token=token
 ```
 
