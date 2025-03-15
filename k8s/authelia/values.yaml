@@ -761,7 +761,8 @@ configMap:
       ##
       ## To allow sign in both with username and email, one can use a filter like
       ## (&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))
-      users_filter: '(&({username_attribute}={input})(objectClass=person))'
+      #users_filter: '(&({username_attribute}={input})(objectClass=person))'
+      users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person))"
 
       ## An additional dn to define the scope of groups.
       #additional_groups_dn: 'OU=Groups'
@@ -779,7 +780,7 @@ configMap:
       ##
       ## If your groups use the `groupOfUniqueNames` structure use this instead:
       ##    (&(uniquemember={dn})(objectclass=groupOfUniqueNames))
-      groups_filter: '(&(uniquemember={dn})(objectclass=groupOfUniqueNames))'
+      #groups_filter: '(&(uniquemember={dn})(objectclass=groupOfUniqueNames))'
 
       ## Follow referrals returned by the server.
       ## This is especially useful for environments where read-only servers exist. Only implemented for write operations.
@@ -794,7 +795,7 @@ configMap:
       permit_feature_detection_failure: false
 
       ## The username of the admin user.
-      user: 'cn=Authelia,ou=people,dc=example,dc=com'
+      user: 'uid=authelia,ou=people,dc=example,dc=com'
 
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
