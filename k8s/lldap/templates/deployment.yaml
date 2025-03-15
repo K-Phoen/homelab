@@ -18,6 +18,7 @@ spec:
       containers:
         - name: lldap
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          command: run --config_file /data/lldap_config.toml --verbose
           env:
             - name: TZ
               value: CET
@@ -33,7 +34,7 @@ spec:
                 secretKeyRef:
                   name: ldap-jwt-secret
                   key: password
-            - name: LLDAP_KEY_SEED
+            - name: LLDAP_SERVER_KEY_SEED
               valueFrom:
                 secretKeyRef:
                   name: ldap-key-seed
