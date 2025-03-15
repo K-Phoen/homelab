@@ -1,0 +1,3 @@
+image:
+  name: lldap/lldap
+  tag: v0.6.1-alpine-rootless

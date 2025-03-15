@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lldap
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: lldap
+
+  template:
+    metadata:
+      labels:
+        app: lldap
+    spec:
+      containers:
+        - name: lldap
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: TZ
+              value: CET
+            - name: LLDAP_LDAP_BASE_DN
+              value: dc=home,dc=lab
+            - name: LLDAP_LDAP_USER_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: ldap-admin
+                  key: password
+            - name: LLDAP_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: ldap-jwt-secret
+                  key: password
+            - name: LLDAP_KEY_SEED
+              valueFrom:
+                secretKeyRef:
+                  name: ldap-key-seed
+                  key: password
+          ports:
+            - name: ldap
+              containerPort: 3890
+            - name: web
+              containerPort: 17170
+          volumeMounts:
+            - mountPath: /data
+              name: lldap-data
+          #resources:
+          #  requests:
+          #    memory: "20Mi"
+          #    cpu: "20m"
+
+      volumes:
+        - name: lldap-data
+          persistentVolumeClaim:
+            claimName: lldap-data

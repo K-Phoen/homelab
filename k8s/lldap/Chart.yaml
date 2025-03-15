@@ -1,0 +1,9 @@
+apiVersion: v2
+name: lldap
+description: Light LDAP with https://github.com/lldap/lldap
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.0"
