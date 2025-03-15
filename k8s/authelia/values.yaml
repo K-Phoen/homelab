@@ -2,3 +2,4 @@
 
 configMap:
   disabled: true
+  existingConfigMap: authelia-config
