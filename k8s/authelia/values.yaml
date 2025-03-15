@@ -1778,7 +1778,7 @@ certificates:
 ## Configuration Use Case: when you want to manually configure the configuration entirely (set configMap.enabled = false).
 ##
 persistence:
-  enabled: false
+  enabled: true
 
   annotations: {}
   # annotations:
