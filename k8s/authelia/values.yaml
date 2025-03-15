@@ -712,7 +712,7 @@ configMap:
 
       ## The address for the ldap server. Format: <scheme>://<address>[:<port>].
       ## Scheme can be ldap or ldaps in the format (port optional).
-      address: 'ldap://lldap.lldap.svc.cluster.local'
+      address: 'ldap://lldap.lldap.svc.cluster.local:3890'
 
       ## Connection Timeout.
       timeout: '5 seconds'
