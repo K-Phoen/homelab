@@ -24,6 +24,10 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /app/config
+          resources:
+            requests:
+              memory: "20Mi"
+              cpu: "20m"
 
       volumes:
         - name: config-volume
