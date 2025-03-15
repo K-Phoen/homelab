@@ -12,7 +12,6 @@ spec:
       match: Host(`home.lab`)
       middlewares:
       - name: forwardauth-authelia
-        namespace: traefik
       services:
         - kind: Service
           name: glance-web
