@@ -1,0 +1,108 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: glance-config
+data:
+  glance.yaml: |
+    theme:
+      background-color: 229 19 23
+      contrast-multiplier: 1.2
+      primary-color: 222 74 74
+      positive-color: 96 44 68
+      negative-color: 359 68 71
+
+    pages:
+      # It's not necessary to create a new file for each page and include it, you can simply
+      # put its contents here, though multiple pages are easier to manage when separated
+      !include: home.yml
+  
+  home.yml: |
+    - name: Home
+      # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
+      # hide-desktop-navigation: true
+      columns:
+        - size: small
+          widgets:
+            - type: calendar
+              first-day-of-week: monday
+
+            - type: twitch-channels
+              channels:
+                - pestily
+                - clemovitch
+                - usul2000
+                - deadlyslob
+                - jeanmassiet
+
+        - size: full
+          widgets:
+            - type: monitor
+              cache: 1m
+              title: Services
+              sites:
+                - title: Grafana
+                  url: https://potatopi.grafana.net/
+                  icon: di:grafana
+                - title: Immich
+                  url: https://photos.kevingomez.fr/
+                  icon: di:immich
+                - title: LibreTranslate
+                  url: https://translate.kevingomez.fr/
+                  icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
+                - title: Portainer
+                  url: https://portainer.kevingomez.fr/
+                  icon: di:portainer
+                - title: RSS
+                  url: https://rss.kevingomez.fr/
+                  icon: di:miniflux-light
+                - title: Wallabag
+                  url: https://wallabag.kevingomez.fr/
+                  icon: di:wallabag-light
+
+            - type: group
+              widgets:
+                - type: reddit
+                  subreddit: grafana
+                  show-thumbnails: true
+                - type: reddit
+                  subreddit: golang
+                  show-thumbnails: true
+                - type: reddit
+                  subreddit: kubernetes
+                  show-thumbnails: true
+                - type: reddit
+                  subreddit: programming
+                  show-thumbnails: true
+                - type: reddit
+                  subreddit: selfhosted
+                  show-thumbnails: true
+                - type: reddit
+                  subreddit: sre
+                  show-thumbnails: true
+
+        - size: small
+          widgets:
+            - type: weather
+              location: Stockholm, Sweden
+              units: metric # alternatively "imperial"
+              hour-format: 24h # alternatively "24h"
+              # Optionally hide the location from being displayed in the widget
+              # hide-location: true
+
+            - type: releases
+              cache: 1d
+              # Without authentication the Github API allows for up to 60 requests per hour. You can create a
+              # read-only token from your Github account settings and use it here to increase the limit.
+              # token: ...
+              repositories:
+                - "0xERR0R/blocky"
+                - glanceapp/glance
+                - immich-app/immich
+                - LibreTranslate/LibreTranslate
+                - miniflux/v2
+                - wallabag/wallabag
+
+            - type: server-stats
+              servers:
+                - type: local
+                  name: carrot

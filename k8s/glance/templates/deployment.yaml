@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glance
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: glance
+
+  template:
+    metadata:
+      labels:
+        app: glance
+    spec:
+      securityContext:
+        runAsNonRoot: true
+
+      containers:
+        - name: glance
+          image: glanceapp/glance:{{ .Values.image.tag }
+          ports:
+            - name: http
+              containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+
+      volumes:
+        - name: config-volume
+          configMap:
+            name: glance-config
