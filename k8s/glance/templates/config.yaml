@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: glance-config
 data:
-  glance.yaml: |
+  glance.yml: |
     theme:
       background-color: 229 19 23
       contrast-multiplier: 1.2
