@@ -743,7 +743,7 @@ configMap:
       base_dn: 'dc=home,dc=lab'
 
       ## An additional dn to define the scope to all users.
-      #additional_users_dn: 'OU=Users'
+      additional_users_dn: 'ou=people'
 
       ## The users filter used in search queries to find the user profile based on input filled in login form.
       ## Various placeholders are available in the user filter:
