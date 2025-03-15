@@ -781,6 +781,7 @@ configMap:
       ## If your groups use the `groupOfUniqueNames` structure use this instead:
       ##    (&(uniquemember={dn})(objectclass=groupOfUniqueNames))
       #groups_filter: '(&(uniquemember={dn})(objectclass=groupOfUniqueNames))'
+      groups_filter: ''
 
       ## Follow referrals returned by the server.
       ## This is especially useful for environments where read-only servers exist. Only implemented for write operations.
