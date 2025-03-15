@@ -3,7 +3,7 @@ kind: 'Ingress'
 metadata:
   name: 'glance'
   annotations:
-    traefik.ingress.kubernetes.io/router.entryPoints: 'websecure' # name of your https entry point (default is 'websecure')
+    traefik.ingress.kubernetes.io/router.entryPoints: 'web'
     traefik.ingress.kubernetes.io/router.middlewares: 'traefik-forwardauth-authelia@kubernetescrd' # name of your middleware, as defined in your middleware.yml
     traefik.ingress.kubernetes.io/router.tls: 'true'
 spec:
@@ -15,6 +15,6 @@ spec:
             pathType: 'Prefix'
             backend:
               service:
-                name:  'glance-web'
+                name: 'glance-web'
                 port:
                   number: 80
