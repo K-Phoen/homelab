@@ -1,15 +1,30 @@
 ingressClass:
   name: traefik
+  isDefaultClass: true
+
+deployment:
+  podAnnotations:
+    k8s.grafana.com/scrape: 'true'
+    k8s.grafana.com/metrics.portNumber: '9100'
 
 providers:
   kubernetesCRD:
     ingressClass: traefik
+    allowCrossNamespace: true
   kubernetesIngress:
     ingressClass: traefik
 
 ingressRoute:
-  # Access the dashboard with:
-  # kubectl port-forward -n traefik $(kubectl get pods -n traefik --selector "app.kubernetes.io/name=traefik" --output=name) 8080:8080
-  # http://127.0.0.1:8081/dashboard/
   dashboard:
     enabled: true
+    entryPoints: ['websecure']
+    matchRule: "Host(`traefik.home.lab`) && PathPrefix(`/dashboard`)"
+    middlewares:
+      - name: forwardauth-authelia
+        namespace: authelia
+
+logs:
+  general:
+    level: "WARN" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+
+globalArguments: [] # To disable new version checks and anonymous usage reports

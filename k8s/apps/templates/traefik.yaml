@@ -29,4 +29,5 @@ spec:
           - $values/k8s/traefik/values.yaml
     - repoURL: {{ .Values.spec.source.repoURL }}
       targetRevision: {{ .Values.spec.source.targetRevision }}
+      path: k8s/traefik
       ref: values
