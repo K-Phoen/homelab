@@ -49,9 +49,6 @@ data:
                 - title: LibreTranslate
                   url: https://translate.kevingomez.fr/
                   icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
-                - title: Portainer
-                  url: https://portainer.kevingomez.fr/
-                  icon: di:portainer
                 - title: RSS
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
@@ -96,10 +93,13 @@ data:
               # token: ...
               repositories:
                 - "0xERR0R/blocky"
+                - authelia/authelia
                 - glanceapp/glance
                 - immich-app/immich
                 - LibreTranslate/LibreTranslate
+                - lldap/lldap
                 - miniflux/v2
+                - traefik/traefik
                 - wallabag/wallabag
 
             - type: server-stats
