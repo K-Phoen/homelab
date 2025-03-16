@@ -33,7 +33,17 @@ kubectl edit configmap argocd-cm -n argocd
 
 Connectors are managed by [dex](https://dexidp.io/docs/connectors/ldap/)
 
+The configuration is automatically reloaded after editing this file:
+
 ```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
 data:
   url: https://argocd.example.com
 
@@ -60,11 +70,31 @@ data:
           # Ldap group search attributes
           groupSearch:
             baseDN: "ou=groups,dc=home,dc=lab"
-            filter: "(objectClass=groupOfUniqueNames)"
+            filter: "(objectClass=group)"
             userMatchers:
             - userAttr: uuid
               groupAttr: member
             nameAttr: uuid
+```
+
+RBAC policy to give the admin role to members of the LDAP group "argocd_admin":
+
+The configuration is automatically reloaded after editing this file:
+s
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  policy.csv: |
+    g, argocd_admin, role:admin
+  policy.default: role:readonly
+  scopes: '[groups, email]'
 ```
 
 ### Accessing the UI
