@@ -29,6 +29,10 @@ spec:
           volumeMounts:
             - name: libretranslate-models
               mountPath: /home/libretranslate/.local
+          resources:
+            requests:
+              memory: "600Mi"
+              cpu: "150m"
 
       volumes:
         - name: libretranslate-models
