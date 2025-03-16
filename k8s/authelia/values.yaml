@@ -464,7 +464,7 @@ configMap:
 
   log:
     ## Level of verbosity for logs: info, debug, trace.
-    level: 'debug'
+    level: 'info'
 
     ## Format the logs are written as: json, text.
     format: 'text'
@@ -553,7 +553,7 @@ configMap:
   ## Parameters used for TOTP generation.
   totp:
     ## Disable TOTP.
-    disable: true
+    disable: false
 
     ## The issuer name displayed in the Authenticator application of your choice.
     ## Defaults to 'Authelia'.
@@ -974,6 +974,9 @@ configMap:
     #   - '10.9.0.0/16'
 
     rules:
+    - domain_regex: '^.*.home\.lab|.*\.kevingomez\.fr$'
+      policy: 'one_factor'
+
     - domain_regex: '^home\.lab|home\.kevingomez\.fr$'
       policy: 'one_factor'
 
