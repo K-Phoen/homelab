@@ -159,9 +159,9 @@ pod:
   # Must be Deployment, DaemonSet, or StatefulSet.
   kind: 'DaemonSet'
 
-  annotations: {}
-  # annotations:
-  #   myAnnotation: 'myValue'
+  annotations:
+    k8s.grafana.com/scrape: 'true'
+    k8s.grafana.com/metrics.portNumber: '9959'
 
   labels: {}
   # labels:
@@ -484,7 +484,7 @@ configMap:
     ##
     metrics:
       ## Enable Metrics.
-      enabled: false
+      enabled: true
 
       ## The port to listen on for metrics. This should be on a different port to the main server.port value.
       port: 9959
