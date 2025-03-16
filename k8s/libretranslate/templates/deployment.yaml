@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: libretranslate
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: libretranslate
+
+  template:
+    metadata:
+      labels:
+        app: libretranslate
+    spec:
+      containers:
+        - name: libretranslate
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: LT_UPDATE_MODELS
+              value: 'true'
+            - name: LT_LOAD_ONLY
+              value: {{ .Values.libretranslate.languages }}
+          ports:
+            - name: http
+              containerPort: 5000
+          volumeMounts:
+            - name: libretranslate-models
+              mountPath: /home/libretranslate/.local
+
+      volumes:
+        - name: libretranslate-models
+          persistentVolumeClaim:
+            claimName: libretranslate-models
