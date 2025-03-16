@@ -6,6 +6,7 @@ deployment:
   podAnnotations:
     k8s.grafana.com/scrape: 'true'
     k8s.grafana.com/metrics.portNumber: '9100'
+    k8s.grafana.com/metrics.scrapeInterval: '30s'
 
 providers:
   kubernetesCRD:
@@ -18,7 +19,7 @@ ingressRoute:
   dashboard:
     enabled: true
     entryPoints: ['websecure']
-    matchRule: "Host(`traefik.home.lab`) && PathPrefix(`/dashboard`)"
+    matchRule: "Host(`traefik.home.lab`)"
     middlewares:
       - name: forwardauth-authelia
         namespace: authelia
