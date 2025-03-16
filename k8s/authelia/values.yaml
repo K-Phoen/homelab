@@ -1039,17 +1039,17 @@ configMap:
     same_site: 'lax'
 
     ## The time in seconds before the cookie expires and session is reset.
-    expiration: '1 hour'
+    expiration: '1h'
 
     ## The inactivity time in seconds before the session is reset.
-    inactivity: '5 minutes'
+    inactivity: '5m'
 
     ## The remember me duration.
     ## Value is in seconds, or duration notation. Value of 0 disables remember me.
     ## See: https://www.authelia.com/configuration/prologue/common/#duration-notation-format
     ## Longer periods are considered less secure because a stolen cookie will last longer giving attackers more time to
     ## spy or attack. Currently the default is 1M or 1 month.
-    remember_me: '1 month'
+    remember_me: '1M'
 
     encryption_key:
       ## Disables this secret and leaves configuring it entirely up to you.
@@ -1103,7 +1103,7 @@ configMap:
 
         ## Cookie Remember Me value override for this individual cookie. Otherwise, uses the default value above where
         ## more descriptive information about this value exists.
-        # inactivity: ''
+        # remember_me: ''
 
     ##
     ## Redis Provider
