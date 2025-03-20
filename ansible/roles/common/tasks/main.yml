@@ -10,11 +10,3 @@
       - lm-sensors
       - vim
     update_cache: true
-
-- name: Install Docker
-  ansible.builtin.include_role:
-    name: geerlingguy.docker
-    apply:
-      become: true
-  vars:
-    docker_users: ["{{ homelab_user }}"]

@@ -164,3 +164,35 @@ kubectl create secret generic -n monitoring grafana-k8s-monitoring \
     --from-literal=gcloud_remote_fleet_management_user='ID' \
     --from-literal=gcloud_remote_fleet_management_password='TOKEN'
 ```
+
+## Democratic CSI
+
+Useful resources:
+
+* https://github.com/democratic-csi/democratic-csi
+* https://github.com/democratic-csi/democratic-csi/blob/master/examples/freenas-api-nfs.yaml
+* https://jonathangazeley.com/2021/01/05/using-truenas-to-provide-persistent-storage-for-kubernetes/
+
+Pre-requisites:
+
+* create a `k8s` dataset in the `main` pool
+* create a `k8s-nfs` user in TrueNAS
+* `cp values-truenas-nfs-api{.redacted,}.yaml`
+* define the API key to use in `values-truenas-nfs-api.yaml` (and tweak other values as needed)
+
+```shell
+cd democratic-csi
+helm repo add democratic-csi https://democratic-csi.github.io/charts/
+helm repo update
+helm upgrade \
+  --install \
+  --create-namespace \
+  --values values-truenas-nfs-api.yaml \
+  --namespace democratic-csi \
+  --set node.kubeletHostPath="/var/lib/kubelet" \
+  truenas-nfs-api democratic-csi/democratic-csi
+k get storageclasses # there should be a truenas-nfs-api-csi StorageClass
+k apply -f test-pvc-nfs-api.yaml
+k describe pvc -n democratic-csi test-claim-truenas-nfs-api
+k delete -n democratic-csi test-claim-truenas-nfs-api
+```

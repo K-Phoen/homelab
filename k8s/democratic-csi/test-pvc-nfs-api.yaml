@@ -1,13 +1,12 @@
-apiVersion: v1
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: libretranslate-models
-  labels:
-    app: libretranslate
+  name: test-claim-truenas-nfs-api
+  namespace: democratic-csi
 spec:
   storageClassName: truenas-nfs-api-csi
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 4Gi

@@ -1,0 +1,83 @@
+csiDriver:
+  # should be globally unique for a given cluster
+  name: "org.democratic-csi.nfs-api"
+
+storageClasses:
+  - name: truenas-nfs-api-csi
+    defaultClass: false
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: nfs
+
+    mountOptions:
+      - noatime
+      - nfsvers=4
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+driver:
+  config:
+    driver: freenas-api-nfs
+    instance_id:
+    httpConnection:
+      protocol: http
+      host: 192.168.1.148
+      port: 80
+      # Created via https://beet.lab/ui/apikeys
+      apiKey: 'API TOKEN HERE'
+      allowInsecure: true
+      # use apiVersion 2 for TrueNAS-12 and up (will work on 11.x in some scenarios as well)
+      # leave unset for auto-detection
+      #apiVersion: 2
+    zfs:
+      # can be used to override defaults if necessary
+      # the example below is useful for TrueNAS 12
+      #cli:
+      #  sudoEnabled: true
+      #
+      #  leave paths unset for auto-detection
+      #  paths:
+      #    zfs: /usr/local/sbin/zfs
+      #    zpool: /usr/local/sbin/zpool
+      #    sudo: /usr/local/bin/sudo
+      #    chroot: /usr/sbin/chroot
+      
+      # can be used to set arbitrary values on the dataset/zvol
+      # can use handlebars templates with the parameters from the storage class/CO
+      #datasetProperties:
+      #  "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+      #  "org.freenas:test": "{{ parameters.foo }}"
+      #  "org.freenas:test2": "some value"
+
+      datasetParentName: main/k8s/nfs/volumes
+      # do NOT make datasetParentName and detachedSnapshotsDatasetParentName overlap
+      # they may be siblings, but neither should be nested in the other
+      # do NOT comment this option out even if you don't plan to use snapshots, just leave it with dummy value
+      detachedSnapshotsDatasetParentName: main/k8s/nfs/snapshots
+      datasetEnableQuotas: true
+      datasetEnableReservation: false
+      datasetPermissionsMode: "0777"
+      datasetPermissionsUser: 3000 # uid for k8s-nfs
+      datasetPermissionsGroup: 3000 # gid for k8s-nfs
+
+      # not supported yet
+      #datasetPermissionsAcls:
+      #- "-m everyone@:full_set:allow"
+      #- "-m u:kube:full_set:allow"
+
+    nfs:
+      #shareCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+      shareHost: 192.168.1.148
+      shareAlldirs: false
+      shareAllowedHosts: []
+      shareAllowedNetworks: []
+      shareMaprootUser: k8s-nfs
+      shareMaprootGroup: k8s-nfs
+      shareMapallUser: ""
+      shareMapallGroup: ""
