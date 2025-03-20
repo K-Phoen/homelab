@@ -52,6 +52,9 @@ data:
                 - title: RSS
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
+                - title: TrueNAS
+                  url: https://beet.home.lab/
+                  icon: di:truenas-scale
                 - title: Wallabag
                   url: https://wallabag.kevingomez.fr/
                   icon: di:wallabag-light
