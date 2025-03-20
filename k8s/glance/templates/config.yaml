@@ -55,6 +55,7 @@ data:
                 - title: TrueNAS
                   url: https://beet.lab/
                   icon: di:truenas-scale
+                  allow-insecure: true
                 - title: Wallabag
                   url: https://wallabag.kevingomez.fr/
                   icon: di:wallabag-light
