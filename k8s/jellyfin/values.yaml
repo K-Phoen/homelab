@@ -15,7 +15,7 @@ nodeSelector:
 persistence:
   config:
     enabled: true
-    storageClass: local
+    storageClass: local-path
     size: 2Gi
   media:
     enabled: false
