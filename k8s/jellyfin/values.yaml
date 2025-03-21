@@ -1,13 +1,13 @@
 # See https://github.com/jellyfin/jellyfin-helm/blob/master/charts/jellyfin/README.md
 
 # Enable hardware acceleration
+podSecurityContext:
+  supplementalGroups:
+    - 44 # "video" group on the host
+    - 105 # "render" group on the host
+
 securityContext:
-  capabilities:
-    add:
-      - "SYS_ADMIN"
-    drop:
-      - "ALL"
-  privileged: false
+  privileged: true
 
 nodeSelector:
   'kubernetes.io/hostname': carrot
