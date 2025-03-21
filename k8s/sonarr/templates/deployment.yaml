@@ -21,6 +21,10 @@ spec:
           env:
             - name: TZ
               value: 'Europe/Stockholm'
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '3000'
           ports:
             - name: http
               containerPort: 8989
