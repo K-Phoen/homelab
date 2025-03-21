@@ -1,0 +1,36 @@
+# See https://github.com/jellyfin/jellyfin-helm/blob/master/charts/jellyfin/README.md
+
+# Enable hardware acceleration
+securityContext:
+  capabilities:
+    add:
+      - "SYS_ADMIN"
+    drop:
+      - "ALL"
+  privileged: false
+
+nodeSelector:
+  'kubernetes.io/hostname': carrot
+
+persistence:
+  config:
+    enabled: true
+    storageClass: local
+    size: 2Gi
+  media:
+    enabled: false
+
+volumeMounts:
+  - mountPath: /library/video
+    name: video-library
+  - name: hardware-acceleration
+    mountPath: /dev/dri
+
+volumes:
+  - name: video-library
+    nfs:
+      server: beet.lab
+      path: /mnt/main/Video
+  - name: hardware-acceleration
+    hostPath:
+      path: /dev/dri
