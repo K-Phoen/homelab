@@ -24,4 +24,5 @@
   ansible.builtin.apt:
     pkg:
       - nfs-common
+      - firmware-linux-nonfree
     update_cache: true
