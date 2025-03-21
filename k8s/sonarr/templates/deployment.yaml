@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: sonarr
+
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - name: sonarr
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: TZ
+              value: 'Europe/Stockholm'
+          ports:
+            - name: http
+              containerPort: 8989
+          volumeMounts:
+            - name: sonarr-config
+              mountPath: /config
+            - name: series-library
+              mountPath: /tv
+            - name: downloads
+              mountPath: /downloads
+
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: series-library
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Video/Series
+        - name: downloads
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Downloads
