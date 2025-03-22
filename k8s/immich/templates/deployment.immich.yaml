@@ -30,6 +30,8 @@ spec:
               value: log # verbose, debug, log, warn, error
             - name: NO_COLOR
               value: 'true'
+            - name: IMMICH_PORT
+              value: '2283'
 
             - name: TZ
               value: Europe/Stockholm
@@ -41,8 +43,8 @@ spec:
 
             - name: DB_HOSTNAME
               value: postgres
-            #- name: DB_DATABASE_NAME
-            #  value: immich
+            - name: DB_DATABASE_NAME
+              value: immich
             - name: DB_USERNAME
               value: postgres
             - name: DB_PASSWORD
