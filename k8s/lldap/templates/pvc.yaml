@@ -5,9 +5,9 @@ metadata:
   labels:
     app: lldap
 spec:
-  storageClassName: local-path
+  storageClassName: truenas-nfs-api-csi
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 1Gi
