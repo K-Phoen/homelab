@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`downloads.kevingomez.fs`)
+      match: Host(`downloads.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
           namespace: authelia
