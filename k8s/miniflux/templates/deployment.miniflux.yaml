@@ -19,7 +19,7 @@ spec:
         - name: miniflux
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           env:
-            # https://miniflux.app/docs/configuration.html                                                                                                                                                               
+            # https://miniflux.app/docs/configuration.html
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -57,8 +57,3 @@ spec:
           #  requests:
           #    memory: "20Mi"
           #    cpu: "20m"
-
-      #volumes:
-      #  - name: config-volume
-      #    configMap:
-      #      name: miniflux-config
