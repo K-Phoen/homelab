@@ -129,7 +129,7 @@ ingress:
     # Specific options for the TraefikCRD TLS configuration. The above TLS section is still used.
     tls:
       ## Disables inclusion of the IngressRoute TLSOptions.
-      disableTLSOptions: false
+      disableTLSOptions: true
       #   existingOptions:
       #     name: 'default-traefik-options'
       #     namespace: 'default'
