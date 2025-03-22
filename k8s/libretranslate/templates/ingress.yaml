@@ -16,6 +16,6 @@ spec:
       services:
         - kind: Service
           name: libretranslate-web
-          port: 80
+          port: http
   tls:
     certResolver: letsencrypt

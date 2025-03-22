@@ -9,8 +9,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`jellyfin.home.lab`)
+      match: Host(`tv.kevingomez.fr`)
       services:
         - kind: Service
           name: jellyfin
           port: http
+  tls:
+    certResolver: letsencrypt

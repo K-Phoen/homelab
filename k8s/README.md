@@ -45,7 +45,7 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  url: https://argocd.example.com
+  url: https://argocd.kevingomez.fr
 
   dex.config: |
     connectors:

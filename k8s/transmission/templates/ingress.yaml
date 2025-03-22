@@ -12,7 +12,10 @@ spec:
       match: Host(`transmission.home.lab`)
       middlewares:
         - name: forwardauth-authelia
+          namespace: authelia
       services:
         - kind: Service
           name: transmission
           port: http
+  tls:
+    certResolver: letsencrypt
