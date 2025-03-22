@@ -9,10 +9,13 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`translate.home.lab`)
+      match: Host(`translate.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
+          namespace: authelia
       services:
         - kind: Service
           name: libretranslate-web
           port: 80
+  tls:
+    certResolver: letsencrypt
