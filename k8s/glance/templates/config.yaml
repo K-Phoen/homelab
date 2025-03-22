@@ -47,9 +47,10 @@ data:
                   url: https://photos.kevingomez.fr/
                   icon: di:immich
                 - title: LibreTranslate
-                  url: https://translate.hpme.lab/
+                  url: https://translate.home.lab/
                   icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
                   allow-insecure: true
+                  alt-status-codes: [200, 401]
                 - title: RSS
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
@@ -69,14 +70,17 @@ data:
                   url: https://prowlarr.home.lab/
                   icon: di:prowlarr
                   allow-insecure: true
+                  alt-status-codes: [200, 401]
                 - title: Sonarr
                   url: https://sonarr.home.lab/
                   icon: di:sonarr
                   allow-insecure: true
+                  alt-status-codes: [200, 401]
                 - title: Transmission
                   url: https://transmission.home.lab/
                   icon: di:transmission
                   allow-insecure: true
+                  alt-status-codes: [200, 401]
 
             - type: group
               widgets:
