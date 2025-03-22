@@ -80,7 +80,7 @@ data:
 RBAC policy to give the admin role to members of the LDAP group "argocd_admin":
 
 The configuration is automatically reloaded after editing this file:
-s
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap

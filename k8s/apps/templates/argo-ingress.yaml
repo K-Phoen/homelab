@@ -9,17 +9,17 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argocd.home.lab`)
+      match: Host(`argocd.kevingomez.fr`)
       priority: 10
       services:
         - name: argocd-server
           port: 80
     - kind: Rule
-      match: Host(`argocd.home.lab`) && Header(`Content-Type`, `application/grpc`)
+      match: Host(`argocd.kevingomez.fr`) && Header(`Content-Type`, `application/grpc`)
       priority: 11
       services:
         - name: argocd-server
           port: 80
           scheme: h2c
   tls:
-    certResolver: default
+    certResolver: letsencrypt
