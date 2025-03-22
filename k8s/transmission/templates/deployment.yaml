@@ -28,6 +28,10 @@ spec:
           ports:
             - name: http
               containerPort: 9091
+            - containerPort: 51413
+              protocol: TCP
+            - containerPort: 51413
+              protocol: UDP
           volumeMounts:
             - name: transmission-config
               mountPath: /config
