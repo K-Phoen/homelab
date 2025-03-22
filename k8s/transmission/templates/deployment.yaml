@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: transmission
+
+  template:
+    metadata:
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - name: transmission
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: TZ
+              value: 'Europe/Stockholm'
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '3000'
+          ports:
+            - name: http
+              containerPort: 9091
+          volumeMounts:
+            - name: transmission-config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+
+      volumes:
+        - name: transmission-config
+          persistentVolumeClaim:
+            claimName: transmission-config
+        - name: downloads
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Downloads
