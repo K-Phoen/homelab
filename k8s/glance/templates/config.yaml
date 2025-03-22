@@ -47,8 +47,9 @@ data:
                   url: https://photos.kevingomez.fr/
                   icon: di:immich
                 - title: LibreTranslate
-                  url: https://translate.kevingomez.fr/
+                  url: https://translate.hpme.lab/
                   icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
+                  allow-insecure: true
                 - title: RSS
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
@@ -59,6 +60,23 @@ data:
                 - title: Wallabag
                   url: https://wallabag.kevingomez.fr/
                   icon: di:wallabag-light
+
+            - type: monitor
+              cache: 1m
+              title: Media
+              sites:
+                - title: Prowlarr
+                  url: https://prowlarr.home.lab/
+                  icon: di:prowlarr
+                  allow-insecure: true
+                - title: Sonarr
+                  url: https://sonarr.home.lab/
+                  icon: di:sonarr
+                  allow-insecure: true
+                - title: Transmission
+                  url: https://transmission.home.lab/
+                  icon: di:transmission
+                  allow-insecure: true
 
             - type: group
               widgets:
