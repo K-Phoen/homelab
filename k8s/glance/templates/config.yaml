@@ -47,9 +47,8 @@ data:
                   url: https://photos.kevingomez.fr/
                   icon: di:immich
                 - title: LibreTranslate
-                  url: https://translate.home.lab/
+                  url: https://translate.kevingomez.fr/
                   icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/libretranslate.png
-                  allow-insecure: true
                   alt-status-codes: [200, 401]
                 - title: RSS
                   url: https://rss.kevingomez.fr/
@@ -66,6 +65,10 @@ data:
               cache: 1m
               title: Media
               sites:
+                - title: Jellyfin
+                  url: https://tv.kevingomez.fr/
+                  icon: di:jellyfin
+                  alt-status-codes: [200]
                 - title: Prowlarr
                   url: https://prowlarr.home.lab/
                   icon: di:prowlarr
@@ -77,9 +80,8 @@ data:
                   allow-insecure: true
                   alt-status-codes: [200, 401]
                 - title: Transmission
-                  url: https://transmission.home.lab/
+                  url: https://downloads.kevingomez.fr/
                   icon: di:transmission
-                  allow-insecure: true
                   alt-status-codes: [200, 401]
 
             - type: group
