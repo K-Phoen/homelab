@@ -33,6 +33,20 @@
     port: '443'
     proto: tcp
 
+- name: Allow transmission port - TCP
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '51413'
+    proto: tcp
+
+- name: Allow transmission port - UDP
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '51413'
+    proto: udp
+
 - name: Allow all access to port 4242 - Custom SSH
   become: true
   community.general.ufw:
