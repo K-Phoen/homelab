@@ -16,3 +16,5 @@ spec:
         - kind: Service
           name: glance-web
           port: 80
+  tls:
+    certResolver: letsencrypt

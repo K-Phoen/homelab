@@ -30,3 +30,7 @@ logs:
     level: "WARN" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
 
 globalArguments: [] # To disable new version checks and anonymous usage reports
+
+persistence:
+  enabled: true
+  storageClass: truenas-nfs-api-csi
