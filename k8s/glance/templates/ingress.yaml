@@ -9,9 +9,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`home.lab`)
+      match: Host(`home.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
+          namespace: authelia
       services:
         - kind: Service
           name: glance-web
