@@ -40,7 +40,7 @@ spec:
                   key: password
             # To run in verbose mode
             - name: LLDAP_VERBOSE
-              value: 'true'
+              value: 'false'
           ports:
             - name: ldap
               containerPort: 3890
