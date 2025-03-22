@@ -133,7 +133,7 @@ ingress:
       #   existingOptions:
       #     name: 'default-traefik-options'
       #     namespace: 'default'
-      certResolver: ''
+      certResolver: letsencrypt
       domainsOverride: []
       # domainsOverride:
       #   - main: 'auth.example.com'
