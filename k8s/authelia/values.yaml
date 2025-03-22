@@ -49,8 +49,8 @@ ingress:
   # className: 'ingress-nginx'
 
   tls:
-    enabled: false
-    secret: 'authelia-tls'
+    enabled: true
+    #secret: 'authelia-tls'
 
     # hostNameOverride: 'example.com'
 
@@ -128,8 +128,6 @@ ingress:
 
     # Specific options for the TraefikCRD TLS configuration. The above TLS section is still used.
     tls:
-      enabled: true
-      
       ## Disables inclusion of the IngressRoute TLSOptions.
       disableTLSOptions: false
       #   existingOptions:
