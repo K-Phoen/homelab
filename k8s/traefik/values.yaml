@@ -36,6 +36,7 @@ persistence:
   storageClass: truenas-nfs-api-csi
 
 additionalArguments:
-  - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+  #- "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+  - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
   - "--certificatesresolvers.letsencrypt.acme.email=contact@kevingomez.fr"
   - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
