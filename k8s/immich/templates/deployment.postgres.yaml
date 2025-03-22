@@ -22,7 +22,7 @@ spec:
       containers:
         - name: postgres
           image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
-          command: [ postgres ]
+          #command: [ postgres ]
           args:
             - '-c'
             - 'shared_preload_libraries=vectors.so'
