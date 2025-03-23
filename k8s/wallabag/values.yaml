@@ -1,0 +1,11 @@
+image:
+  name: ghcr.io/immich-app/immich-server
+  tag: 'v1.129.0'
+
+postgres:
+  image: postgres
+  tag: '17.4-alpine3.21'
+
+redis:
+  image: docker.io/redis
+  tag: 'redis:7.4.1-alpine'

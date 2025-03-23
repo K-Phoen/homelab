@@ -20,7 +20,7 @@ ingressRoute:
   dashboard:
     enabled: true
     entryPoints: ['websecure']
-    matchRule: "Host(`traefik.home.lab`)"
+    matchRule: "Host(`traefik.kevingomez.fr`)"
     middlewares:
       - name: forwardauth-authelia
         namespace: authelia
