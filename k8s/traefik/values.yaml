@@ -32,13 +32,10 @@ ingressRoute:
 
 logs:
   general:
-    level: "DEBUG" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+    level: "WARN" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
 
   access:
     enabled: true
-    fields:
-      headers:
-        defaultmode: "keep"
 
 globalArguments: [] # To disable new version checks and anonymous usage reports
 
@@ -69,15 +66,11 @@ ports:
         - '10.42.0.0/16'
         - '10.43.0.0/16'
         - '192.168.1.0/24'
-        - '127.0.0.0/24'
-        - 'fe80::/7'
     proxyProtocol:
       trustedIPs:
         - '10.42.0.0/16'
         - '10.43.0.0/16'
         - '192.168.1.0/24'
-        - '127.0.0.0/24'
-        - 'fe80::/7'
 
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
