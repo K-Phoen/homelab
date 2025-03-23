@@ -14,6 +14,17 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san carrot.lab --disable 
 
 A kubeconfig is written to `/etc/rancher/k3s/k3s.yaml`.
 
+
+## Node Setup (potato)
+
+Run on potato:
+
+```shell
+curl -sfL https://get.k3s.io | K3S_URL=https://carrot.lab:6443 K3S_TOKEN=mynodetoken sh -
+```
+
+Note: `K3S_TOKEN` is stored in `/var/lib/rancher/k3s/server/node-token` on the server node.
+
 ## Argo CD
 
 ### Installation

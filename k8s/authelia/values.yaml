@@ -1819,7 +1819,7 @@ persistence:
   volumeName: ''
 
   accessModes:
-    - 'ReadWriteOnce'
+    - 'ReadWriteMany'
 
   size: '1Gi'
 

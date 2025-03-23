@@ -16,10 +16,12 @@
     tailscale_args: "--ssh --advertise-exit-node"
     tailscale_oauth_ephemeral: false
 
-- name: Install Docker
-  ansible.builtin.include_role:
-    name: geerlingguy.docker
-    apply:
-      become: true
-  vars:
-    docker_users: ["{{ homelab_user }}"]
+- name: Setup firewall
+  ansible.builtin.include_tasks: ./ufw.yml
+
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - nfs-common
+    update_cache: true
