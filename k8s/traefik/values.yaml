@@ -45,9 +45,6 @@ env:
         name: gandi-pat
         key: password
 
-service:
-  externalTrafficPolicy: Local
-
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=gandiv5"
