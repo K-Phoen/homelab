@@ -157,7 +157,7 @@ ingress:
 
 pod:
   # Must be Deployment, DaemonSet, or StatefulSet.
-  kind: 'DaemonSet'
+  kind: 'Deployment'
 
   annotations:
     k8s.grafana.com/scrape: 'true'
