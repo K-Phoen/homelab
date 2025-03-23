@@ -46,7 +46,9 @@ env:
         key: password
 
 service:
-  externalTrafficPolicy: Local
+  enabled: true
+  spec:
+    externalTrafficPolicy: Local
 
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
