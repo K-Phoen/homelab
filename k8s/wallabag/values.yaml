@@ -1,6 +1,6 @@
 image:
-  name: ghcr.io/immich-app/immich-server
-  tag: 'v1.129.0'
+  name: wallabag/wallabag
+  tag: '2.6.10'
 
 postgres:
   image: postgres
