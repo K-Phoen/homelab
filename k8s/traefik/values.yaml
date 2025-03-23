@@ -48,7 +48,6 @@ env:
 service:
   spec:
     externalTrafficPolicy: Local
-    externalIps: ['192.168.1.42']
 
 ports:
   web:
@@ -57,17 +56,9 @@ ports:
 
   websecure:
     forwardedHeaders:
-      trustedIPs:
-        - '10.42.0.0/16'
-        - '10.43.0.0/16'
-        - '192.168.1.0/24'
-        - 'fc00::/7'
+      insecure: true
     proxyProtocol:
-      trustedIPs:
-        - '10.42.0.0/16'
-        - '10.43.0.0/16'
-        - '192.168.1.0/24'
-        - 'fc00::/7'
+      insecure: true
 
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
