@@ -2,6 +2,9 @@ ingressClass:
   name: traefik
   isDefaultClass: true
 
+nodeSelector:
+  'kubernetes.io/hostname': carrot
+
 deployment:
   podAnnotations:
     k8s.grafana.com/scrape: 'true'
