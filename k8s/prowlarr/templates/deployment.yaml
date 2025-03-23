@@ -27,6 +27,10 @@ spec:
           volumeMounts:
             - name: prowlarr-config
               mountPath: /config
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "20m"
 
       volumes:
         - name: prowlarr-config
