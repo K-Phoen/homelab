@@ -6,6 +6,11 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
 
+  # the PVC used by prowlarr is defined as ReadWriteOnce, so only one pod can
+  # access it at any time
+  strategy:
+    type: Recreate
+
   selector:
     matchLabels:
       app: prowlarr
