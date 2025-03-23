@@ -29,7 +29,13 @@ ingressRoute:
 
 logs:
   general:
-    level: "WARN" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+    level: "DEBUG" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+
+  access:
+    enabled: true
+    fields:
+      headers:
+        defaultmode: "keep"
 
 globalArguments: [] # To disable new version checks and anonymous usage reports
 
