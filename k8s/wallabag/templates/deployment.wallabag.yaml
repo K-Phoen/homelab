@@ -15,10 +15,6 @@ spec:
       labels:
         app: wallabag
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
-
       containers:
         - name: wallabag
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
