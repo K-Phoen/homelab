@@ -24,6 +24,8 @@ ingressRoute:
     middlewares:
       - name: forwardauth-authelia
         namespace: authelia
+    tls:
+      certResolver: letsencrypt
 
 logs:
   general:

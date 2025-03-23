@@ -12,7 +12,10 @@ spec:
       match: Host(`sonarr.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
+          namespace: authelia
       services:
         - kind: Service
           name: sonarr
           port: http
+  tls:
+    certResolver: letsencrypt

@@ -12,7 +12,10 @@ spec:
       match: Host(`prowlarr.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
+          namespace: authelia
       services:
         - kind: Service
           name: prowlarr
           port: http
+  tls:
+    certResolver: letsencrypt

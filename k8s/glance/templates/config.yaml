@@ -53,6 +53,7 @@ data:
                 - title: RSS
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
+                  alt-status-codes: [200, 401]
                 - title: TrueNAS
                   url: https://beet.lab/
                   icon: di:truenas-scale
@@ -70,12 +71,12 @@ data:
                   icon: di:jellyfin
                   alt-status-codes: [200]
                 - title: Prowlarr
-                  url: https://prowlarr.home.lab/
+                  url: https://prowlarr.kevingomez.fr/
                   icon: di:prowlarr
                   allow-insecure: true
                   alt-status-codes: [200, 401]
                 - title: Sonarr
-                  url: https://sonarr.home.lab/
+                  url: https://sonarr.kevingomez.fr/
                   icon: di:sonarr
                   allow-insecure: true
                   alt-status-codes: [200, 401]

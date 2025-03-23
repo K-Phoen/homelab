@@ -9,8 +9,10 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`ldap.home.lab`)
+      match: Host(`ldap.kevingomez.fr`)
       services:
         - kind: Service
           name: lldap
           port: 17170
+  tls:
+    certResolver: letsencrypt
