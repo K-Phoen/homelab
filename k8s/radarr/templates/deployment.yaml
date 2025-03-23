@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: radarr
+
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - name: radarr
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: TZ
+              value: 'Europe/Stockholm'
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '3000'
+          ports:
+            - name: http
+              containerPort: 7878
+          volumeMounts:
+            - name: radarr-config
+              mountPath: /config
+            - name: movies-library
+              mountPath: /movies
+            - name: downloads
+              mountPath: /downloads
+
+      volumes:
+        - name: radarr-config
+          persistentVolumeClaim:
+            claimName: radarr-config
+        - name: movies-library
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Video/Movies
+        - name: downloads
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Downloads
