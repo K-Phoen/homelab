@@ -73,12 +73,14 @@ data:
                 - title: Prowlarr
                   url: https://prowlarr.kevingomez.fr/
                   icon: di:prowlarr
-                  allow-insecure: true
+                  alt-status-codes: [200, 401]
+                - title: Radarr
+                  url: https://Radarr.kevingomez.fr/
+                  icon: di:radarr
                   alt-status-codes: [200, 401]
                 - title: Sonarr
                   url: https://sonarr.kevingomez.fr/
                   icon: di:sonarr
-                  allow-insecure: true
                   alt-status-codes: [200, 401]
                 - title: Transmission
                   url: https://downloads.kevingomez.fr/
