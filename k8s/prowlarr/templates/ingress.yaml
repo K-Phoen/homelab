@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`prowlarr.home.lab`)
+      match: Host(`prowlarr.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
       services:
