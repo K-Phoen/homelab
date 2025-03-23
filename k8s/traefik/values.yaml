@@ -45,11 +45,31 @@ env:
         name: gandi-pat
         key: password
 
+service:
+  spec:
+    externalTrafficPolicy: Local
+
+ports:
+  web:
+    expose:
+      default: false
+
+  websecure:
+    forwardedHeaders:
+      trustedIPs:
+        - '10.42.0.0/16'
+        - '10.43.0.0/16'
+        - '192.168.1.0/24'
+        - 'fc00::/7'
+    proxyProtocol:
+      trustedIPs:
+        - '10.42.0.0/16'
+        - '10.43.0.0/16'
+        - '192.168.1.0/24'
+        - 'fc00::/7'
+
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=gandiv5"
   - "--certificatesresolvers.letsencrypt.acme.email=contact@kevingomez.fr"
   - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
-
-  - '--entryPoints.websecure.forwardedHeaders.trustedIPs=10.42.0.0/16,10.43.0.0/16,192.168.1.0/24,fc00::/7'
-  - '--entryPoints.websecure.proxyProtocol.trustedIPs=10.42.0.0/16,10.43.0.0/16,192.168.1.0/24,fc00::/7'
