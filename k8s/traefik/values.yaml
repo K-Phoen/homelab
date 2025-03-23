@@ -48,6 +48,9 @@ env:
 service:
   spec:
     externalTrafficPolicy: Local
+    externalIps: ['192.168.1.42']
+
+hostNetwork: true
 
 ports:
   web:
