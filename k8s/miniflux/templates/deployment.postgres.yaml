@@ -6,6 +6,11 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
 
+  # the PVC used by postgres is defined as ReadWriteOnce, so only one instance
+  # of postgres can access it at any time
+  strategy:
+    type: Recreate
+
   selector:
     matchLabels:
       app: postgres
