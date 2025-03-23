@@ -15,6 +15,16 @@ spec:
       labels:
         app: immich
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
       securityContext:
         runAsUser: 	3000 # k8s-nfs on nas
         runAsGroup: 3001 # k8s-nfs on nas

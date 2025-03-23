@@ -15,6 +15,16 @@ spec:
       labels:
         app: redis
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
       containers:
         - name: redis
           image: {{ .Values.redis.image }}:{{ .Values.redis.tag }}

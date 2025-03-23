@@ -14,6 +14,12 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san carrot.lab --disable 
 
 A kubeconfig is written to `/etc/rancher/k3s/k3s.yaml`.
 
+Add a marker indicating that this machine has a fast disk (can be used by some
+deployments that prefer being deployed on fast nodes):
+
+```shell
+kubectl label nodes carrot disktype=ssd
+```
 
 ## Node Setup (potato)
 
