@@ -35,6 +35,10 @@ spec:
               mountPath: /tv
             - name: downloads
               mountPath: /downloads
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "20m"
 
       volumes:
         - name: sonarr-config

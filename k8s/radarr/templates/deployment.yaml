@@ -35,6 +35,10 @@ spec:
               mountPath: /movies
             - name: downloads
               mountPath: /downloads
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "20m"
 
       volumes:
         - name: radarr-config

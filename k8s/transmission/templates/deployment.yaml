@@ -37,6 +37,10 @@ spec:
               mountPath: /config
             - name: downloads
               mountPath: /downloads
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "20m"
 
       volumes:
         - name: transmission-config
