@@ -87,7 +87,7 @@ applicationObservability:
 alloy-metrics:
   enabled: true
   logging:
-    level: debug
+    level: warn
 
 alloy-singleton:
   enabled: true
