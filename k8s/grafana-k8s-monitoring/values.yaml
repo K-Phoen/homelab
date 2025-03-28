@@ -1,6 +1,9 @@
 cluster:
   name: homelab
 
+global:
+  scrapeInterval: "30s"
+
 destinations:
   - name: grafana-cloud-metrics
     type: prometheus
@@ -77,15 +80,23 @@ applicationObservability:
 
 alloy-metrics:
   enabled: true
+  logging:
+    level: warn
 
 alloy-singleton:
   enabled: true
+  logging:
+    level: warn
 
 alloy-logs:
   enabled: true
+  logging:
+    level: warn
 
 alloy-receiver:
   enabled: true
+  logging:
+    level: warn
   alloy:
     extraPorts:
       - name: otlp-grpc
