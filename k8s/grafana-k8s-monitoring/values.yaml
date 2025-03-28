@@ -51,6 +51,8 @@ clusterMetrics:
   node-exporter:
     metricsTuning:
       useIntegrationAllowList: true
+      includeMetrics:
+        - node_hwmon_temp_celsius
 
 annotationAutodiscovery:
   enabled: true
