@@ -48,6 +48,9 @@ destinations:
 
 clusterMetrics:
   enabled: true
+  node-exporter:
+    metricsTuning:
+      useIntegrationAllowList: true
 
 annotationAutodiscovery:
   enabled: true
@@ -57,6 +60,9 @@ clusterEvents:
 
 nodeLogs:
   enabled: true
+  journal:
+    # The list of systemd units to keep scraped logs from. If empty, all units are scraped.
+    units: []
 
 podLogs:
   enabled: true
