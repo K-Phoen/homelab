@@ -50,7 +50,7 @@ clusterMetrics:
   enabled: true
   node-exporter:
     metricsTuning:
-      useIntegrationAllowList: false
+      useIntegrationAllowList: true
 
 annotationAutodiscovery:
   enabled: true
