@@ -82,6 +82,13 @@
     port: 10250
     src: '192.168.1.0/24'
 
+- name: Open node-exporter metrics
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: 9100
+    src: '192.168.1.0/24'
+
 - name: Enable UFW
   become: true
   community.general.ufw:
