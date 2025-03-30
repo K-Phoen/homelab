@@ -1,6 +1,6 @@
 image:
   name: ghcr.io/immich-app/immich-server
-  tag: 'v1.129.0'
+  tag: 'v1.130.3'
 
 postgres:
   image: docker.io/tensorchord/pgvecto-rs
