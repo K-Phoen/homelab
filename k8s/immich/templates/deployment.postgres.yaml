@@ -64,10 +64,10 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: pg-data
-          #resources:
-          #  requests:
-          #    memory: "20Mi"
-          #    cpu: "20m"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "10m"
 
       volumes:
         - name: pg-data
