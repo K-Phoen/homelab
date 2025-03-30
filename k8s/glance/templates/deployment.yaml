@@ -18,6 +18,12 @@ spec:
       containers:
         - name: glance
           image: glanceapp/glance:{{ .Values.image.tag }}
+          env:
+            - name: IMMICH_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: immich-api-key
+                  key: password
           ports:
             - name: http
               containerPort: 8080
