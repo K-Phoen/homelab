@@ -19,6 +19,8 @@ spec:
         - name: glance
           image: glanceapp/glance:{{ .Values.image.tag }}
           env:
+            - name: TZ
+              value: 'Europe/Stockholm'
             - name: IMMICH_API_KEY
               valueFrom:
                 secretKeyRef:

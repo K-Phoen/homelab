@@ -115,21 +115,27 @@ data:
                 - type: reddit
                   subreddit: grafana
                   show-thumbnails: true
+                  collapse-after: 8
                 - type: reddit
                   subreddit: golang
                   show-thumbnails: true
+                  collapse-after: 8
                 - type: reddit
                   subreddit: kubernetes
                   show-thumbnails: true
+                  collapse-after: 8
                 - type: reddit
                   subreddit: programming
                   show-thumbnails: true
+                  collapse-after: 8
                 - type: reddit
                   subreddit: selfhosted
                   show-thumbnails: true
+                  collapse-after: 8
                 - type: reddit
                   subreddit: sre
                   show-thumbnails: true
+                  collapse-after: 8
 
         - size: small
           widgets:
