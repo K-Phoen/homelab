@@ -54,10 +54,10 @@ spec:
           volumeMounts:
             - mountPath: /var/www/wallabag/web/assets/images
               name: wallabag-images
-          #resources:
-          #  requests:
-          #    memory: "20Mi"
-          #    cpu: "20m"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "20m"
 
       volumes:
         - name: wallabag-images
