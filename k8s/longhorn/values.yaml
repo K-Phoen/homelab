@@ -2,5 +2,8 @@ defaultSettings:
   allowCollectingLonghornUsageMetrics: false
   logLevel: "Warn"
 
+defaultBackupStore:
+  backupTarget: nfs://beet.lab:/mnt/main/Backups/longhorn
+
 persistence:
   defaultClassReplicaCount: 2 # I don't have more nodes yet :(
