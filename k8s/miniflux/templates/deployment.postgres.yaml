@@ -20,10 +20,6 @@ spec:
       labels:
         app: postgres
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
-
       containers:
         - name: postgres
           image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
