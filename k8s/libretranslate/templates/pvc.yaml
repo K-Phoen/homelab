@@ -5,9 +5,9 @@ metadata:
   labels:
     app: libretranslate
 spec:
-  storageClassName: truenas-nfs-api-csi
+  storageClassName: longhorn
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
