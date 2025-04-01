@@ -18,11 +18,3 @@
 
 - name: Setup firewall
   ansible.builtin.include_tasks: ./ufw.yml
-
-- name: Install required packages
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - nfs-common
-      - firmware-linux-nonfree
-    update_cache: true

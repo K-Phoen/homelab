@@ -10,3 +10,12 @@
       - lm-sensors
       - vim
     update_cache: true
+
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - firmware-linux-nonfree
+      - open-iscsi
+      - nfs-common
+    update_cache: true
