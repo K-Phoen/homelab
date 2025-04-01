@@ -19,9 +19,9 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: truenas-nfs-api-csi
+  storageClassName: longhorn
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 15Gi
+      storage: 1Gi

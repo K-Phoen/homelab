@@ -25,10 +25,6 @@ spec:
                     operator: In
                     values: [ssd]
 
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
-
       containers:
         - name: postgres
           image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
@@ -58,6 +54,8 @@ spec:
                   key: password
             - name: POSTGRES_INITDB_ARGS
               value: '--data-checksums'
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           ports:
             - name: pg
               containerPort: 5432
