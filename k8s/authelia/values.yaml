@@ -1811,7 +1811,7 @@ persistence:
   # existingClaim: 'my-claim-name'
 
   #storageClass: ''
-  storageClass: 'truenas-nfs-api-csi'
+  storageClass: 'longhorn'
 
   ## Persistent Volume Name
   ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
@@ -1819,7 +1819,7 @@ persistence:
   volumeName: ''
 
   accessModes:
-    - 'ReadWriteMany'
+    - 'ReadWriteOnce'
 
   size: '1Gi'
 
