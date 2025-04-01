@@ -60,7 +60,7 @@ ingress:
     ## Use a standard Ingress object, not an IngressRoute.
     disableIngressRoute: false
 
-    # matchOverride: Host(`auth.example.com`) && PathPrefix(`/`)
+    # matchOverride: Host(`auth.example.com`) && PathPrefix(`/`)...
 
     ## The TraefikCRD apiVersion Overrides. The apiGroupOverride controls the first part, apiVersionOverride controls
     ## the second.
@@ -1819,7 +1819,7 @@ persistence:
   volumeName: ''
 
   accessModes:
-    - 'ReadWriteOnce'
+    - 'ReadWriteMany'
 
   size: '1Gi'
 
