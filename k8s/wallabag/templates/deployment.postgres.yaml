@@ -6,6 +6,11 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
 
+  # the PVC used by postgres is defined as ReadWriteOnce, so only one instance
+  # of postgres can access it at any time
+  strategy:
+    type: Recreate
+
   selector:
     matchLabels:
       app: postgres
@@ -15,10 +20,6 @@ spec:
       labels:
         app: postgres
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
-
       containers:
         - name: postgres
           image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
@@ -32,6 +33,8 @@ spec:
                 secretKeyRef:
                   name: postgres-password
                   key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           ports:
             - name: pg
               containerPort: 5432
