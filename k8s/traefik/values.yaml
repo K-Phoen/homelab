@@ -41,7 +41,7 @@ globalArguments: [] # To disable new version checks and anonymous usage reports
 
 persistence:
   enabled: true
-  storageClass: truenas-nfs-api-csi
+  storageClass: longhorn
   accessMode: ReadWriteMany
 
 env:
