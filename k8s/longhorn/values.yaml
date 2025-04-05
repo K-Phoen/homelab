@@ -7,3 +7,7 @@ defaultBackupStore:
 
 persistence:
   defaultClassReplicaCount: 2 # I don't have more nodes yet :(
+
+annotations:
+  k8s.grafana.com/scrape: 'true'
+  k8s.grafana.com/metrics.portNumber: '9500'
