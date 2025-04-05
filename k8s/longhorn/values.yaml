@@ -8,7 +8,6 @@ defaultBackupStore:
 persistence:
   defaultClassReplicaCount: 2 # I don't have more nodes yet :(
 
-longhornManager:
-  serviceAnnotations:
-    k8s.grafana.com/scrape: 'true'
-    k8s.grafana.com/metrics.portNumber: '9500'
+annotations:
+  k8s.grafana.com/scrape: 'true'
+  k8s.grafana.com/metrics.portNumber: '9500'
