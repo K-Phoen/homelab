@@ -464,7 +464,7 @@ configMap:
 
   log:
     ## Level of verbosity for logs: info, debug, trace.
-    level: 'debug'
+    level: 'info'
 
     ## Format the logs are written as: json, text.
     format: 'text'
@@ -1112,10 +1112,10 @@ configMap:
     ##
     ## The redis connection details
     redis:
-      enabled: false
+      enabled: true
       deploy: false
       enabledSecret: false
-      host: 'redis.databases.svc.cluster.local'
+      host: 'redis.authelia.svc.cluster.local'
       port: 6379
 
       ## Optional username to be used with authentication.
@@ -1124,7 +1124,7 @@ configMap:
 
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
-        disabled: false
+        disabled: true
 
         ## The secret name. The ~ name is special as it is the secret we generate either automatically or via the
         ## secret_value option below.
