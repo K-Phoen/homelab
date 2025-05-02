@@ -1,6 +1,6 @@
 image:
   name: docker.io/miniflux/miniflux
-  tag: '2.2.2-distroless'
+  tag: '2.2.8-distroless'
 
 postgres:
   image: postgres

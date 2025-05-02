@@ -1,6 +1,6 @@
 image:
   name: libretranslate/libretranslate
-  tag: v1.6.4
+  tag: v1.6.5
 
 libretranslate:
   languages: 'en,fr,es,sv'
