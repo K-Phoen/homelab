@@ -3,8 +3,8 @@ image:
   tag: "v1.133.1"
 
 postgres:
-  image: docker.io/tensorchord/pgvecto-rs
-  tag: "pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0"
+  image: ghcr.io/immich-app/postgres
+  tag: "14-vectorchord0.3.0-pgvectors0.3.0"
 
 redis:
   image: docker.io/redis
