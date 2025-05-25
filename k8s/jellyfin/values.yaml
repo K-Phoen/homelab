@@ -1,5 +1,8 @@
 # See https://github.com/jellyfin/jellyfin-helm/blob/master/charts/jellyfin/README.md
 
+image:
+  tag: 10.10.7
+
 # Enable hardware acceleration
 podSecurityContext:
   supplementalGroups:
