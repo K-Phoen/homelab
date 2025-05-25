@@ -156,9 +156,13 @@ data:
                 - authelia/authelia
                 - glanceapp/glance
                 - immich-app/immich
+                - jellyfin/jellyfin
                 - LibreTranslate/LibreTranslate
                 - lldap/lldap
                 - miniflux/v2
+                - Prowlarr/Prowlarr
+                - Radarr/Radarr
+                - Sonarr/Sonarr
                 - traefik/traefik
                 - wallabag/wallabag
 
