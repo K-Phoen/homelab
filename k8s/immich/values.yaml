@@ -1,6 +1,6 @@
 image:
   name: ghcr.io/immich-app/immich-server
-  tag: "v1.133.1"
+  tag: "v1.134.0"
 
 postgres:
   image: ghcr.io/immich-app/postgres
@@ -9,4 +9,3 @@ postgres:
 redis:
   image: docker.io/redis
   tag: "6.2-alpine@sha256:e3b17ba9479deec4b7d1eeec1548a253acc5374d68d3b27937fcfe4df8d18c7e"
-
