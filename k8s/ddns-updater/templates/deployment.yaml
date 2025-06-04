@@ -29,9 +29,11 @@ spec:
             # Enable the web server and web UI
             - name: SERVER_ENABLED
               value: 'yes'
-          envFrom:
-            - secretRef:
-                name: ddns-updater-config
+            - name: CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: ddns-updater-config
+                  key: password
           ports:
             - name: http
               containerPort: 8000
