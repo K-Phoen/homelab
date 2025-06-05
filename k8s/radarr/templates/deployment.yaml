@@ -42,8 +42,9 @@ spec:
 
       volumes:
         - name: radarr-config
-          persistentVolumeClaim:
-            claimName: radarr-config
+          nfs:
+            server: beet.lab
+            path: /mnt/main/k8s/nfs/volumes/pvc-47610227-dc70-4d00-8880-471b7b440a24
         - name: movies-library
           nfs:
             server: beet.lab
