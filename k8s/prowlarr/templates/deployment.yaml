@@ -39,5 +39,6 @@ spec:
 
       volumes:
         - name: prowlarr-config
-          persistentVolumeClaim:
-            claimName: prowlarr-config
+          nfs:
+            server: beet.lab
+            path: /mnt/main/k8s/nfs/volumes/pvc-c191c6d9-70bc-4c6a-9e20-d2f039e71ed9
