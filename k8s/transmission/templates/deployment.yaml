@@ -44,8 +44,9 @@ spec:
 
       volumes:
         - name: transmission-config
-          persistentVolumeClaim:
-            claimName: transmission-config
+          nfs:
+            server: beet.lab
+            path: /mnt/main/k8s/nfs/volumes/pvc-4c89814e-5547-4ad1-bb0c-9d0e82a4cae7
         - name: downloads
           nfs:
             server: beet.lab
