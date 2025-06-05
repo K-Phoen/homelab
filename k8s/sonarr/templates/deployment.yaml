@@ -42,8 +42,9 @@ spec:
 
       volumes:
         - name: sonarr-config
-          persistentVolumeClaim:
-            claimName: sonarr-config
+          nfs:
+            server: beet.lab
+            path: /mnt/main/k8s/nfs/volumes/pvc-009ef461-68ad-4ea6-b94c-69ab3584e44e
         - name: series-library
           nfs:
             server: beet.lab
