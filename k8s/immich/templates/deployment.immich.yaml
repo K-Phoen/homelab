@@ -75,5 +75,6 @@ spec:
 
       volumes:
         - name: immich-data
-          persistentVolumeClaim:
-            claimName: immich-data
+          nfs:
+            server: beet.lab
+            path: /mnt/main/k8s/nfs/volumes/pvc-1f25dc05-8b57-43f8-b5ac-ad20609b1d9d
