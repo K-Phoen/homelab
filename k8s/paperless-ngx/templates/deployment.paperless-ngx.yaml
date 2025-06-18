@@ -23,9 +23,8 @@ spec:
         - name: paperless-ngx
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           env:
-            - name: DEBUG
-              value: 'true'
-
+            - name: PAPERLESS_URL
+              value: https://papers.kevingomez.fr
             - name: PAPERLESS_REDIS
               value: redis://redis:6379
             - name: PAPERLESS_DBHOST
@@ -45,6 +44,8 @@ spec:
               value: http://gotenberg:3000
             - name: PAPERLESS_TIKA_ENDPOINT
               value: http://tika:9998
+            - name: PAPERLESS_TIME_ZONE
+              value: Europe/Stockholm
           ports:
             - name: http
               containerPort: 8000
