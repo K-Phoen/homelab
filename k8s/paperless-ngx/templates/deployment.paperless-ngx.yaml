@@ -15,9 +15,9 @@ spec:
       labels:
         app: paperless-ngx
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
+      #securityContext:
+      #  runAsUser: 	3000 # k8s-nfs on nas
+      #  runAsGroup: 3001 # k8s-nfs on nas
 
       containers:
         - name: paperless-ngx
@@ -59,18 +59,14 @@ spec:
 
       volumes:
         - name: paperless-ngx-data
-          nfs:
-            server: beet.lab
-            path: /mnt/main/Documents/paperless-ngx/data
+          persistentVolumeClaim:
+            claimName: paperless-data
         - name: paperless-ngx-consume
-          nfs:
-            server: beet.lab
-            path: /mnt/main/Documents/paperless-ngx/consume
+          persistentVolumeClaim:
+            claimName: paperless-consume
         - name: paperless-ngx-media
-          nfs:
-            server: beet.lab
-            path: /mnt/main/Documents/paperless-ngx/media
+          persistentVolumeClaim:
+            claimName: paperless-media
         - name: paperless-ngx-export
-          nfs:
-            server: beet.lab
-            path: /mnt/main/Documents/paperless-ngx/export
+          persistentVolumeClaim:
+            claimName: paperless-export
