@@ -27,6 +27,8 @@ spec:
               value: redis://redis:6379
             - name: PAPERLESS_DBHOST
               value: postgres
+            - name: PAPERLESS_DBNAME
+              value: paperless-ngx
             - name: PAPERLESS_DBUSER
               value: postgres
             - name: PAPERLESS_DBPASS
