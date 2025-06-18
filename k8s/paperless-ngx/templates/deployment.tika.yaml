@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tika
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: tika
+
+  template:
+    metadata:
+      labels:
+        app: tika
+    spec:
+      containers:
+        - name: tika
+          image: {{ .Values.tika.image }}:{{ .Values.tika.tag }}
+          ports:
+            - name: tika
+              containerPort: 9998
+          #resources:
+          #  requests:
+          #    memory: "15Mi"
+          #    cpu: "10m"

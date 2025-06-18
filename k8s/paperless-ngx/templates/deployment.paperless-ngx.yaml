@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: paperless-ngx
+
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      securityContext:
+        runAsUser: 	3000 # k8s-nfs on nas
+        runAsGroup: 3001 # k8s-nfs on nas
+
+      containers:
+        - name: paperless-ngx
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: PAPERLESS_REDIS
+              value: redis://redis:6379
+            - name: PAPERLESS_DBHOST
+              value: postgres
+            - name: PAPERLESS_TIKA_ENABLED
+              value: '1'
+            - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+              value: http://gotenberg:3000
+            - name: PAPERLESS_TIKA_ENDPOINT
+              value: http://tika:9998
+          ports:
+            - name: http
+              containerPort: 8000
+          volumeMounts:
+            - mountPath: /usr/src/paperless
+              name: paperless-ngx-data
+          #resources:
+          #  requests:
+          #    memory: "2Gi"
+          #    cpu: "0.1"
+
+      volumes:
+        - name: paperless-ngx-data
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Documents/paperless-ngx
