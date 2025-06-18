@@ -15,9 +15,9 @@ spec:
       labels:
         app: paperless-ngx
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
+      #securityContext:
+      #  runAsUser: 	3000 # k8s-nfs on nas
+      #  runAsGroup: 3001 # k8s-nfs on nas
 
       containers:
         - name: paperless-ngx
