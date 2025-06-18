@@ -18,13 +18,13 @@ spec:
       containers:
         - name: gotenberg
           image: {{ .Values.gotenberg.image }}:{{ .Values.gotenberg.tag }}
+          # The gotenberg chromium route is used to convert .eml files. We do not
+          # want to allow external content like tracking pixels or even javascript.
+          command: ["gotenberg"]
+          args: ["--chromium-disable-javascrip", "true", "--chromium-allow-list", "file:///tmp/.*"]
           ports:
             - name: gotenberg
               containerPort: 3000
-              # The gotenberg chromium route is used to convert .eml files. We do not
-              # want to allow external content like tracking pixels or even javascript.
-              command: ["gotenberg"]
-              args: ["--chromium-disable-javascrip", "true", "--chromium-allow-list", "file:///tmp/.*"]
           #resources:
           #  requests:
           #    memory: "15Mi"
