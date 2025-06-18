@@ -15,9 +15,9 @@ spec:
       labels:
         app: paperless-ngx
     spec:
-      #securityContext:
-      #  runAsUser: 	3000 # k8s-nfs on nas
-      #  runAsGroup: 3001 # k8s-nfs on nas
+      securityContext:
+        runAsUser: 	3000 # k8s-nfs on nas
+        runAsGroup: 3001 # k8s-nfs on nas
 
       containers:
         - name: paperless-ngx
@@ -27,6 +27,13 @@ spec:
               value: redis://redis:6379
             - name: PAPERLESS_DBHOST
               value: postgres
+            - name: PAPERLESS_DBUSER
+              value: postgres
+            - name: PAPERLESS_DBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: password
             - name: PAPERLESS_TIKA_ENABLED
               value: '1'
             - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
@@ -37,8 +44,14 @@ spec:
             - name: http
               containerPort: 8000
           volumeMounts:
-            - mountPath: /usr/src/paperless
+            - mountPath: /usr/src/paperless/data
               name: paperless-ngx-data
+            - mountPath: /usr/src/paperless/consume
+              name: paperless-ngx-consume
+            - mountPath: /usr/src/paperless/media
+              name: paperless-ngx-media
+            - mountPath: /usr/src/paperless/export
+              name: paperless-ngx-export
           #resources:
           #  requests:
           #    memory: "2Gi"
@@ -48,4 +61,16 @@ spec:
         - name: paperless-ngx-data
           nfs:
             server: beet.lab
-            path: /mnt/main/Documents/paperless-ngx
+            path: /mnt/main/Documents/paperless-ngx/data
+        - name: paperless-ngx-consume
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Documents/paperless-ngx/consume
+        - name: paperless-ngx-media
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Documents/paperless-ngx/media
+        - name: paperless-ngx-export
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Documents/paperless-ngx/export
