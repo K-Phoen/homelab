@@ -1,0 +1,26 @@
+# See https://github.com/nextcloud/helm/blob/main/charts/nextcloud/README.md
+
+postgres:
+  image: docker.io/postgres
+  tag: "17.5-alpine@sha256:fbe21607052bb5c298674f2fd8cf044a63aa3ddf50b81627f894f91f40f50bcb"
+
+internalDatabase:
+  enabled: false
+
+externalDatabase:
+  enabled: true
+  type: postgresql
+  host: postgres:5432
+  database: nextcloud
+  user: nextcloud
+
+  existingSecret:
+    enabled: true
+    secretName: postgres-password
+    passwordKey: password
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessMode: ReadWriteMany
+  size: 50Gi
