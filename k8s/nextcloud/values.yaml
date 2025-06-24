@@ -12,8 +12,11 @@ externalDatabase:
 
   existingSecret:
     enabled: true
-    secretName: postgres-password
+    secretName: pg-credentials
+    usernameKey: username
     passwordKey: password
+    hostKey: host
+    databaseKey: database
 
 persistence:
   enabled: true
