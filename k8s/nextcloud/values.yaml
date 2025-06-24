@@ -1,9 +1,5 @@
 # See https://github.com/nextcloud/helm/blob/main/charts/nextcloud/README.md
 
-postgres:
-  image: docker.io/postgres
-  tag: "17.5-alpine@sha256:fbe21607052bb5c298674f2fd8cf044a63aa3ddf50b81627f894f91f40f50bcb"
-
 internalDatabase:
   enabled: false
 
