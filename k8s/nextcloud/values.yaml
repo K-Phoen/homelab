@@ -28,7 +28,7 @@ persistence:
     enabled: true
     storageClass: longhorn
     accessMode: ReadWriteMany
-    size: 50Gi
+    size: 10Gi
 
 nextcloud:
   host: nextcloud.kevingomez.fr
