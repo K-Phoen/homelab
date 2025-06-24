@@ -23,3 +23,16 @@ persistence:
   storageClass: longhorn
   accessMode: ReadWriteMany
   size: 50Gi
+
+nextcloud:
+  host: nextcloud.kevingomez.fr
+
+  phpConfigs:
+    zz-memory_limit.ini: |-
+      memory_limit=512M
+
+# Temporary
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
