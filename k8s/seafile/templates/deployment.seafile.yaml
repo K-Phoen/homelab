@@ -47,6 +47,8 @@ spec:
                   key: password
             - name: SEAFILE_SERVER_LETSENCRYPT
               value: "false"
+            - name: SEAFILE_SERVER_PROTOCOL
+              value: https
             - name: SEAFILE_SERVER_HOSTNAME
               value: "files.kevingomez.fr"
             - name: JWT_PRIVATE_KEY
