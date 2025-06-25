@@ -77,6 +77,9 @@ data:
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
                   alt-status-codes: [200, 401]
+                - title: Seafile
+                  url: https://files.kevingomez.fr/
+                  icon: di:seafile
                 - title: TrueNAS
                   url: https://beet.lab/
                   icon: di:truenas-scale
