@@ -90,22 +90,41 @@ alloy-metrics:
   enabled: true
   logging:
     level: warn
+  alloy:
+    resources:
+      requests:
+        memory: "640Mi"
+        cpu: "0.07"
 
 alloy-singleton:
   enabled: true
   logging:
     level: warn
+  alloy:
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "0.01"
 
 alloy-logs:
   enabled: true
   logging:
     level: warn
+  alloy:
+    resources:
+      requests:
+        memory: "210Mi"
+        cpu: "0.07"
 
 alloy-receiver:
   enabled: true
   logging:
     level: warn
   alloy:
+    resources:
+      requests:
+        memory: "164Mi"
+        cpu: "0.02"
     extraPorts:
       - name: otlp-grpc
         port: 4317
