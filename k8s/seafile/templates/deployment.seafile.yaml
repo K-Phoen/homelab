@@ -15,10 +15,6 @@ spec:
       labels:
         app: seafile
     spec:
-      securityContext:
-        runAsUser: 	3000 # k8s-nfs on nas
-        runAsGroup: 3001 # k8s-nfs on nas
-
       containers:
         - name: seafile
           image: {{ .Values.seafile.image }}:{{ .Values.seafile.tag }}
