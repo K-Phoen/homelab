@@ -1,0 +1,3 @@
+seafile:
+  image: seafileltd/seafile-mc
+  tag: "12.0-latest"

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seafile
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: seafile
+
+  template:
+    metadata:
+      labels:
+        app: seafile
+    spec:
+      securityContext:
+        runAsUser: 	3000 # k8s-nfs on nas
+        runAsGroup: 3001 # k8s-nfs on nas
+
+      containers:
+        - name: seafile
+          image: {{ .Values.seafile.image }}:{{ .Values.seafile.tag }}
+          env:
+            - name: TIME_ZONE
+              value: "Europe/Stockholm"
+            - name: DB_HOST
+              value: "mariadb"
+            - name: DB_ROOT_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-password
+                  key: password
+            - name: SEAFILE_ADMIN_EMAIL
+              value: "contact@kevingomez.fr"
+            - name: SEAFILE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: password
+            - name: SEAFILE_SERVER_LETSENCRYPT
+              value: "false"
+            - name: SEAFILE_SERVER_HOSTNAME
+              value: "files.kevingomez.fr"
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - mountPath: /shared
+              name: seafile-data
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.1"
+
+      volumes:
+        - name: seafile-data
+          nfs:
+            server: beet.lab
+            path: /mnt/main/seafile
