@@ -54,6 +54,8 @@ spec:
                 secretKeyRef:
                   name: jwt-private-key
                   key: password
+            - name: ENABLE_SEADOC
+              value: 'false'
           ports:
             - name: http
               containerPort: 80
