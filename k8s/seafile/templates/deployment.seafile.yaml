@@ -49,6 +49,11 @@ spec:
               value: "false"
             - name: SEAFILE_SERVER_HOSTNAME
               value: "files.kevingomez.fr"
+            - name: JWT_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-private-key
+                  key: password
           ports:
             - name: http
               containerPort: 80
