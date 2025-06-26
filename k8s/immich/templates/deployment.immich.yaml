@@ -70,7 +70,7 @@ spec:
               name: immich-data
           resources:
             requests:
-              memory: "800Gi"
+              memory: "800Mi"
               cpu: "0.1"
 
       volumes:
