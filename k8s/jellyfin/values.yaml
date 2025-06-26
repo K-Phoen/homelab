@@ -23,6 +23,11 @@ persistence:
   media:
     enabled: false
 
+resources:
+  requests:
+    memory: "800Mi"
+    cpu: "0.5"
+
 volumeMounts:
   - mountPath: /library/video
     name: video-library
