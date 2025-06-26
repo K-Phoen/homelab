@@ -58,10 +58,10 @@ spec:
               name: paperless-ngx-media
             - mountPath: /usr/src/paperless/export
               name: paperless-ngx-export
-          #resources:
-          #  requests:
-          #    memory: "2Gi"
-          #    cpu: "0.1"
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "0.1"
 
       volumes:
         - name: paperless-ngx-data

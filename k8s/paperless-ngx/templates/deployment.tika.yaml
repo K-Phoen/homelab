@@ -21,7 +21,7 @@ spec:
           ports:
             - name: tika
               containerPort: 9998
-          #resources:
-          #  requests:
-          #    memory: "15Mi"
-          #    cpu: "10m"
+          resources:
+            requests:
+              memory: "300Mi"
+              cpu: "10m"
