@@ -80,13 +80,13 @@ data:
                 - title: Seafile
                   url: https://files.kevingomez.fr/
                   icon: di:seafile
+                - title: Shiori
+                  url: https://shiori.kevingomez.fr/
+                  icon: di:shiori
                 - title: TrueNAS
                   url: https://beet.lab/
                   icon: di:truenas-scale
                   allow-insecure: true
-                - title: Wallabag
-                  url: https://wallabag.kevingomez.fr/
-                  icon: di:wallabag-light
 
             - type: monitor
               cache: 1m
