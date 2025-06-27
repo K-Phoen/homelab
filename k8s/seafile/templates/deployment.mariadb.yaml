@@ -44,8 +44,8 @@ spec:
               mountPath: /var/lib/mysql
           resources:
             requests:
-              memory: "200Mi"
-              cpu: "0.01"
+              memory: "128Mi"
+              cpu: "20m"
       volumes:
         - name: mariadb-data
           persistentVolumeClaim:
