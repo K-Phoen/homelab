@@ -1,0 +1,21 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  name: shiori
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`shiori.kevingomez.fr`)
+      middlewares:
+        - name: forwardauth-authelia
+          namespace: authelia
+      services:
+        - kind: Service
+          name: shiori
+          port: http
+  tls:
+    certResolver: letsencrypt
