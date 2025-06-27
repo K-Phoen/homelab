@@ -165,9 +165,10 @@ data:
                 - miniflux/v2
                 - Prowlarr/Prowlarr
                 - Radarr/Radarr
+                - haiwen/seafile
+                - go-shiori/shiori
                 - Sonarr/Sonarr
                 - traefik/traefik
-                - wallabag/wallabag
 
             - type: server-stats
               servers:
