@@ -39,6 +39,11 @@ logs:
 
 globalArguments: [] # To disable new version checks and anonymous usage reports
 
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "20m"
+
 persistence:
   enabled: true
   storageClass: longhorn
