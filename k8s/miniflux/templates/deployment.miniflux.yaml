@@ -39,7 +39,7 @@ spec:
             - name: METRICS_COLLECTOR
               value: '1'
             #- name: METRICS_ALLOWED_NETWORKS
-            #  value: 172.19.0.1/16                                                                                                                                                                     
+            #  value: 172.19.0.1/16
             #- name: METRICS_USERNAME
             #  value: miniflux
             #- name: METRICS_PASSWORD
@@ -56,4 +56,4 @@ spec:
           resources:
             requests:
               memory: "75Mi"
-              cpu: "20m"
+              cpu: "10m"

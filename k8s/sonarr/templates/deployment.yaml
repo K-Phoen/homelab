@@ -37,8 +37,8 @@ spec:
               mountPath: /downloads
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "20m"
+              memory: "256Mi"
+              cpu: "30m"
 
       volumes:
         - name: sonarr-config

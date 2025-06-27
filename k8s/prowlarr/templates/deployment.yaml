@@ -34,7 +34,7 @@ spec:
               mountPath: /config
           resources:
             requests:
-              memory: "180Mi"
+              memory: "200Mi"
               cpu: "20m"
 
       volumes:

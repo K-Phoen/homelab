@@ -51,8 +51,8 @@ spec:
               name: lldap-data
           resources:
             requests:
-              memory: "15Mi"
-              cpu: "20m"
+              memory: "10Mi"
+              cpu: "10m"
 
       volumes:
         - name: lldap-data

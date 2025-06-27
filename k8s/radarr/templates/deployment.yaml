@@ -37,8 +37,8 @@ spec:
               mountPath: /downloads
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "20m"
+              memory: "150Mi"
+              cpu: "10m"
 
       volumes:
         - name: radarr-config

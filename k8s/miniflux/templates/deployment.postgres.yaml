@@ -43,8 +43,8 @@ spec:
               name: pg-data
           resources:
             requests:
-              memory: "120Mi"
-              cpu: "20m"
+              memory: "128Mi"
+              cpu: "10m"
 
       volumes:
         - name: pg-data
