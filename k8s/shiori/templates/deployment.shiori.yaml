@@ -34,7 +34,7 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "15m"
+              cpu: "10m"
 
       volumes:
         - name: shiori-data
