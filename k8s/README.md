@@ -181,3 +181,7 @@ kubectl create secret generic -n monitoring grafana-k8s-monitoring \
     --from-literal=gcloud_remote_fleet_management_user='ID' \
     --from-literal=gcloud_remote_fleet_management_password='TOKEN'
 ```
+
+## Davis deployment
+
+Endpoint to use when setting up CalDav integration on a client: `https://calendars.kevingomez.fr/dav`
