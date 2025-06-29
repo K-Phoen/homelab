@@ -76,7 +76,7 @@ spec:
           resources:
             requests:
               memory: "128Mi"
-              cpu: 15m
+              cpu: 5m
 
       volumes:
         - name: davis-db
