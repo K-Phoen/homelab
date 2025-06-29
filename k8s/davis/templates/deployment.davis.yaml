@@ -73,8 +73,6 @@ spec:
               name: davis-db
             - mountPath: /davis-webdav
               name: davis-webdav
-            - mountPath: /tmp
-              name: tmp
           resources:
             requests:
               memory: "128Mi"
