@@ -1,0 +1,3 @@
+davis:
+  image: ghcr.io/tchapi/davis-standalone
+  tag: "5.1.2"

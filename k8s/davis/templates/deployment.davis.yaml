@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlite
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: sqlite
+
+  template:
+    metadata:
+      labels:
+        app: sqlite
+    spec:
+      containers:
+        - name: davis
+          image: {{ .Values.davis.image }}:{{ .Values.davis.tag }}
+          env:
+            - name: APP_ENV
+              value: prod
+            - name: LOG_FILE_PATH
+              value: "%kernel.logs_dir%/%kernel.environment%.log"
+            - name: DATABASE_DRIVER
+              value: sqlite
+            - name: DATABASE_URL
+              value: sqlite:////davis-db/database.db
+
+            - name: MAILER_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: davis-mailer-dsn
+                  key: password
+
+            - name: ADMIN_LOGIN
+              value: kevin
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: davis-admin-password
+                  key: password
+
+            - name: AUTH_REALM
+              value: SabreDAV
+            - name: AUTH_METHOD
+              value: Basic
+
+            - name: CALDAV_ENABLED
+              value: 'true'
+            - name: CARDDAV_ENABLED
+              value: 'true'
+            - name: WEBDAV_ENABLED
+              value: 'false'
+
+            - name: INVITE_FROM_ADDRESS
+              value: 'contact@kevingomez.fr'
+
+            - name: APP_TIMEZONE
+              value: Europe/Stockholm
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - mountPath: /davis-db
+              name: davis-db
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: 15m
+
+      volumes:
+        - name: davis-db
+          persistentVolumeClaim:
+            claimName: davis-db
