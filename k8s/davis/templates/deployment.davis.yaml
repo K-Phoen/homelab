@@ -52,7 +52,13 @@ spec:
             - name: CARDDAV_ENABLED
               value: 'true'
             - name: WEBDAV_ENABLED
-              value: 'false'
+              value: 'true'
+            - name: WEBDAV_TMP_DIR
+              value: /tmp
+            - name: WEBDAV_PUBLIC_DIR
+              value: /davis-webdav/public
+            - name: WEBDAV_HOMES_DIR
+              value: /davis-webdav/homes
 
             - name: INVITE_FROM_ADDRESS
               value: 'contact@kevingomez.fr'
@@ -65,6 +71,10 @@ spec:
           volumeMounts:
             - mountPath: /davis-db
               name: davis-db
+            - mountPath: /davis-webdav
+              name: davis-webdav
+            - mountPath: /tmp
+              name: tmp
           resources:
             requests:
               memory: "128Mi"
@@ -74,3 +84,9 @@ spec:
         - name: davis-db
           persistentVolumeClaim:
             claimName: davis-db
+        - name: davis-webdav
+          persistentVolumeClaim:
+            claimName: davis-webdav
+        - name: tmp
+          emptyDir:
+            medium: Memory
