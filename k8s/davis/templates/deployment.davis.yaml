@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqlite
+  name: davis
 spec:
   replicas: 1
   revisionHistoryLimit: 3
 
   selector:
     matchLabels:
-      app: sqlite
+      app: davis
 
   template:
     metadata:
       labels:
-        app: sqlite
+        app: davis
     spec:
       containers:
         - name: davis
