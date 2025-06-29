@@ -157,6 +157,7 @@ data:
               repositories:
                 - "0xERR0R/blocky"
                 - authelia/authelia
+                - tchapi/davis
                 - glanceapp/glance
                 - immich-app/immich
                 - jellyfin/jellyfin
