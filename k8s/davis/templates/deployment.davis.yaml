@@ -61,7 +61,7 @@ spec:
               value: Europe/Stockholm
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 9000
           volumeMounts:
             - mountPath: /davis-db
               name: davis-db
