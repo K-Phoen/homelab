@@ -1,0 +1,3 @@
+blog:
+  image: ghcr.io/k-phoen/blog
+  tag: "de706e"
