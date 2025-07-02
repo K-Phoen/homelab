@@ -32,8 +32,7 @@ spec:
               cpu: 5m
 
         - name: anubis
-          image: ghcr.io/techarohq/anubis:latest
-          imagePullPolicy: Always
+          image: {{ .Values.anubis.image }}:{{ .Values.anubis.tag }}
           ports:
             - name: anubis
               containerPort: 8080

@@ -1,3 +1,7 @@
 blog:
   image: ghcr.io/k-phoen/blog
   tag: "b8fa81"
+
+anubis:
+  image: docker pull ghcr.io/techarohq/anubis
+  tag: "sha256-657c37d9d213203cc69454c3a199e1e784ba2372023276f2ca79ab22e1d37846"
