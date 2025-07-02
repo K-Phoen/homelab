@@ -12,6 +12,11 @@ spec:
 
   template:
     metadata:
+      annotations:
+        k8s.grafana.com/scrape: 'true'
+        k8s.grafana.com/metrics.portNumber: '9090'
+        k8s.grafana.com/metrics.scrapeInterval: '30s'
+        k8s.grafana.com/job: 'integrations/anubis-blog'
       labels:
         app: blog
     spec:
@@ -53,12 +58,9 @@ spec:
             - name: "OG_EXPIRY_TIME"
               value: "24h"
           resources:
-            limits:
-              cpu: 750m
-              memory: 256Mi
             requests:
-              cpu: 250m
-              memory: 256Mi
+              cpu: 5m
+              memory: 16Mi
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
