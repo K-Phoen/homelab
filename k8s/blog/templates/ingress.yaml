@@ -13,6 +13,6 @@ spec:
       services:
         - kind: Service
           name: blog
-          port: http
+          port: anubis
   tls:
     certResolver: letsencrypt
