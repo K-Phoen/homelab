@@ -20,6 +20,16 @@ spec:
       labels:
         app: blog
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
       containers:
         - name: blog
           image: {{ .Values.blog.image }}:{{ .Values.blog.tag }}
