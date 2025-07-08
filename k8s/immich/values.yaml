@@ -1,10 +1,10 @@
 image:
   name: ghcr.io/immich-app/immich-server
-  tag: "v1.134.0"
+  tag: "v1.135.3"
 
 postgres:
   image: ghcr.io/immich-app/postgres
-  tag: "14-vectorchord0.3.0-pgvectors0.3.0"
+  tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 
 redis:
   image: docker.io/redis
