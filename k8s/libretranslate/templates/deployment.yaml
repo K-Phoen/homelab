@@ -33,7 +33,7 @@ spec:
               value: 'true'
             - name: LT_LOAD_ONLY
               value: {{ .Values.libretranslate.languages }}
-            - name: HIDE_API
+            - name: LT_HIDE_API
               value: 'true'
           ports:
             - name: http
