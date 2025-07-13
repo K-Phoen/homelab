@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-display
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: weather-display
+
+  template:
+    metadata:
+      labels:
+        app: weather-display
+    spec:
+      containers:
+        - name: weather-display
+          image: {{ .Values.weather_display.name }}:{{ .Values.weather_display.tag }}
+          env:
+            - name: OWM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: owm-api-key
+                  key: password
+            - name: LATITUDE
+              valueFrom:
+                secretKeyRef:
+                  name: latitude
+                  key: password
+            - name: LONGITUDE
+              valueFrom:
+                secretKeyRef:
+                  name: longitude
+                  key: password
+            - name: CALDAV_URL
+              value: https://calendars.kevingomez.fr/dav/calendars
+            - name: CALDAV_USERNAME
+              value: kevin
+            - name: CALDAV_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: caldav-password
+                  key: password
+            - name: SHARED_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: api-key
+                  key: password
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "10m"

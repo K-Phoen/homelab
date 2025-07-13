@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  name: weather-display
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`weather-display.kevingomez.fr`)
+      services:
+        - kind: Service
+          name: weather-display
+          port: http
+  tls:
+    certResolver: letsencrypt
