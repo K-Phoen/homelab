@@ -1,4 +1,3 @@
 weather_display:
   name: ghcr.io/k-phoen/weather-display
-  tag: "70659c"
-
+  tag: "ea5711"
