@@ -77,9 +77,6 @@ data:
                   url: https://rss.kevingomez.fr/
                   icon: di:miniflux-light
                   alt-status-codes: [200, 401]
-                - title: Seafile
-                  url: https://files.kevingomez.fr/
-                  icon: di:seafile
                 - title: Shiori
                   url: https://shiori.kevingomez.fr/
                   icon: di:shiori
@@ -166,7 +163,6 @@ data:
                 - miniflux/v2
                 - Prowlarr/Prowlarr
                 - Radarr/Radarr
-                - haiwen/seafile
                 - go-shiori/shiori
                 - Sonarr/Sonarr
                 - traefik/traefik
