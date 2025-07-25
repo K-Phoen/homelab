@@ -18,3 +18,13 @@
   roles:
     - common
     - carrot
+
+- name: Setup bean
+  hosts: bean
+
+  vars:
+    docker_users: ["{{ homelab_user }}"]
+
+  roles:
+    - common
+    - bean
