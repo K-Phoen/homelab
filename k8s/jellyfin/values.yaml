@@ -12,8 +12,15 @@ podSecurityContext:
 securityContext:
   privileged: true
 
-nodeSelector:
-  'kubernetes.io/hostname': carrot
+affinity:
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+            - key: disktype
+              operator: In
+              values: [ssd]
 
 persistence:
   config:
