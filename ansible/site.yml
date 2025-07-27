@@ -7,9 +7,9 @@
 
   roles:
     - common
+    - k3s_node
     - alloy_node
     - exit_node
-    - k3s_node
 
 - name: Setup carrot
   hosts: carrot
@@ -19,9 +19,9 @@
 
   roles:
     - common
+    - k3s_control_plane
     - alloy_node
     - exit_node
-    - k3s_control_plane
 
 - name: Setup bean
   hosts: bean
@@ -32,7 +32,7 @@
 
   roles:
     - common
+    - k3s_node
     - alloy_node
     - exit_node
-    - k3s_node
     - dns_server
