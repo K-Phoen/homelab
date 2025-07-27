@@ -19,6 +19,22 @@
     group: root
     mode: '0644'
 
+- name: Allow all access to port 53 - DNS TCP
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '53'
+    proto: tcp
+  when: blocky_enabled is defined and blocky_enabled
+
+- name: Allow all access to port 53 - DNS UDP
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '53'
+    proto: udp
+  when: blocky_enabled is defined and blocky_enabled
+
 - name: Allow all access to port 80 - HTTP
   become: true
   community.general.ufw:

@@ -1,0 +1,10 @@
+blocky__version: v0.25
+blocky__arch: "{{ ansible_machine }}"
+blocky__base: "blocky-{{ blocky__version }}"
+blocky__system: "{{ ansible_system }}"
+blocky__base_url: https://github.com/0xERR0R/blocky/releases/download
+blocky__download_url: "{{ blocky__base_url }}/{{ blocky__version }}/blocky_{{ blocky__version }}_{{ blocky__system }}_{{ blocky__arch }}.tar.gz"
+blocky__checksum_url: "{{ blocky__base_url }}/{{ blocky__version }}/blocky_checksums.txt"
+blocky__download_path: /tmp
+blocky__install_path: /opt/blocky
+blocky__readiness_check_enabled: true

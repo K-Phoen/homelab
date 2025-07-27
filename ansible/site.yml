@@ -7,9 +7,9 @@
 
   roles:
     - common
+    - alloy_node
     - exit_node
     - k3s_node
-    - potato
 
 - name: Setup carrot
   hosts: carrot
@@ -19,18 +19,20 @@
 
   roles:
     - common
+    - alloy_node
     - exit_node
     - k3s_control_plane
-    - carrot
 
 - name: Setup bean
   hosts: bean
 
   vars:
     docker_users: ["{{ homelab_user }}"]
+    blocky_enabled: true
 
   roles:
     - common
+    - alloy_node
     - exit_node
     - k3s_node
-    - bean
+    - dns_server

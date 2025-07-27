@@ -153,9 +153,8 @@ loki.source.file "logs_integrations_integrations_node_exporter_direct_scrape" {
 
 // End: linux server integration
 
-
+{% if blocky_enabled is defined and blocky_enabled %}
 // Start: blocky
-
 prometheus.scrape "blocky" {
   targets = [
         {"__address__" = "localhost:4000", "job" = "blocky", "instance" = "potato"},
@@ -165,3 +164,4 @@ prometheus.scrape "blocky" {
 }
 
 // End: blocky
+{% endif %}

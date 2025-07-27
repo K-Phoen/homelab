@@ -1,8 +1,0 @@
----
-- name: Install alloy
-  ansible.builtin.include_role:
-    name: grafana.grafana.alloy
-    apply:
-      become: true
-  vars:
-    alloy_config: "{{ lookup('ansible.builtin.template', './files/config.alloy.j2') }}"

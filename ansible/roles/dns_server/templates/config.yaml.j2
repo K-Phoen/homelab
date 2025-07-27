@@ -1,0 +1,122 @@
+# {{ ansible_managed }}
+# https://0xerr0r.github.io/blocky/v0.23/configuration/
+
+bootstrapDns:
+  - upstream: tcp-tls:dns.mullvad.net
+    ips:
+      - 194.242.2.2
+  - upstream: tcp-tls:dns0.eu
+    ips:
+      - 193.110.81.0
+      - 185.253.5.0
+  - upstream: tcp-tls:dns.quad9.net
+    ips:
+      - 9.9.9.9
+      - 149.112.112.112
+  - upstream: tcp-tls:unicast.uncensoreddns.org
+    ips:
+      - 89.233.43.71
+
+upstreams:
+  timeout: 2s
+  strategy: parallel_best
+
+  groups:
+    default:
+      # Quad9
+      - tcp-tls:dns.quad9.net:853
+
+      # Mullvad
+      - tcp-tls:dns.mullvad.net:853
+
+      # dns0.eu
+      - tcp-tls:dns0.eu:853
+
+      # https://blog.uncensoreddns.org/
+      - tcp-tls:unicast.uncensoreddns.org:853
+
+      # Cloudflare ipv4
+      #- 1.1.1.1
+      #- 1.0.0.1
+      # Google
+      #- 8.8.8.8
+      #- 8.8.4.4
+      # Cloudflare ipv6
+      #- 2606:4700:4700::1111
+      #- 2606:4700:4700::1001
+      # Cloudflare DOH
+      #- https://1.1.1.1/dns-query
+      #- https://1.0.0.1/dns-query
+
+customDNS:
+  customTTL: 1h
+  filterUnmappedTypes: true
+  rewrite:
+    lan: lab
+    homelab: lab
+    home: lab
+  mapping:
+    beet.lab: 192.168.1.148
+    bean.lab: 192.168.1.52
+    carrot.lab: 192.168.1.42
+    potato.lab: 192.168.1.133
+    # 100.111.87.49 is carrot over tailscale
+    argocd.kevingomez.fr: 100.111.87.49
+    auth.kevingomez.fr: 100.111.87.49
+    blog.kevingomez.fr: 100.111.87.49
+    calendars.kevingomez.fr: 100.111.87.49
+    downloads.kevingomez.fr: 100.111.87.49
+    home.kevingomez.fr: 100.111.87.49
+    ldap.kevingomez.fr: 100.111.87.49
+    prowlarr.kevingomez.fr: 100.111.87.49
+    radarr.kevingomez.fr: 100.111.87.49
+    rss.kevingomez.fr: 100.111.87.49
+    shiori.kevingomez.fr: 100.111.87.49
+    sonarr.kevingomez.fr: 100.111.87.49
+    tv.kevingomez.fr: 100.111.87.49
+    traefik.kevingomez.fr: 100.111.87.49
+    translate.kevingomez.fr: 100.111.87.49
+    www.kevingomez.fr: 100.111.87.49
+
+caching:
+  minTime: 5m
+  prefetching: true
+  prefetchThreshold: 15
+
+prometheus:
+  enable: true
+  path: /metrics
+
+blocking:
+  loading:
+    strategy: fast
+    refreshPeriod: 24h
+    downloads:
+      timeout: 15m
+      attempts: 5
+      cooldown: 15s
+
+  denylists:
+    ads:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    mixed:
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt # see https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#ledger-multi-pro---extended-protection-recommended-
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/popupads.txt # see https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#tada-pop-up-ads---protects-against-annoying-and-malicious-pop-up-ads-
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/native.tiktok.extended.txt # https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#calling-native-tracker---broadband-tracker-of-devices-services-and-operating-systems- (tiktok)
+    security:
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/popupads.txt # see https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#closed_lock_with_key-threat-intelligence-feeds---increases-security-significantly-recommended-
+      - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/hoster.txt # https://github.com/hagezi/dns-blocklists?tab=readme-ov-file#computer-badware-hoster-blocking---protects-against-the-malicious-use-of-free-host-services-
+
+  clientGroupsBlock:
+    default:
+      - ads
+      - mixed
+      - security
+
+log:
+  level: warn
+
+ports:
+  dns: 53
+  http: 4000
+  https: 4434 # don't want to use it: I want nginx to serve HTTPS first.
