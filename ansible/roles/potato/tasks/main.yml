@@ -7,14 +7,3 @@
   vars:
     alloy_config: "{{ lookup('ansible.builtin.template', './files/config.alloy.j2') }}"
 
-- name: Setup tailscale
-  ansible.builtin.include_role:
-    name: artis3n.tailscale
-  vars:
-    tailscale_authkey: "{{ vault_tailscale_authkey }}"
-    tailscale_tags: ["homelab"]
-    tailscale_args: "--ssh --advertise-exit-node"
-    tailscale_oauth_ephemeral: false
-
-- name: Setup firewall
-  ansible.builtin.include_tasks: ./ufw.yml

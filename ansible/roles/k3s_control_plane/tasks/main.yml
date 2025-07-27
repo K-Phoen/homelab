@@ -1,0 +1,3 @@
+---
+- name: Setup firewall
+  ansible.builtin.include_tasks: ./ufw.yml

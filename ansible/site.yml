@@ -7,6 +7,8 @@
 
   roles:
     - common
+    - exit_node
+    - k3s_node
     - potato
 
 - name: Setup carrot
@@ -17,6 +19,8 @@
 
   roles:
     - common
+    - exit_node
+    - k3s_control_plane
     - carrot
 
 - name: Setup bean
@@ -27,4 +31,6 @@
 
   roles:
     - common
+    - exit_node
+    - k3s_node
     - bean
