@@ -61,7 +61,7 @@ spec:
             - name: "SERVE_ROBOTS_TXT"
               value: "false"
             - name: "TARGET"
-              value: "http://localhost:80"
+              value: "http://localhost:8080"
             - name: "OG_PASSTHROUGH"
               value: "true"
             - name: "OG_EXPIRY_TIME"
