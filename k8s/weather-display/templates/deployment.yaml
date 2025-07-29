@@ -15,6 +15,9 @@ spec:
       labels:
         app: weather-display
     spec:
+      securityContext: 
+        runAsNonRoot: true
+
       containers:
         - name: weather-display
           image: {{ .Values.weather_display.name }}:{{ .Values.weather_display.tag }}
@@ -54,4 +57,11 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "5m"
+              cpu: "2m"
+          securityContext: 
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            capabilities: 
+              drop:
+                - ALL
