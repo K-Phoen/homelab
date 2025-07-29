@@ -15,6 +15,9 @@ spec:
       labels:
         app: ddns-updater
     spec:
+      securityContext: 
+        runAsNonRoot: true
+
       containers:
         - name: ddns-updater
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
@@ -41,3 +44,14 @@ spec:
             requests:
               memory: "20Mi"
               cpu: "10m"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
