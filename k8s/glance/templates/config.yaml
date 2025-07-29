@@ -133,6 +133,10 @@ data:
                   show-thumbnails: true
                   collapse-after: 8
                 - type: reddit
+                  subreddit: homelab
+                  show-thumbnails: true
+                  collapse-after: 8
+                - type: reddit
                   subreddit: sre
                   show-thumbnails: true
                   collapse-after: 8
