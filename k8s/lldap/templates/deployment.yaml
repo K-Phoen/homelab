@@ -15,6 +15,9 @@ spec:
       labels:
         app: lldap
     spec:
+      securityContext: 
+        runAsNonRoot: true
+
       containers:
         - name: lldap
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
@@ -53,6 +56,15 @@ spec:
             requests:
               memory: "10Mi"
               cpu: "10m"
+          securityContext: 
+            runAsUser: 1000
+            runAsGroup: 1000
+            allowPrivilegeEscalation: false
+            capabilities: 
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
 
       volumes:
         - name: lldap-data
