@@ -40,6 +40,16 @@ spec:
             requests:
               memory: "32Mi"
               cpu: 5m
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
 
         - name: anubis
           image: {{ .Values.anubis.image }}:{{ .Values.anubis.tag }}
