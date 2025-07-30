@@ -43,7 +43,7 @@ ingress:
   #   path: '/'
 
   certManager: false
-  rewriteTarget: false
+  #rewriteTarget: false
 
   ## The Ingress Class Name.
   # className: 'ingress-nginx'
@@ -611,7 +611,7 @@ configMap:
 
     ## User verification controls if the user must make a gesture or action to confirm they are present.
     ## Options are required, preferred, discouraged.
-    user_verification: 'preferred'
+    #user_verification: 'preferred'
 
   ##
   ## NTP Configuration
@@ -962,7 +962,7 @@ configMap:
     ## resource if there is no policy to be applied to the user.
     default_policy: 'deny'
 
-    networks: []
+    #networks: []
     # networks:
     # - name: 'private'
     #   networks:
@@ -1114,7 +1114,7 @@ configMap:
     redis:
       enabled: true
       deploy: false
-      enabledSecret: false
+      #enabledSecret: false
       host: 'redis.authelia.svc.cluster.local'
       port: 6379
 
@@ -1173,7 +1173,7 @@ configMap:
       ## This provides specific options to Redis Sentinel, sentinel_name must be defined (Master Name).
       high_availability:
         enabled: false
-        enabledSecret: false
+        #enabledSecret: false
         ## Sentinel Name / Master Name
         sentinel_name: 'mysentinel'
 
@@ -1392,7 +1392,7 @@ configMap:
     ##     (configure in tls section)
     smtp:
       enabled: false
-      enabledSecret: false
+      #enabledSecret: false
       address: 'submission://smtp.mail.svc.cluster.local:587'
       timeout: '5 seconds'
       sender: 'Authelia <admin@example.com>'
