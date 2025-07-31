@@ -1,0 +1,26 @@
+name: Publish Grafana manifests
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish-grafana-manifests:
+    name: Publish Grafana manifests
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup grafanactl
+        uses: ./.github/actions/setup-grafanactl
+
+      - name: Push resources
+        env:
+            GRAFANA_SERVER: ${{ secrets.GRAFANA_SERVER }}
+            GRAFANA_STACK_ID: ${{ secrets.GRAFANA_STACK_ID }}
+            GRAFANA_TOKEN: ${{ secrets.GRAFANA_TOKEN }}
+        run: |
+          grafanactl resources push -p ./grafana -v

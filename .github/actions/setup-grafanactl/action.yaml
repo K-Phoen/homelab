@@ -1,0 +1,24 @@
+name: "Setup grafanactl"
+description: "Downloads grafanactl and adds it to the $PATH"
+inputs:
+  version:
+    description: "grafanactl version to install"
+    required: true
+    default: "0.1.1"
+outputs:
+  bin-path:
+    description: "Path to the grafanactl binary"
+    value: ${{ steps.setup.outputs.bin-path }}
+runs:
+  using: "composite"
+  steps:
+    - name: Download grafanactl
+      shell: bash
+      run: |
+        version="$(echo "${{ inputs.version }}" | sed 's/[^a-zA-Z0-9._\/-]//g')"
+        mkdir -p "${HOME}/.local/bin/"
+        wget https://github.com/grafana/grafanactl/releases/download/v${version}/grafanactl_Linux_x86_64.tar.gz
+        tar -xzf grafanactl_Linux_x86_64.tar.gz
+        mv cog "${HOME}/.local/bin/grafanactl"
+        chmod +x "${HOME}/.local/bin/grafanactl"
+        echo "bin-path=${HOME}/.local/bin" >> "${GITHUB_OUTPUT}"
