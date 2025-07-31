@@ -19,6 +19,6 @@ runs:
         mkdir -p "${HOME}/.local/bin/"
         wget https://github.com/grafana/grafanactl/releases/download/v${version}/grafanactl_Linux_x86_64.tar.gz
         tar -xzf grafanactl_Linux_x86_64.tar.gz
-        mv cog "${HOME}/.local/bin/grafanactl"
+        mv grafanactl "${HOME}/.local/bin/grafanactl"
         chmod +x "${HOME}/.local/bin/grafanactl"
         echo "bin-path=${HOME}/.local/bin" >> "${GITHUB_OUTPUT}"
