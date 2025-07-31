@@ -1,0 +1,14 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "cdl4fwl71924gc",
+    "namespace": "stacks-660328"
+  },
+  "spec": {
+    "description": "",
+    "title": "Homelab"
+  }
+}

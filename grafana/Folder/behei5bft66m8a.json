@@ -1,0 +1,14 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "behei5bft66m8a",
+    "namespace": "stacks-660328"
+  },
+  "spec": {
+    "description": "",
+    "title": "Beet"
+  }
+}
