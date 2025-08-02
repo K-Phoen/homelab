@@ -17,10 +17,21 @@ jobs:
       - name: Setup grafanactl
         uses: ./.github/actions/setup-grafanactl
 
+      - name: Setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache-dependency-path: |
+             grafana/dashboards/go.sum
+
+      - name: Generate dashboards
+        run: |
+          make generate-dashboards
+
       - name: Push resources
         run: |
           grafanactl config set contexts.default.grafana.server "${{ secrets.GRAFANA_SERVER }}"
           grafanactl config set contexts.default.grafana.stack-id "${{ secrets.GRAFANA_STACK_ID }}"
           grafanactl config set contexts.default.grafana.token "${{ secrets.GRAFANA_TOKEN }}"
 
-          grafanactl resources push -p ./grafana -v
+          grafanactl resources push -p ./grafana/resources -v

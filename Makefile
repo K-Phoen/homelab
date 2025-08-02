@@ -25,6 +25,12 @@ ansible: deps ## Runs ansible.
 ansible-dry-run: deps ## Runs ansible in dry-run mode.
 	ansible-playbook -e @./ansible/variables.var -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
 
+##@ Grafana
+
+.PHONY: generate-dashboards
+generate-dashboards: ## Generates Grafana dashboards.
+	cd grafana/dashboards && go mod vendor && go run . ../resources/Dashboard
+
 ##@ Dependencies
 
 .PHONY: deps
