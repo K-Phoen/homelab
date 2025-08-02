@@ -18,9 +18,9 @@ jobs:
         uses: ./.github/actions/setup-grafanactl
 
       - name: Push resources
-        env:
-            GRAFANA_SERVER: ${{ secrets.GRAFANA_SERVER }}
-            GRAFANA_STACK_ID: ${{ secrets.GRAFANA_STACK_ID }}
-            GRAFANA_TOKEN: ${{ secrets.GRAFANA_TOKEN }}
         run: |
+          grafanactl config set contexts.default.grafana.server "${{ secrets.GRAFANA_SERVER }}"
+          grafanactl config set contexts.default.grafana.stack-id "${{ secrets.GRAFANA_STACK_ID }}"
+          grafanactl config set contexts.default.grafana.token "${{ secrets.GRAFANA_TOKEN }}"
+
           grafanactl resources push -p ./grafana -v
