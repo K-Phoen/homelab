@@ -11,3 +11,17 @@ func DefaultPrometheusDatasource() dashboard.DataSourceRef {
 		Uid:  cog.ToPtr("grafanacloud-prom"),
 	}
 }
+
+func DefaultLokiDatasource() dashboard.DataSourceRef {
+	return dashboard.DataSourceRef{
+		Type: cog.ToPtr("loki"),
+		Uid:  cog.ToPtr("grafanacloud-logs"),
+	}
+}
+
+func AllVariableOption() dashboard.VariableOption {
+	return dashboard.VariableOption{
+		Text:  dashboard.StringOrArrayOfString{String: cog.ToPtr("All")},
+		Value: dashboard.StringOrArrayOfString{ArrayOfString: []string{"$__all"}},
+	}
+}

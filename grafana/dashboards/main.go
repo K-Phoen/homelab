@@ -6,13 +6,14 @@ import (
 	"os"
 	"path"
 
-	"github.com/K-Phoen/homelab/grafana/dashboards/homelab"
+	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
+	"github.com/K-Phoen/homelab/grafana/dashboards/rooms"
 	"github.com/grafana/grafana-foundation-sdk/go/cog"
 	"github.com/grafana/grafana-foundation-sdk/go/dashboard"
 	"github.com/grafana/grafana-foundation-sdk/go/resource"
 )
 
-const defaultOutputDir = "./dashboards"
+const defaultOutputDir = "./"
 
 func main() {
 	outputDir := defaultOutputDir
@@ -29,7 +30,13 @@ func main() {
 			// "Living Room"
 			name:   "de81hbkf5okqoe",
 			folder: "cdl4fwl71924gc",
-			fn:     homelab.LivingRoomDashboard,
+			fn:     rooms.LivingRoomDashboard,
+		},
+		{
+			// "Anubis – blog.kevingomez.fr"
+			name:   "een0nilkaqpz4a",
+			folder: "cdl4fwl71924gc",
+			fn:     anubis.BlogDashboard,
 		},
 	}
 

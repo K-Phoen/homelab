@@ -1,4 +1,4 @@
-package homelab
+package rooms
 
 import (
 	"github.com/K-Phoen/homelab/grafana/dashboards/shared"
@@ -78,7 +78,6 @@ func livingRoomPressureTimeseries() *timeseries.PanelBuilder {
 
 func LivingRoomDashboard() *dashboard.DashboardBuilder {
 	return dashboard.NewDashboardBuilder("Living room").
-		Title("Living room").
 		Readonly().
 		Tooltip(dashboard.DashboardCursorSyncCrosshair).
 		Annotations(shared.DefaultAnnotations()).
