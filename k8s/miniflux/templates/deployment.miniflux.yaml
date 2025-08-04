@@ -43,8 +43,8 @@ spec:
                   key: password
             - name: METRICS_COLLECTOR
               value: '1'
-            #- name: METRICS_ALLOWED_NETWORKS
-            #  value: 172.19.0.1/16
+            - name: METRICS_ALLOWED_NETWORKS
+              value: '10.42.0.0/16'
             #- name: METRICS_USERNAME
             #  value: miniflux
             #- name: METRICS_PASSWORD
