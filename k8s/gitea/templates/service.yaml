@@ -17,7 +17,7 @@ kind: Service
 metadata:
   name: gitea-ssh
 spec:
-  type: NodePort
+#  type: NodePort
   ports:
     - port: 22
       targetPort: ssh
