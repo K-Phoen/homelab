@@ -17,7 +17,7 @@ kind: Service
 metadata:
   name: gitea-ssh
 spec:
-#  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 22
       targetPort: ssh
