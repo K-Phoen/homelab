@@ -49,6 +49,13 @@
     port: '443'
     proto: tcp
 
+- name: Allow all access to port 22 - gitea
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
 - name: Allow transmission port - TCP
   become: true
   community.general.ufw:
