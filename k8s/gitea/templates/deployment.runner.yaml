@@ -15,6 +15,16 @@ spec:
       labels:
         app: runner
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
       securityContext:
         fsGroup: 1000
 
@@ -31,8 +41,15 @@ spec:
                 secretKeyRef:
                   name: runner-token
                   key: password
+
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "10m"
+
           securityContext:
             privileged: true
+
           volumeMounts:
             - mountPath: /data
               name: runner-data
