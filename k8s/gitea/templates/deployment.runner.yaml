@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runner
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: runner
+
+  template:
+    metadata:
+      labels:
+        app: runner
+    spec:
+      securityContext:
+        fsGroup: 1000
+
+      containers:
+        - name: runner
+          image: gitea/act_runner:{{ .Values.runner.tag }}
+          env:
+            - name: DOCKER_HOST
+              value: unix:///var/run/user/1000/docker.sock
+            - name: GITEA_INSTANCE_URL
+              value: http://gitea-http.gitea.svc.cluster.local
+            - name: GITEA_RUNNER_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: runner-token
+                  key: password
+          volumeMounts:
+            - mountPath: /data
+              name: runner-data
+
+      volumes:
+        - name: runner-data
+          persistentVolumeClaim:
+            claimName: gitea-act-runner
+
