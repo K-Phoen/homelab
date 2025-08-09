@@ -15,6 +15,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: gitea-ssh
+spec:
+  type: ClusterIP
+  ports:
+    - port: 22
+      targetPort: ssh
+      protocol: TCP
+      name: ssh
+  selector:
+    app: gitea
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: postgres
 spec:
   type: ClusterIP
