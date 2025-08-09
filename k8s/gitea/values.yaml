@@ -1,0 +1,6 @@
+gitea:
+  tag: "1.24.4-rootless"
+
+postgres:
+  image: postgres
+  tag: "17.4-alpine3.21"
