@@ -31,6 +31,8 @@ spec:
                 secretKeyRef:
                   name: runner-token
                   key: password
+          securityContext:
+            privileged: true
           volumeMounts:
             - mountPath: /data
               name: runner-data
