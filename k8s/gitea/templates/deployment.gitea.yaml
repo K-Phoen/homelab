@@ -85,7 +85,6 @@ spec:
               containerPort: 2222
 
           livenessProbe:
-            enabled: true
             tcpSocket:
               port: http
             initialDelaySeconds: 60
@@ -95,7 +94,6 @@ spec:
             failureThreshold: 10
 
           readinessProbe:
-            enabled: true
             tcpSocket:
               port: http
             initialDelaySeconds: 5
