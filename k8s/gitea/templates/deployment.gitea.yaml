@@ -31,6 +31,8 @@ spec:
                     operator: In
                     values: [ssd]
 
+      terminationGracePeriodSeconds: 30
+
       containers:
         - name: gitea
           image: docker.gitea.com/gitea:{{ .Values.gitea.tag }}
@@ -86,6 +88,7 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
             runAsNonRoot: true
+            privileged: false
             allowPrivilegeEscalation: false
             capabilities:
               drop:
