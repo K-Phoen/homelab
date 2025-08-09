@@ -49,8 +49,8 @@ spec:
               value: "true"
             - name: GITEA__mailer__FROM
               value: noreply@git.kevingomez.fr
-            - name: GITEA__mailer__PROTOCOL
-              value: smtps
+            #- name: GITEA__mailer__PROTOCOL
+            #  value: smtps
             - name: GITEA__mailer__SMTP_ADDR
               value: smtp.fastmail.com
             - name: GITEA__mailer__SMTP_PORT
