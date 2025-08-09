@@ -29,6 +29,7 @@ spec:
         - name: gitea
           image: docker.gitea.com/gitea:{{ .Values.gitea.tag }}
           env:
+            # Database
             - name: GITEA__database__DB_TYPE
               value: postgres
             - name: GITEA__database__HOST
@@ -41,6 +42,28 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: postgres-password
+                  key: password
+
+            # Mailer
+            - name: GITEA__mailer__ENABLED
+              value: "true"
+            - name: GITEA__mailer__FROM
+              value: noreply@git.kevingomez.fr
+            - name: GITEA__mailer__PROTOCOL
+              value: smtps
+            - name: GITEA__mailer__SMTP_ADDR
+              value: smtp.fastmail.com
+            - name: GITEA__mailer__SMTP_PORT
+              value: "587"
+            - name: GITEA__mailer__USER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: username
+            - name: GITEA__mailer__PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
                   key: password
 
           ports:
