@@ -66,5 +66,5 @@ spec:
 
       volumes:
         - name: gitea-data
-          configMap:
-            name: gitea-data
+          persistentVolumeClaim:
+            claimName: gitea-data
