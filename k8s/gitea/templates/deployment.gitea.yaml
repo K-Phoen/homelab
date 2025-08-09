@@ -6,6 +6,12 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
 
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: "100%"
+      maxUnavailable: 0
+
   selector:
     matchLabels:
       app: gitea
@@ -29,6 +35,10 @@ spec:
         - name: gitea
           image: docker.gitea.com/gitea:{{ .Values.gitea.tag }}
           env:
+            # Misc
+            - name: GITEA_TEMP
+              value: /tmp/gitea
+
             # Database
             - name: GITEA__database__DB_TYPE
               value: postgres
@@ -88,6 +98,8 @@ spec:
               mountPath: /var/lib/gitea
             - name: gitea-config
               mountPath: /etc/gitea
+            - name: temp
+              mountPath: /tmp
 
       volumes:
         - name: gitea-data
@@ -96,3 +108,5 @@ spec:
         - name: gitea-config
           persistentVolumeClaim:
             claimName: gitea-config
+        - name: temp
+          emptyDir: {}
