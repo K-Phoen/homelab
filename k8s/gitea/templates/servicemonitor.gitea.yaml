@@ -11,10 +11,12 @@ spec:
     matchNames:
       - gitea
 
-  jobLabel: integrations/gitea
   endpoints:
     - port: http
       interval: 30s
+      relabelings:
+        - targetLabel: job
+          replacement: integrations/gitea
       scheme: http
       scrapeTimeout: 5s
       authorization:
