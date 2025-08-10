@@ -7,6 +7,7 @@ import (
 	"path"
 
 	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
+	"github.com/K-Phoen/homelab/grafana/dashboards/gitea"
 	"github.com/K-Phoen/homelab/grafana/dashboards/rooms"
 	"github.com/grafana/grafana-foundation-sdk/go/cog"
 	"github.com/grafana/grafana-foundation-sdk/go/dashboard"
@@ -37,6 +38,12 @@ func main() {
 			name:   "een0nilkaqpz4a",
 			folder: "cdl4fwl71924gc",
 			fn:     anubis.BlogDashboard,
+		},
+		{
+			// "Gitea Overview"
+			name:   "gitea-overview",
+			folder: "cdl4fwl71924gc",
+			fn:     gitea.OverviewDashboard,
 		},
 	}
 
