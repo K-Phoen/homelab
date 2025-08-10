@@ -38,7 +38,7 @@ spec:
             - name: GITEA_TEMP
               value: /tmp/gitea
             - name: GITEA__log__LEVEL
-              value: debug
+              value: Warn # https://docs.gitea.com/administration/logging-config#the-log-section
 
             # Metrics - https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics
             - name: GITEA__metrics__ENABLED
