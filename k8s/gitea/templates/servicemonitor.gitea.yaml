@@ -20,6 +20,6 @@ spec:
       authorization:
         type: Bearer
         credentials:
-          name: metrics-token
+          name: gitea-metrics-token
           key: password
           optional: false
