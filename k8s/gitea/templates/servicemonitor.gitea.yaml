@@ -2,10 +2,15 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: gitea
+  namespace: monitoring
 spec:
   selector:
     matchLabels:
       app: gitea
+
+  namespaceSelector:
+    matchNames:
+      - gitea
 
   jobLabel: integrations/gitea
   endpoints:
