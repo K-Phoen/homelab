@@ -40,8 +40,7 @@ func uptimeStat() *stat.PanelBuilder {
 	return shared.StatPanel("Uptime").
 		Datasource(shared.DefaultPrometheusDatasource()).
 		WithTarget(shared.PrometheusQuery(`time()-process_start_time_seconds{job="integrations/gitea"}`).Instant()).
-		Unit(units.Seconds).
-		GraphMode(common.BigValueGraphModeArea)
+		Unit(units.Seconds)
 }
 
 func memoryUsageTimeseries() *timeseries.PanelBuilder {
