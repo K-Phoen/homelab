@@ -68,7 +68,7 @@ clusterMetrics:
 prometheusOperatorObjects:
   enabled: true
   crds:
-    deploy: true
+    deploy: false
   serviceMonitors:
     namespaces:
       - monitoring
