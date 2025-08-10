@@ -35,6 +35,8 @@ spec:
           image: docker.gitea.com/gitea:{{ .Values.gitea.tag }}
           env:
             # Misc
+            - name: RUN_USER
+              value: git
             - name: GITEA_TEMP
               value: /tmp/gitea
             - name: GITEA__log__LEVEL
