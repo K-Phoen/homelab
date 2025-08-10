@@ -37,6 +37,8 @@ spec:
             # Misc
             - name: GITEA_TEMP
               value: /tmp/gitea
+            - name: GITEA__metrics__ENABLED
+              value: 'true'
 
             # Database
             - name: GITEA__database__DB_TYPE
