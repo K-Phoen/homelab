@@ -69,12 +69,6 @@ func fileDescriptorsUsageTimeseries() *timeseries.PanelBuilder {
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Min(0).
 		Legend(common.NewVizLegendOptionsBuilder().ShowLegend(false)).
-		OverrideByQuery("A", []dashboard.DynamicConfigValue{
-			{
-				Id:    "color",
-				Value: map[string]any{"fixedColor": "green", "mode": "fixed"},
-			},
-		}).
 		OverrideByQuery("B", []dashboard.DynamicConfigValue{
 			{
 				Id:    "custom.lineStyle",
