@@ -39,7 +39,7 @@ func versionStat() *stat.PanelBuilder {
 func uptimeStat() *stat.PanelBuilder {
 	return shared.StatPanel("Uptime").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(`time()-process_start_time_seconds{job="integrations/gitea"}`)).
+		WithTarget(shared.PrometheusQuery(`time()-process_start_time_seconds{job="integrations/gitea"}`).Instant()).
 		Unit(units.Seconds).
 		GraphMode(common.BigValueGraphModeArea)
 }
