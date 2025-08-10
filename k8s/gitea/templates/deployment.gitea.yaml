@@ -45,6 +45,11 @@ spec:
               value: 'true'
             - name: GITEA__metrics__ENABLED_ISSUE_BY_REPOSITORY
               value: 'true'
+            - name: GITEA__metrics__TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: metrics-token
+                  key: password
 
             # Database
             - name: GITEA__database__DB_TYPE

@@ -48,7 +48,18 @@ destinations:
 
 clusterMetrics:
   enabled: true
+
+  kube-state-metrics:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 40Mi
+
   node-exporter:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 64Mi
     metricsTuning:
       useIntegrationAllowList: true
       includeMetrics:
@@ -91,6 +102,12 @@ applicationObservability:
     grafanaCloudMetrics:
       enabled: true
 
+alloy-operator:
+  resources:
+    requests:
+      cpu: 30m
+      memory: 128Mi
+
 alloy-metrics:
   enabled: true
   logging:
@@ -98,7 +115,7 @@ alloy-metrics:
   alloy:
     resources:
       requests:
-        memory: "640Mi"
+        memory: "650Mi"
         cpu: "0.07"
 
 alloy-singleton:
@@ -108,8 +125,8 @@ alloy-singleton:
   alloy:
     resources:
       requests:
-        memory: "64Mi"
-        cpu: "0.01"
+        memory: "128Mi"
+        cpu: "0.015"
 
 alloy-logs:
   enabled: true
@@ -118,8 +135,8 @@ alloy-logs:
   alloy:
     resources:
       requests:
-        memory: "210Mi"
-        cpu: "0.07"
+        memory: "200Mi"
+        cpu: "0.05"
 
 alloy-receiver:
   enabled: true
@@ -128,8 +145,8 @@ alloy-receiver:
   alloy:
     resources:
       requests:
-        memory: "164Mi"
-        cpu: "0.02"
+        memory: "100Mi"
+        cpu: "0.01"
     extraPorts:
       - name: otlp-grpc
         port: 4317

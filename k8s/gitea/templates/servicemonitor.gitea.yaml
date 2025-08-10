@@ -7,6 +7,7 @@ spec:
     matchLabels:
       app: gitea
 
+  jobLabel: integrations/gitea
   endpoints:
     - port: http
       interval: 30s
