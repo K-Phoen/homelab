@@ -37,7 +37,13 @@ spec:
             # Misc
             - name: GITEA_TEMP
               value: /tmp/gitea
+
+            # Metrics - https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics
             - name: GITEA__metrics__ENABLED
+              value: 'true'
+            - name: GITEA__metrics__ENABLED_ISSUE_BY_LABEL
+              value: 'true'
+            - name: GITEA__metrics__ENABLED_ISSUE_BY_REPOSITORY
               value: 'true'
 
             # Database
