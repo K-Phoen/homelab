@@ -55,6 +55,7 @@ clusterMetrics:
         - node_hwmon_temp_celsius
 
 prometheusOperatorObjects:
+  enabled: true
   serviceMonitors:
     enabled: true
 
