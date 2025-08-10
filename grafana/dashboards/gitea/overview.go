@@ -13,22 +13,22 @@ import (
 func generalStat() *stat.PanelBuilder {
 	return shared.StatPanel("").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery("gitea_organizations").LegendFormat("Organizations")).
-		WithTarget(shared.PrometheusQuery("gitea_teams").LegendFormat("Teams")).
-		WithTarget(shared.PrometheusQuery("gitea_users").LegendFormat("Users")).
-		WithTarget(shared.PrometheusQuery("gitea_repositories").LegendFormat("Repositories")).
-		WithTarget(shared.PrometheusQuery("gitea_milestones").LegendFormat("Milestones")).
-		WithTarget(shared.PrometheusQuery("gitea_releases").LegendFormat("Releases")).
-		WithTarget(shared.PrometheusQuery("gitea_issues_open").LegendFormat("Issues opened")).
-		WithTarget(shared.PrometheusQuery("gitea_issues_closed").LegendFormat("Issues closed")).
-		WithTarget(shared.PrometheusQuery("gitea_webhooks").LegendFormat("Webhooks")).
+		WithTarget(shared.PrometheusQuery("gitea_organizations").Instant().LegendFormat("Organizations")).
+		WithTarget(shared.PrometheusQuery("gitea_teams").Instant().LegendFormat("Teams")).
+		WithTarget(shared.PrometheusQuery("gitea_users").Instant().LegendFormat("Users")).
+		WithTarget(shared.PrometheusQuery("gitea_repositories").Instant().LegendFormat("Repositories")).
+		WithTarget(shared.PrometheusQuery("gitea_milestones").Instant().LegendFormat("Milestones")).
+		WithTarget(shared.PrometheusQuery("gitea_releases").Instant().LegendFormat("Releases")).
+		WithTarget(shared.PrometheusQuery("gitea_issues_open").Instant().LegendFormat("Issues opened")).
+		WithTarget(shared.PrometheusQuery("gitea_issues_closed").Instant().LegendFormat("Issues closed")).
+		WithTarget(shared.PrometheusQuery("gitea_webhooks").Instant().LegendFormat("Webhooks")).
 		Unit(units.NoUnit)
 }
 
 func versionStat() *stat.PanelBuilder {
 	return shared.StatPanel("Version").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(`gitea_build_info{job="integrations/gitea"}`).Format(prometheus.PromQueryFormatTable)).
+		WithTarget(shared.PrometheusQuery(`gitea_build_info{job="integrations/gitea"}`).Instant().Format(prometheus.PromQueryFormatTable)).
 		ReduceOptions(
 			common.NewReduceDataOptionsBuilder().
 				Calcs([]string{"lastNotNull"}).
@@ -69,6 +69,12 @@ func fileDescriptorsUsageTimeseries() *timeseries.PanelBuilder {
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Min(0).
 		Legend(common.NewVizLegendOptionsBuilder().ShowLegend(false)).
+		OverrideByQuery("A", []dashboard.DynamicConfigValue{
+			{
+				Id:    "color",
+				Value: map[string]any{"fixedColor": "green", "mode": "fixed"},
+			},
+		}).
 		OverrideByQuery("B", []dashboard.DynamicConfigValue{
 			{
 				Id:    "custom.lineStyle",
