@@ -140,8 +140,9 @@ spec:
 
       volumes:
         - name: gitea-data
-          persistentVolumeClaim:
-            claimName: gitea-data
+          nfs:
+            server: beet.lab
+            path: /mnt/main/gitea
         - name: gitea-config
           persistentVolumeClaim:
             claimName: gitea-config
