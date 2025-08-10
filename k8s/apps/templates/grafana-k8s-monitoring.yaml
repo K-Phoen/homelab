@@ -23,7 +23,7 @@ spec:
   sources:
     - chart: k8s-monitoring
       repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 3.0.2
+      targetRevision: 3.2.4
       helm:
         releaseName: grafana-k8s-monitoring
         valueFiles:

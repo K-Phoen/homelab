@@ -54,6 +54,10 @@ clusterMetrics:
       includeMetrics:
         - node_hwmon_temp_celsius
 
+prometheusOperatorObjects:
+  serviceMonitors:
+    enabled: true
+
 annotationAutodiscovery:
   enabled: true
 
