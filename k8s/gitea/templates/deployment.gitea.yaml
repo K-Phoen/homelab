@@ -37,6 +37,8 @@ spec:
             # Misc
             - name: GITEA_TEMP
               value: /tmp/gitea
+            - name: GITEA__log__LEVEL
+              value: debug
 
             # Metrics - https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics
             - name: GITEA__metrics__ENABLED
