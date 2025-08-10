@@ -2,7 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: gitea
-  namespace: monitoring
 spec:
   selector:
     matchLabels:
@@ -20,6 +19,6 @@ spec:
       authorization:
         type: Bearer
         credentials:
-          name: gitea-metrics-token
+          name: metrics-token
           key: password
           optional: false

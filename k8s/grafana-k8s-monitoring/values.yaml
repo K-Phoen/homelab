@@ -71,7 +71,7 @@ prometheusOperatorObjects:
     deploy: false
   serviceMonitors:
     namespaces:
-      - monitoring
+      - gitea
 
 annotationAutodiscovery:
   enabled: true
