@@ -56,8 +56,6 @@ clusterMetrics:
 
 prometheusOperatorObjects:
   enabled: true
-  serviceMonitors:
-    enabled: true
 
 annotationAutodiscovery:
   enabled: true
