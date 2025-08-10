@@ -63,6 +63,9 @@ data:
               cache: 1m
               title: Services
               sites:
+                - title: Gitea
+                  url: https://git.kevingomez.fr/
+                  icon: di:gitea
                 - title: Grafana
                   url: https://potatopi.grafana.net/
                   icon: di:grafana
@@ -159,6 +162,7 @@ data:
                 - "0xERR0R/blocky"
                 - authelia/authelia
                 - tchapi/davis
+                - go-gitea/gitea
                 - glanceapp/glance
                 - immich-app/immich
                 - jellyfin/jellyfin
@@ -170,8 +174,3 @@ data:
                 - go-shiori/shiori
                 - Sonarr/Sonarr
                 - traefik/traefik
-
-            - type: server-stats
-              servers:
-                - type: local
-                  name: carrot
