@@ -19,6 +19,6 @@ spec:
       authorization:
         type: Bearer
         credentials:
-          name: metrics-token
+          name: metrics-tokensssssss
           key: password
           optional: false
