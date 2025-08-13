@@ -1,11 +1,11 @@
 homelab:
   hosts:
     potato:
-      ansible_host: 192.168.1.133
+      ansible_host: 10.10.10.122
       ansible_port: 4242
     carrot:
-      ansible_host: 192.168.1.42
+      ansible_host: 10.10.10.64
       ansible_port: 4242
     bean:
-      ansible_host: 192.168.1.52
+      ansible_host: 10.10.10.91
       ansible_port: 4242

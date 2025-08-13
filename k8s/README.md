@@ -26,7 +26,7 @@ kubectl label nodes carrot disktype=ssd
 Run on potato:
 
 ```shell
-curl -sfL https://get.k3s.io | K3S_URL=https://192.168.1.42:6443 K3S_TOKEN=mynodetoken sh -
+curl -sfL https://get.k3s.io | K3S_URL=https://10.10.10.64:6443 K3S_TOKEN=mynodetoken sh -
 ```
 
 Note: `K3S_TOKEN` is stored in `/var/lib/rancher/k3s/server/node-token` on the server node.
