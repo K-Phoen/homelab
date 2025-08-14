@@ -53,9 +53,9 @@ env:
         name: gandi-pat
         key: password
 
-service:
-  spec:
-    externalTrafficPolicy: Local
+#service:
+#  spec:
+#    externalTrafficPolicy: Local
 
 ports:
   web:
