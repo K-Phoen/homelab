@@ -1,3 +1,6 @@
 ---
 - name: Setup firewall
   ansible.builtin.include_tasks: ./ufw.yml
+
+- name: Setup k3s backups
+  ansible.builtin.include_tasks: ./k3s_backups.yml
