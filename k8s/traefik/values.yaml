@@ -4,10 +4,10 @@ ingressClass:
 
 deployment:
   podAnnotations:
-    k8s.grafana.com/scrape: 'true'
-    k8s.grafana.com/metrics.portNumber: '9100'
-    k8s.grafana.com/metrics.scrapeInterval: '30s'
-    k8s.grafana.com/job: 'integrations/traefik'
+    k8s.grafana.com/scrape: "true"
+    k8s.grafana.com/metrics.portNumber: "9100"
+    k8s.grafana.com/metrics.scrapeInterval: "30s"
+    k8s.grafana.com/job: "integrations/traefik"
 
 providers:
   kubernetesCRD:
@@ -19,7 +19,7 @@ providers:
 ingressRoute:
   dashboard:
     enabled: true
-    entryPoints: ['websecure']
+    entryPoints: ["websecure"]
     matchRule: "Host(`traefik.kevingomez.fr`)"
     middlewares:
       - name: forwardauth-authelia
@@ -63,16 +63,21 @@ ports:
       default: false
 
   websecure:
+    transport:
+      respondingTimeouts:
+        # https://github.com/immich-app/immich/discussions/8872
+        readTimeout: "0s"
+
     forwardedHeaders:
       trustedIPs:
-        - '10.42.0.0/16'
-        - '10.43.0.0/16'
-        - '10.10.20.0/24' # local
+        - "10.42.0.0/16"
+        - "10.43.0.0/16"
+        - "10.10.20.0/24" # local
     proxyProtocol:
       trustedIPs:
-        - '10.42.0.0/16'
-        - '10.43.0.0/16'
-        - '10.10.20.0/24' # local
+        - "10.42.0.0/16"
+        - "10.43.0.0/16"
+        - "10.10.20.0/24" # local
 
 additionalArguments:
   - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
