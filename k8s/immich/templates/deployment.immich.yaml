@@ -37,7 +37,7 @@ spec:
             - name: IMMICH_TELEMETRY_INCLUDE
               value: all
             - name: IMMICH_LOG_LEVEL
-              value: log # verbose, debug, log, warn, error
+              value: verbose # verbose, debug, log, warn, error
             - name: NO_COLOR
               value: 'true'
             - name: IMMICH_PORT
