@@ -15,7 +15,7 @@ spec:
           name: blog
           port: anubis
   tls:
-    certResolver: letsencrypt
+    secretName: blog-cert
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
