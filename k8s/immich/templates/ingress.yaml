@@ -15,4 +15,4 @@ spec:
           name: immich
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: immich-cert

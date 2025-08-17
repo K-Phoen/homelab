@@ -18,4 +18,4 @@ spec:
           name: miniflux
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: miniflux-cert

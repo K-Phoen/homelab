@@ -15,4 +15,4 @@ spec:
           name: jellyfin
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: jellyfin-cert

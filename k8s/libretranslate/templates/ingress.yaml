@@ -18,4 +18,4 @@ spec:
           name: libretranslate-web
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: libretranslate-cert

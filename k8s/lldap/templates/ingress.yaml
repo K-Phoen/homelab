@@ -15,4 +15,4 @@ spec:
           name: lldap
           port: 17170
   tls:
-    certResolver: letsencrypt
+    secretName: lldap-cert
