@@ -18,6 +18,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gitea-ssh
+  # shared with traefik/traefik
+  annotations:
+    metallb.io/allow-shared-ip: "shared-entrypoint-ip"
   labels:
     app: gitea
 spec:

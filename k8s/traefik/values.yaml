@@ -53,7 +53,10 @@ env:
         name: gandi-pat
         key: password
 
-#service:
+service:
+  annotations:
+    # shared with gitea/gitea-ssh
+    metallb.io/allow-shared-ip: "shared-entrypoint-ip"
 #  spec:
 #    externalTrafficPolicy: Local
 
