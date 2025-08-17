@@ -60,7 +60,7 @@ env:
 ports:
   web:
     expose:
-      default: false
+      default: true
 
   websecure:
     transport:
