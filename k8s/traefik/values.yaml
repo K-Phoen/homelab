@@ -43,16 +43,7 @@ resources:
     cpu: "0.02"
 
 persistence:
-  enabled: true
-  storageClass: longhorn
-  accessMode: ReadWriteMany
-
-env:
-  - name: GANDIV5_PERSONAL_ACCESS_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: gandi-pat
-        key: password
+  enabled: false
 
 #service:
 #  spec:
@@ -79,9 +70,3 @@ ports:
         - "10.42.0.0/16"
         - "10.43.0.0/16"
         - "10.10.20.0/24" # local
-
-#additionalArguments:
-#  - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-#  - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=gandiv5"
-#  - "--certificatesresolvers.letsencrypt.acme.email=contact@kevingomez.fr"
-#  - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
