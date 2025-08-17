@@ -112,6 +112,13 @@
     port: 9100
     src: '10.10.10.1/24'
 
+- name: Open metallb memberlist
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: 7946
+    src: '10.10.10.1/24'
+
 - name: Enable UFW
   become: true
   community.general.ufw:
