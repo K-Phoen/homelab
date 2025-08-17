@@ -4,6 +4,7 @@ ingressClass:
 
 deployment:
   replicas: 3 # hopefully one per node, but it should be fine if not.
+  revisionHistoryLimit: 3
   podAnnotations:
     k8s.grafana.com/scrape: "true"
     k8s.grafana.com/metrics.portNumber: "9100"
