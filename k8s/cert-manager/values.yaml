@@ -1,7 +1,7 @@
 # https://artifacthub.io/packages/helm/cert-manager/cert-manager
 
 global:
-  logLevel: 6 # default: 2
+  logLevel: 2 # default: 2
 
 crds:
   enabled: true
