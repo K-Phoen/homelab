@@ -5,3 +5,9 @@ global:
 
 crds:
   enabled: true
+
+prometheus:
+  enabled: true
+
+  servicemonitor:
+    enabled: true
