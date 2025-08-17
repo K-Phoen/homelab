@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
   name: weather-display-cert
 spec:
-  secretName: transmission-cert
+  secretName: weather-display-cert
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
