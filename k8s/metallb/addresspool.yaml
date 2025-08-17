@@ -1,0 +1,9 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: pool
+spec:
+  addresses:
+    # make sure the DHCP server won't use that range
+    # Also: left out some IPs on purpose, we never know.
+    - 10.10.10.191-10.10.10.210
