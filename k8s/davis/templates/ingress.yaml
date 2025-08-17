@@ -15,4 +15,4 @@ spec:
           name: davis
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: davis-cert

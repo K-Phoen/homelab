@@ -15,4 +15,4 @@ spec:
           name: gitea-http
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: gitea-cert
