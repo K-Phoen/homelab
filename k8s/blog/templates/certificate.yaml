@@ -5,7 +5,7 @@ metadata:
 spec:
   secretName: blog-cert
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - blog.kevingomez.fr
