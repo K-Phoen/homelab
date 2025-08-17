@@ -1,5 +1,5 @@
 gitea:
-  tag: "1.24.4-rootless"
+  tag: "1.24.5-rootless"
 
 runner:
   tag: "0.2.12-dind-rootless"
