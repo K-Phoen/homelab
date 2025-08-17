@@ -11,3 +11,8 @@ prometheus:
 
   servicemonitor:
     enabled: true
+
+    endpointAdditionalProperties:
+     relabelings:
+      - targetLabel: job
+        replacement: integrations/cert-manager
