@@ -50,7 +50,7 @@ ingress:
 
   tls:
     enabled: true
-    #secret: 'authelia-tls'
+    secret: 'authelia-cert'
 
     # hostNameOverride: 'example.com'
 
@@ -133,7 +133,7 @@ ingress:
       #   existingOptions:
       #     name: 'default-traefik-options'
       #     namespace: 'default'
-      certResolver: letsencrypt
+      #certResolver: letsencrypt
       domainsOverride: []
       # domainsOverride:
       #   - main: 'auth.example.com'

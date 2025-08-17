@@ -23,7 +23,7 @@ spec:
   sources:
     - chart: authelia
       repoURL: https://charts.authelia.com
-      targetRevision: '0.10.41'
+      targetRevision: '0.10.42'
       helm:
         valueFiles:
           # Even when the ref field is configured with the path field, $value still represents the root of sources with the ref field.
