@@ -15,4 +15,4 @@ spec:
           name: weather-display
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: weather-display-cert

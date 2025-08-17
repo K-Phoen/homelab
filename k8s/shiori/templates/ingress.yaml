@@ -15,4 +15,4 @@ spec:
           name: shiori
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: shiori-cert
