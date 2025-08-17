@@ -39,6 +39,10 @@ spec:
               value: /tmp/gitea
             - name: GITEA__log__LEVEL
               value: Warn # https://docs.gitea.com/administration/logging-config#the-log-section
+            - name: GITEA__server__PUBLIC_URL_DETECTION
+              value: auto
+            - name: GITEA__server__SSH_DOMAIN
+              value: git-ssh.kevingomez.fr
 
             # Metrics - https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics
             - name: GITEA__metrics__ENABLED
