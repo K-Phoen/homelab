@@ -46,9 +46,9 @@ resources:
 persistence:
   enabled: false
 
-#service:
-#  spec:
-#    externalTrafficPolicy: Local
+service:
+  spec:
+    externalTrafficPolicy: Local
 
 ports:
   web:
