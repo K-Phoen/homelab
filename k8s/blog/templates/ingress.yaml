@@ -34,4 +34,4 @@ spec:
           name: blog
           port: http
   tls:
-    certResolver: letsencrypt
+    secretName: www-cert
