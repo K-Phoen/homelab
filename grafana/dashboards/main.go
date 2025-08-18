@@ -8,6 +8,7 @@ import (
 
 	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
 	"github.com/K-Phoen/homelab/grafana/dashboards/gitea"
+	"github.com/K-Phoen/homelab/grafana/dashboards/metallb"
 	"github.com/K-Phoen/homelab/grafana/dashboards/rooms"
 	"github.com/grafana/grafana-foundation-sdk/go/cog"
 	"github.com/grafana/grafana-foundation-sdk/go/dashboard"
@@ -44,6 +45,12 @@ func main() {
 			name:   "gitea-overview",
 			folder: "cdl4fwl71924gc",
 			fn:     gitea.OverviewDashboard,
+		},
+		{
+			// "MetalLb Overview"
+			name:   "metallb-overview",
+			folder: "cdl4fwl71924gc",
+			fn:     metallb.OverviewDashboard,
 		},
 	}
 
