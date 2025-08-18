@@ -1,2 +1,15 @@
 # https://github.com/metallb/metallb/blob/942c2fe54a75ac6353d3099eeebff33b6b8fe3f0/charts/metallb/values.yaml
 
+controller:
+  logLevel: warn
+  resources:
+    requests:
+      memory: "45Mi"
+      cpu: 1m
+
+speaker:
+  logLevel: warn
+  resources:
+    requests:
+      memory: "100Mi"
+      cpu: 1m
