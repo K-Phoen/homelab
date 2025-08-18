@@ -78,6 +78,7 @@ func livingRoomPressureTimeseries() *timeseries.PanelBuilder {
 
 func LivingRoomDashboard() *dashboard.DashboardBuilder {
 	return dashboard.NewDashboardBuilder("Living room").
+		Tags([]string{"generated"}).
 		Readonly().
 		Tooltip(dashboard.DashboardCursorSyncCrosshair).
 		Annotations(shared.DefaultAnnotations()).

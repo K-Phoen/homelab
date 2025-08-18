@@ -86,6 +86,7 @@ func fileDescriptorsUsageTimeseries() *timeseries.PanelBuilder {
 
 func OverviewDashboard() *dashboard.DashboardBuilder {
 	return dashboard.NewDashboardBuilder("Gitea Overview").
+		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
 		Time("now-1h", "now").

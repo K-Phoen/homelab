@@ -45,6 +45,7 @@ func clientUpdatesTimeseries() *timeseries.PanelBuilder {
 
 func OverviewDashboard() *dashboard.DashboardBuilder {
 	return dashboard.NewDashboardBuilder("MetalLb Overview").
+		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
 		Time("now-1h", "now").

@@ -99,6 +99,7 @@ func logsVolumeTimeseries() *timeseries.PanelBuilder {
 
 func BlogDashboard() *dashboard.DashboardBuilder {
 	return dashboard.NewDashboardBuilder("Anubis – blog.kevingomez.fr").
+		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
 		Tooltip(dashboard.DashboardCursorSyncCrosshair).
