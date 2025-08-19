@@ -4,7 +4,7 @@ inputs:
   version:
     description: "grafanactl version to install"
     required: true
-    default: "0.1.1"
+    default: "0.1.3"
 outputs:
   bin-path:
     description: "Path to the grafanactl binary"
@@ -22,3 +22,4 @@ runs:
         mv grafanactl "${HOME}/.local/bin/grafanactl"
         chmod +x "${HOME}/.local/bin/grafanactl"
         echo "bin-path=${HOME}/.local/bin" >> "${GITHUB_OUTPUT}"
+
