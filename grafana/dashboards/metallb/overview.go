@@ -9,7 +9,7 @@ import (
 )
 
 func addressUtilizationTimeseries() *timeseries.PanelBuilder {
-	return shared.TimeseriesPanel("File descriptors usage").
+	return shared.TimeseriesPanel("Address utilization").
 		WithTarget(shared.PrometheusQuery(`metallb_allocator_addresses_in_use_total * 100 / metallb_allocator_addresses_total`).LegendFormat("{{ pool }}")).
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Min(0).
