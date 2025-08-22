@@ -1,0 +1,16 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "cdl4fwl71924gc"
+    },
+    "labels": {},
+    "name": "devt0dk3loxdsf",
+    "namespace": "stacks-660328"
+  },
+  "spec": {
+    "description": "",
+    "title": "Unifi"
+  }
+}
