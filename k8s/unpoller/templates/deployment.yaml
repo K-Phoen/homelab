@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unpoller
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: unpoller
+
+  template:
+    metadata:
+      labels:
+        app: unpoller
+    spec:
+      securityContext: 
+        runAsNonRoot: true
+
+      containers:
+        - name: unpoller
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: UP_POLLER_DEBUG
+              value: 'true'
+            - name: UP_UNIFI_DEFAULT_SAVE_DPI
+              value: 'true'
+            - name: UP_UNIFI_DEFAULT_USER
+              value: 'unifi-grafana'
+            - name: UP_UNIFI_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: unifi-password
+                  key: password
+            - name: UP_UNIFI_DEFAULT_URL
+              value: https://10.10.10.1
+            - name: UP_PROMETHEUS_NAMESPACE
+              value: unpoller
+            - name: UP_INFLUXDB_DISABLE
+              value: 'true'
+
+          resources:
+            requests:
+              memory: "20Mi"
+              cpu: "10m"
+
+          ports:
+            - name: metrics
+              containerPort: 9130
+
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
