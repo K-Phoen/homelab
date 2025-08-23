@@ -157,7 +157,7 @@ loki.write "grafana_cloud_loki" {
 // Start: blocky
 prometheus.scrape "blocky" {
   targets = [
-        {"__address__" = "localhost:4000", "job" = "blocky", "instance" = "potato"},
+    {"__address__" = "localhost:4000", "job" = "blocky", "instance" = constants.hostname},
   ]
   scrape_interval = "30s"
   forward_to = [prometheus.remote_write.metrics_service.receiver]

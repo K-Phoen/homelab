@@ -19,6 +19,14 @@
     group: root
     mode: '0644'
 
+- name: Allow keepalived multicast
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '10.10.10.1/24'
+    dest: '224.0.0.18'
+  when: blocky_enabled is defined and blocky_enabled
+
 - name: Allow all access to port 53 - DNS TCP
   become: true
   community.general.ufw:

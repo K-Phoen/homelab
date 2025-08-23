@@ -9,6 +9,7 @@
       - git
       - lm-sensors
       - vim
+      - dnsutils
     update_cache: true
 
 - name: Install required packages

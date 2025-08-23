@@ -1,0 +1,22 @@
+vrrp_script blocky_responding {
+  script   "/usr/bin/dig google.fr @127.0.0.1"
+  timeout  3
+  interval 3
+  rise     5
+  fall     5
+}
+
+vrrp_instance blocky {
+  state             BACKUP
+  virtual_router_id {{ keepalived__virtual_router_id }}
+  advert_int        1
+  interface         {{ ansible_default_ipv4['interface'] }}
+  priority          {{ keepalived__vrrp_priority }}
+  nopreempt
+  virtual_ipaddress {
+    {{ keepalived__vip }} dev {{ ansible_default_ipv4['interface'] }}
+  }
+  track_script {
+    blocky_responding
+  }
+}

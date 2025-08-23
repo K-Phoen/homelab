@@ -1,0 +1,21 @@
+---
+- name: Install keepalived
+  become: true
+  ansible.builtin.apt:
+    pkg:
+      - keepalived
+    update_cache: true
+
+- name: Configure keepalived
+  become: true
+  ansible.builtin.template:
+    src: templates/keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+  register: keepalivedConfigured
+
+- name: Restart keepalived
+  become: true
+  ansible.builtin.systemd:
+    name: keepalived
+    state: restarted
+  when: keepalivedConfigured.changed

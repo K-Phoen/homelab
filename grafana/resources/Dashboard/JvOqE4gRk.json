@@ -122,15 +122,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "blocky_build_info ",
+            "expr": "blocky_build_info{instance=~\"$instance\"}",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -219,15 +220,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(up{job=~\"$job\"})",
+            "expr": "sum(up{job=~\"$job\",instance=~\"$instance\"})",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -306,15 +308,16 @@
           "textMode": "value",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "blocky_blocking_enabled",
+            "expr": "blocky_blocking_enabled{instance=~\"$instance\"}",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -373,7 +376,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -382,7 +385,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(time() -blocky_last_list_group_refresh_timestamp_seconds)/ sum(up{job=~\"$job\"})",
+            "expr": "sum(time() -blocky_last_list_group_refresh_timestamp_seconds{instance=~\"$instance\"})/ sum(up{job=~\"$job\",instance=~\"$instance\"})",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -450,15 +453,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "ceil(sum(increase(blocky_query_total[$__range]))) ",
+            "expr": "ceil(sum(increase(blocky_query_total{instance=~\"$instance\"}[$__range]))) ",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -530,15 +534,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(blocky_request_duration_ms_sum[$__range])) / sum(increase(blocky_request_duration_ms_count[$__range]))",
+            "expr": "sum(increase(blocky_request_duration_ms_sum{instance=~\"$instance\"}[$__range])) / sum(increase(blocky_request_duration_ms_count{instance=~\"$instance\"}[$__range]))",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -606,7 +611,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -615,7 +620,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(blocky_denylist_cache_entries) / sum(up{job=~\"$job\"})",
+            "expr": "sum(blocky_denylist_cache_entries{instance=~\"$instance\"}) / sum(up{job=~\"$job\", instance=~\"$instance\"})",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -677,15 +682,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(blocky_cache_hit_count[$__range])) / (sum(increase(blocky_cache_hit_count[$__range])) + sum(increase(blocky_cache_miss_count[$__range])))",
+            "expr": "sum(increase(blocky_cache_hit_count{instance=~\"$instance\"}[$__range])) / (sum(increase(blocky_cache_hit_count{instance=~\"$instance\"}[$__range])) + sum(increase(blocky_cache_miss_count{instance=~\"$instance\"}[$__range])))",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -758,15 +764,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(blocky_error_total[$__range]))",
+            "expr": "sum(increase(blocky_error_total{instance=~\"$instance\"}[$__range]))",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -841,15 +848,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(blocky_response_total{response_type=\"BLOCKED\"}[$__range])) / sum(increase(blocky_query_total[$__range])) ",
+            "expr": "sum(increase(blocky_response_total{instance=~\"$instance\", response_type=\"BLOCKED\"}[$__range])) / sum(increase(blocky_query_total{instance=~\"$instance\"}[$__range])) ",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -905,7 +913,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -914,7 +922,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(blocky_cache_entries)/ sum(up{job=~\"$job\"})",
+            "expr": "sum(blocky_cache_entries{instance=~\"$instance\"})/ sum(up{instance=~\"$instance\", job=~\"$job\"})",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -982,15 +990,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(go_memstats_sys_bytes{job=~\"$job\"})/sum(up{job=~\"$job\"})",
+            "expr": "sum(go_memstats_sys_bytes{instance=~\"$instance\", job=~\"$job\"})/sum(up{instance=~\"$instance\", job=~\"$job\"})",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -1046,7 +1055,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1055,7 +1064,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "ceil(sum(increase(blocky_prefetch_count[$__range])))",
+            "expr": "ceil(sum(increase(blocky_prefetch_count{instance=~\"$instance\"}[$__range])))",
             "format": "table",
             "interval": "",
             "legendFormat": "",
@@ -1111,7 +1120,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1120,7 +1129,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "blocky_prefetch_domain_name_cache_entries",
+            "expr": "blocky_prefetch_domain_name_cache_entries{instance=~\"$instance\"}",
             "format": "table",
             "interval": "",
             "legendFormat": "",
@@ -1180,7 +1189,7 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1189,7 +1198,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "(sum(rate(blocky_prefetchs_total[$__range])) or sum(rate(blocky_prefetch_count[$__range]))) * 60",
+            "expr": "(sum(rate(blocky_prefetchs_total{instance=~\"$instance\"}[$__range])) or sum(rate(blocky_prefetch_count{instance=~\"$instance\"}[$__range]))) * 60",
             "format": "table",
             "interval": "",
             "legendFormat": "",
@@ -1251,15 +1260,16 @@
           "textMode": "auto",
           "wideLayout": true
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(increase(blocky_prefetch_hit_count[$__range])) / (sum(increase(blocky_cache_hit_count[$__range])))",
+            "expr": "sum(increase(blocky_prefetch_hit_count{instance=~\"$instance\"}[$__range])) / (sum(increase(blocky_cache_hit_count{instance=~\"$instance\"}[$__range])))",
             "format": "table",
             "instant": false,
             "interval": "",
@@ -1283,6 +1293,111 @@
         "panels": [],
         "title": "Activity",
         "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 19,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "fieldMinMax": false,
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "reqpm"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "id": 52,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.2.0-16890666601.patch2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum by (instance) (rate(blocky_query_total[$__rate_interval])) * 60",
+            "format": "time_series",
+            "instant": false,
+            "interval": "",
+            "legendFormat": " {{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Request rate per instance",
+        "transparent": true,
+        "type": "timeseries"
       },
       {
         "datasource": {
@@ -1351,9 +1466,9 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 14
+          "y": 21
         },
-        "id": 52,
+        "id": 62,
         "options": {
           "legend": {
             "calcs": [],
@@ -1368,7 +1483,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1377,7 +1492,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "label_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\n    sum by (client) (rate(blocky_query_total[$__rate_interval])) * 60,\n\"client\", \"bean @ ts\", \"client\", \"100.87.198.114\"),\n\"client\", \"carbon @ ts\", \"client\", \"100.114.53.80\"),\n\"client\", \"kevin-xps13 @ ts\", \"client\", \"100.70.121.126\"),\n\"client\", \"potato @ ts\", \"client\", \"100.72.150.17\"),\n\"client\", \"parasite @ ts\", \"client\", \"100.87.189.44\"),\n\"client\", \"beast @ ts\", \"client\", \"100.72.92.128\"),\n\"client\", \"carrot @ ts\", \"client\", \"100.111.87.49\"),\n\"client\", \"carbon @ local\", \"client\", \"192.168.1.111\"),\n\"client\", \"beet @ local\", \"client\", \"192.168.1.148\")",
+            "expr": "label_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\n    sum by (client) (rate(blocky_query_total{instance=~\"$instance\"}[$__rate_interval])) * 60,\n\"client\", \"bean @ ts\", \"client\", \"100.87.198.114\"),\n\"client\", \"carbon @ ts\", \"client\", \"100.114.53.80\"),\n\"client\", \"kevin-xps13 @ ts\", \"client\", \"100.70.121.126\"),\n\"client\", \"potato @ ts\", \"client\", \"100.72.150.17\"),\n\"client\", \"parasite @ ts\", \"client\", \"100.87.189.44\"),\n\"client\", \"beast @ ts\", \"client\", \"100.72.92.128\"),\n\"client\", \"carrot @ ts\", \"client\", \"100.111.87.49\"),\n\"client\", \"carbon @ local\", \"client\", \"10.10.20.149\"),\n\"client\", \"bean @ local\", \"client\", \"10.10.10.91\"),\n\"client\", \"keepalived vip\", \"client\", \"10.10.10.211\"),\n\"client\", \"beet @ local\", \"client\", \"10.10.10.37\")",
             "format": "time_series",
             "instant": false,
             "interval": "",
@@ -1417,7 +1532,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 21
+          "y": 28
         },
         "id": 2,
         "maxDataPoints": 3,
@@ -1447,15 +1562,16 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": " sort_desc(sum by (type) (ceil(increase(blocky_query_total[$__range]))))",
+            "expr": " sort_desc(sum by (type) (ceil(increase(blocky_query_total{instance=~\"$instance\"}[$__range]))))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1494,7 +1610,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 21
+          "y": 28
         },
         "id": 8,
         "maxDataPoints": 3,
@@ -1524,15 +1640,16 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": "sort_desc(sum by (client) (ceil(increase(blocky_query_total[$__range]))))",
+            "expr": "sort_desc(sum by (client) (ceil(increase(blocky_query_total{instance=~\"$instance\"}[$__range]))))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1571,7 +1688,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 21
+          "y": 28
         },
         "id": 32,
         "maxDataPoints": 3,
@@ -1595,7 +1712,7 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1604,7 +1721,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "blocky_denylist_cache_entries",
+            "expr": "blocky_denylist_cache_entries{instance=~\"$instance\"}",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1644,7 +1761,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 29
+          "y": 36
         },
         "id": 38,
         "maxDataPoints": 3,
@@ -1674,15 +1791,16 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": " sort_desc(sum by (response_type) (ceil(increase(blocky_response_total[$__range]))))",
+            "expr": " sort_desc(sum by (response_type) (ceil(increase(blocky_response_total{instance=~\"$instance\"}[$__range]))))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1721,7 +1839,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 29
+          "y": 36
         },
         "id": 14,
         "maxDataPoints": 3,
@@ -1751,15 +1869,16 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": " sort_desc(sum by (reason) (ceil(increase(blocky_response_total[$__range]))))",
+            "expr": " sort_desc(sum by (reason) (ceil(increase(blocky_response_total{instance=~\"$instance\"}[$__range]))))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1798,7 +1917,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 29
+          "y": 36
         },
         "id": 12,
         "maxDataPoints": 3,
@@ -1828,15 +1947,16 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
               "type": "prometheus",
               "uid": "grafanacloud-prom"
             },
+            "editorMode": "code",
             "exemplar": false,
-            "expr": " sort_desc(sum by (response_code) (ceil(increase(blocky_response_total[$__range]))))",
+            "expr": " sort_desc(sum by (response_code) (ceil(increase(blocky_response_total{instance=~\"$instance\"}[$__range]))))",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1872,7 +1992,7 @@
           "h": 9,
           "w": 24,
           "x": 0,
-          "y": 37
+          "y": 44
         },
         "id": 22,
         "options": {
@@ -1920,7 +2040,7 @@
             "unit": "s"
           }
         },
-        "pluginVersion": "12.1.0-16426244399",
+        "pluginVersion": "12.2.0-16890666601.patch2",
         "targets": [
           {
             "datasource": {
@@ -1929,7 +2049,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "sum(increase(blocky_request_duration_seconds_bucket{response_type=\"RESOLVED\"}[$__rate_interval])) by (le)",
+            "expr": "sum(increase(blocky_request_duration_seconds_bucket{instance=~\"$instance\", response_type=\"RESOLVED\"}[$__rate_interval])) by (le)",
             "format": "heatmap",
             "instant": false,
             "interval": "",
@@ -1966,6 +2086,27 @@
           "query": {
             "qryType": 1,
             "query": "label_values(blocky_blocking_enabled,job)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allowCustomValue": false,
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "definition": "label_values(blocky_build_info,instance)",
+          "includeAll": true,
+          "label": "Instance",
+          "name": "instance",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(blocky_build_info,instance)",
             "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 1,
