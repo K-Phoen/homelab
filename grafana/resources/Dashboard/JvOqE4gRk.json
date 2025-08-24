@@ -48,7 +48,7 @@
     },
     "editable": true,
     "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
+    "graphTooltip": 1,
     "links": [
       {
         "icon": "external link",
@@ -1492,7 +1492,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "label_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\n    sum by (client) (rate(blocky_query_total{instance=~\"$instance\"}[$__rate_interval])) * 60,\n\"client\", \"bean @ ts\", \"client\", \"100.87.198.114\"),\n\"client\", \"carbon @ ts\", \"client\", \"100.114.53.80\"),\n\"client\", \"kevin-xps13 @ ts\", \"client\", \"100.70.121.126\"),\n\"client\", \"potato @ ts\", \"client\", \"100.72.150.17\"),\n\"client\", \"parasite @ ts\", \"client\", \"100.87.189.44\"),\n\"client\", \"beast @ ts\", \"client\", \"100.72.92.128\"),\n\"client\", \"carrot @ ts\", \"client\", \"100.111.87.49\"),\n\"client\", \"carbon @ local\", \"client\", \"10.10.20.149\"),\n\"client\", \"bean @ local\", \"client\", \"10.10.10.91\"),\n\"client\", \"keepalived vip\", \"client\", \"10.10.10.211\"),\n\"client\", \"beet @ local\", \"client\", \"10.10.10.37\")",
+            "expr": "label_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\nlabel_replace(\n    sum by (client) (rate(blocky_query_total{client!=\"127.0.0.1\",instance=~\"$instance\"}[$__rate_interval])) * 60,\n\"client\", \"bean @ ts\", \"client\", \"100.87.198.114\"),\n\"client\", \"carbon @ ts\", \"client\", \"100.114.53.80\"),\n\"client\", \"kevin-xps13 @ ts\", \"client\", \"100.70.121.126\"),\n\"client\", \"potato @ local\", \"client\", \"10.10.10.122\"),\n\"client\", \"potato @ ts\", \"client\", \"100.72.150.17\"),\n\"client\", \"parasite @ ts\", \"client\", \"100.87.189.44\"),\n\"client\", \"parasite @ local\", \"client\", \"10.10.20.13\"),\n\"client\", \"beast @ ts\", \"client\", \"100.72.92.128\"),\n\"client\", \"carrot @ ts\", \"client\", \"100.111.87.49\"),\n\"client\", \"carrot @ local\", \"client\", \"10.10.10.64\"),\n\"client\", \"carbon @ local\", \"client\", \"10.10.20.149\"),\n\"client\", \"bean @ local\", \"client\", \"10.10.10.91\"),\n\"client\", \"keepalived vip\", \"client\", \"10.10.10.211\"),\n\"client\", \"beet @ local\", \"client\", \"10.10.10.37\")",
             "format": "time_series",
             "instant": false,
             "interval": "",

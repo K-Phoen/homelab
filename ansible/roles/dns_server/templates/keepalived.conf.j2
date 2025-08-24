@@ -1,9 +1,16 @@
+global_defs {
+  # Don't run scripts configured to be run as root if any part of the path
+  # is writable by a non-root user.
+  enable_script_security
+}
+
 vrrp_script blocky_responding {
   script   "/usr/bin/dig google.fr @127.0.0.1"
   timeout  3
   interval 3
   rise     5
   fall     5
+  user     blocky blocky
 }
 
 vrrp_instance blocky {
@@ -13,9 +20,11 @@ vrrp_instance blocky {
   interface         {{ ansible_default_ipv4['interface'] }}
   priority          {{ keepalived__vrrp_priority }}
   nopreempt
+
   virtual_ipaddress {
     {{ keepalived__vip }} dev {{ ansible_default_ipv4['interface'] }}
   }
+
   track_script {
     blocky_responding
   }
