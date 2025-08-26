@@ -9,6 +9,14 @@ blocky__download_path: /tmp
 blocky__install_path: /opt/blocky
 blocky__readiness_check_enabled: true
 
+keepalived_exporter__version: 1.7.0
+keepalived_exporter__base: "keepalived-exporter-{{ keepalived_exporter__version }}"
+keepalived_exporter__system: "{{ ansible_system }}"
+keepalived_exporter__arch: "{{ ansible_machine }}"
+keepalived_exporter__download_url: "https://github.com/mehdy/keepalived-exporter/releases/download/v{{ keepalived_exporter__version }}/keepalived-exporter_{{ keepalived_exporter__version }}_{{ keepalived_exporter__system }}_{{ keepalived_exporter__arch }}.tar.gz"
+keepalived_exporter__install_path: /opt/keepalived-exporter
+keepalived_exporter__download_path: /opt/keepalived-exporter
+
 keepalived__vip: '10.10.10.211'
 
 # arbitrary unique number from 1 to 255
