@@ -79,7 +79,7 @@ ingress:
 
     # stickyCookieNameOverride: 'authelia_traefik_lb'
 
-    # strategy: 'RoundRobin'
+    strategy: 'wrr'
 
     # responseForwardingFlushInterval: '100ms'
 
