@@ -8,6 +8,7 @@ import (
 
 	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
 	"github.com/K-Phoen/homelab/grafana/dashboards/gitea"
+	"github.com/K-Phoen/homelab/grafana/dashboards/keepalived"
 	"github.com/K-Phoen/homelab/grafana/dashboards/metallb"
 	"github.com/K-Phoen/homelab/grafana/dashboards/rooms"
 	"github.com/grafana/grafana-foundation-sdk/go/cog"
@@ -51,6 +52,18 @@ func main() {
 			name:   "metallb-overview",
 			folder: "cdl4fwl71924gc",
 			fn:     metallb.OverviewDashboard,
+		},
+		{
+			// "Keepalived Overview - blocky"
+			name:   "keepalived-overview-blocky",
+			folder: "cdl4fwl71924gc",
+			fn: func() *dashboard.DashboardBuilder {
+				return keepalived.OverviewDashboard(keepalived.Options{
+					Title:         "blocky",
+					ScriptName:    "blocky_responding",
+					VirtualRouter: 42,
+				})
+			},
 		},
 	}
 
