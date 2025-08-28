@@ -138,7 +138,7 @@ func nodeStatus() *statushistory.PanelBuilder {
 				},
 			},
 		}).
-		Thresholds(dashboard.NewThresholdsConfigBuilder())
+		Thresholds(dashboard.NewThresholdsConfigBuilder().Mode(dashboard.ThresholdsModeAbsolute))
 }
 
 func masterChangesOverTime(opts Options) *timeseries.PanelBuilder {
