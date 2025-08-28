@@ -12,11 +12,13 @@ spec:
 
   template:
     metadata:
+      {{ if .Values.anubis.enable }}
       annotations:
         k8s.grafana.com/scrape: 'true'
         k8s.grafana.com/metrics.portNumber: '9090'
         k8s.grafana.com/metrics.scrapeInterval: '30s'
         k8s.grafana.com/job: 'integrations/anubis-blog'
+      {{ end }}
       labels:
         app: blog
     spec:
@@ -50,7 +52,7 @@ spec:
                 - ALL
             seccompProfile:
               type: RuntimeDefault
-
+        {{ if .Values.anubis.enable }}
         - name: anubis
           image: {{ .Values.anubis.image }}:{{ .Values.anubis.tag }}
           ports:
@@ -90,3 +92,4 @@ spec:
                 - ALL
             seccompProfile:
               type: RuntimeDefault
+        {{ end }}

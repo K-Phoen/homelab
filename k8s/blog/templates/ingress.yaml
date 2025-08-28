@@ -13,7 +13,7 @@ spec:
       services:
         - kind: Service
           name: blog
-          port: anubis
+          port: {{ if .Values.anubis.enable }}anubis{{ else }}http{{ end }}
   tls:
     secretName: blog-cert
 ---

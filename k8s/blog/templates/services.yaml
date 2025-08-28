@@ -9,9 +9,11 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    {{ if .Values.anubis.enable }}
     - protocol: TCP
       port: 8080
       targetPort: anubis
       name: anubis
+    {{ end }}
   selector:
     app: blog
