@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: umami
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: umami
+
+  template:
+    metadata:
+      labels:
+        app: umami
+
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
+      containers:
+        - name: umami
+          image: {{ .Values.umami.image }}:{{ .Values.umami.tag }}
+          env:
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+
+            - name: DISABLE_TELEMETRY
+              value: '1'
+
+            - name: DATABASE_TYPE
+              value: postgresql
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-url
+                  key: password
+
+          ports:
+            - name: http
+              containerPort: 3000
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: 5m

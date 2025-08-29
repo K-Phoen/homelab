@@ -1,0 +1,7 @@
+umami:
+  image: ghcr.io/umami-software/umami
+  tag: "postgresql-v2.19.0"
+
+postgres:
+  image: postgres
+  tag: "17.4-alpine3.21"
