@@ -1,6 +1,6 @@
 blog:
   image: ghcr.io/k-phoen/blog
-  tag: "062c43"
+  tag: "85f0bd"
 anubis:
   enable: false
   image: ghcr.io/techarohq/anubis
