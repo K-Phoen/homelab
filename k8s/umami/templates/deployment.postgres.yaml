@@ -48,7 +48,7 @@ spec:
               name: pg-data
           resources:
             requests:
-              memory: "256Mi"
+              memory: "128Mi"
               cpu: "10m"
 
       volumes:
