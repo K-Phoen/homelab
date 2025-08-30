@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-ml
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: immich-ml
+
+  template:
+    metadata:
+      labels:
+        app: immich-ml
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
+      containers:
+        - name: immich-ml
+          image: {{ .Values.image.ml }}:{{ .Values.image.tag }}
+          env:
+            # https://immich.app/docs/install/environment-variables
+            - name: IMMICH_TELEMETRY_INCLUDE
+              value: all
+            - name: IMMICH_LOG_LEVEL
+              value: warn # verbose, debug, log, warn, error
+            - name: NO_COLOR
+              value: 'true'
+            - name: IMMICH_SERVER_URL
+              value: 'http://immich.immich.svc.cluster.local:80'
+            - name: IMMICH_PORT
+              value: '3003'
+            - name: MACHINE_LEARNING_CACHE_FOLDER
+              value: /cache
+          ports:
+            - name: http
+              containerPort: 3003
+          volumeMounts:
+            - mountPath: /cache
+              name: ml-cache
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "5m"
+
+      volumes:
+        - name: ml-cache
+          persistentVolumeClaim:
+            claimName: immich-ml-cache
