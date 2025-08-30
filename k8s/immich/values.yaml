@@ -1,6 +1,6 @@
 image:
   name: ghcr.io/immich-app/immich-server
-  tag: "v1.140.0"
+  tag: "v1.140.1"
 
 postgres:
   image: ghcr.io/immich-app/postgres
