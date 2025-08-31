@@ -16,3 +16,21 @@ prometheus:
      relabelings:
       - targetLabel: job
         replacement: integrations/cert-manager
+
+# Resources for the cert-manager controller pod.
+resources:
+  requests:
+    cpu: 2m
+    memory: 90Mi
+
+webhook:
+  resources:
+    requests:
+      cpu: 2m
+      memory: 25Mi
+
+cainjector:
+  resources:
+    requests:
+      cpu: 2m
+      memory: 50Mi
