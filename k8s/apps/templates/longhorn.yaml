@@ -30,4 +30,5 @@ spec:
           - $values/k8s/longhorn/values.yaml
     - repoURL: {{ .Values.spec.source.repoURL }}
       targetRevision: {{ .Values.spec.source.targetRevision }}
+      path: k8s/longhorn
       ref: values
