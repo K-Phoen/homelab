@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: crowdsec-bouncer
+spec:
+  plugin:
+    bouncer:
+      enabled: true
+      crowdsecMode: appsec
+      crowdsecAppsecEnabled: true
+      crowdsecAppsecHost: crowdsec-appsec-service.crowdsec:7422
+      crowdsecLapiScheme: http
+      crowdsecLapiHost: crowdsec-service.crowdsec:8080
+      crowdsecLapiKey: "toto_joue_avec_crowdsec"
+      crowdsecLapiTLSInsecureVerify: true

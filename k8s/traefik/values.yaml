@@ -2,6 +2,12 @@ ingressClass:
   name: traefik
   isDefaultClass: true
 
+experimental:
+  plugins:
+    bouncer:
+      moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
+      version: v1.4.5
+
 deployment:
   replicas: 3 # hopefully one per node, but it should be fine if not.
   revisionHistoryLimit: 3
@@ -54,8 +60,12 @@ ports:
   web:
     expose:
       default: true
+    middlewares:
+      - traefik-crowdsec-bouncer@kubernetescrd
 
   websecure:
+    middlewares:
+      - traefik-crowdsec-bouncer@kubernetescrd
     transport:
       respondingTimeouts:
         # https://github.com/immich-app/immich/discussions/8872

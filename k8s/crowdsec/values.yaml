@@ -1,0 +1,76 @@
+# https://github.com/crowdsecurity/helm-charts/blob/main/charts/crowdsec/README.md
+
+# for raw logs format: json or cri (docker|containerd)
+container_runtime: containerd
+
+config:
+  config.yaml.local: |
+    api:
+      server:
+        auto_registration: # Activate if not using TLS for authentication
+          enabled: true
+          token: "${REGISTRATION_TOKEN}" # /!\ Do not modify this variable (auto-generated and handled by the chart)
+          allowed_ranges:
+            - "127.0.0.1/32"
+            - "10.10.20.1/24"
+            - "10.42.0.0/16"
+
+agent:
+  # Specify each pod whose logs you want to process
+  acquisition:
+    # The namespace where the pod is located
+    - namespace: traefik
+      # The pod name
+      podName: traefik-*
+      # as in crowdsec configuration, we need to specify the program name to find a matching parser
+      program: traefik
+  env:
+    - name: COLLECTIONS
+      value: "crowdsecurity/traefik"
+
+appsec:
+  enabled: true
+  acquisitions:
+    - source: appsec
+      listen_addr: "0.0.0.0:7422"
+      path: /
+      appsec_config: crowdsecurity/crs-vpatch
+      labels:
+        type: appsec
+  configs:
+    mycustom-appsec-config.yaml: |
+      name: crowdsecurity/crs-vpatch
+      default_remediation: ban
+      #log_level: debug
+      outofband_rules:
+        - crowdsecurity/crs
+      inband_rules:
+        - crowdsecurity/base-config
+        - crowdsecurity/vpatch-*
+  env:
+    - name: COLLECTIONS
+      value: "crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-crs"
+
+lapi:
+  dashboard:
+    enabled: false
+  persistentVolume:
+    config:
+      accessModes: [ReadWriteMany]
+      storageClassName: longhorn
+    data:
+      accessModes: [ReadWriteMany]
+      storageClassName: longhorn
+  env:
+    # To enroll the Security Engine to the console
+    - name: ENROLL_KEY
+      valueFrom:
+        secretKeyRef:
+          name: crowdsec-enroll
+          key: password
+    - name: ENROLL_INSTANCE_NAME
+      value: "homelab"
+    - name: ENROLL_TAGS
+      value: "k8s linux"
+    - name: BOUNCER_KEY_traefik
+      value: toto_joue_avec_crowdsec
