@@ -18,6 +18,8 @@ spec:
       labels:
         app: gitea
     spec:
+      automountServiceAccountToken: false
+
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

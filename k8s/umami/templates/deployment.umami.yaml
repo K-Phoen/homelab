@@ -16,6 +16,8 @@ spec:
         app: umami
 
     spec:
+      automountServiceAccountToken: false
+
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

@@ -20,6 +20,8 @@ spec:
       labels:
         app: prowlarr
     spec:
+      automountServiceAccountToken: false
+
       containers:
         - name: prowlarr
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}

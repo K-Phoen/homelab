@@ -15,6 +15,18 @@ spec:
       labels:
         app: weather-display
     spec:
+      automountServiceAccountToken: false
+
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+
       securityContext: 
         runAsNonRoot: true
 
