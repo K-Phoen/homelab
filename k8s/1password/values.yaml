@@ -9,3 +9,4 @@ connect:
 
 operator:
   create: true
+  logLevel: error
