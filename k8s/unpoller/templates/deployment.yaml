@@ -26,6 +26,8 @@ spec:
           env:
             - name: UP_POLLER_DEBUG
               value: 'false'
+            - name: UP_POLLER_QUIET
+              value: 'true'
             - name: UP_UNIFI_DEFAULT_SAVE_DPI
               value: 'true'
             - name: UP_UNIFI_DEFAULT_USER
