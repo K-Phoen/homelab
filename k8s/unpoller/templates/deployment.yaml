@@ -25,7 +25,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           env:
             - name: UP_POLLER_DEBUG
-              value: 'true'
+              value: 'false'
             - name: UP_UNIFI_DEFAULT_SAVE_DPI
               value: 'true'
             - name: UP_UNIFI_DEFAULT_USER
