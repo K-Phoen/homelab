@@ -45,6 +45,9 @@ appsec:
       labels:
         type: appsec
 
+  strategy:
+    type: RollingUpdate
+
   podAnnotations:
     k8s.grafana.com/job: integrations/crowdsec
     k8s.grafana.com/metrics.portNumber: '6060'
