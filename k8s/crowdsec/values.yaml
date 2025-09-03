@@ -24,6 +24,13 @@ agent:
       podName: traefik-*
       # as in crowdsec configuration, we need to specify the program name to find a matching parser
       program: traefik
+
+  podAnnotations:
+    k8s.grafana.com/job: integrations/crowdsec
+    k8s.grafana.com/metrics.portNumber: '6060'
+    k8s.grafana.com/metrics.scrapeInterval: 30s
+    k8s.grafana.com/scrape: 'true'
+
   env:
     - name: COLLECTIONS
       value: "crowdsecurity/traefik"
@@ -37,6 +44,13 @@ appsec:
       appsec_config: crowdsecurity/crs-vpatch
       labels:
         type: appsec
+
+  podAnnotations:
+    k8s.grafana.com/job: integrations/crowdsec
+    k8s.grafana.com/metrics.portNumber: '6060'
+    k8s.grafana.com/metrics.scrapeInterval: 30s
+    k8s.grafana.com/scrape: 'true'
+
   configs:
     mycustom-appsec-config.yaml: |
       name: crowdsecurity/crs-vpatch
@@ -47,6 +61,7 @@ appsec:
       inband_rules:
         - crowdsecurity/base-config
         - crowdsecurity/vpatch-*
+
   env:
     - name: COLLECTIONS
       value: "crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-crs"
@@ -54,6 +69,7 @@ appsec:
 lapi:
   dashboard:
     enabled: false
+
   persistentVolume:
     config:
       accessModes: [ReadWriteMany]
@@ -61,6 +77,13 @@ lapi:
     data:
       accessModes: [ReadWriteMany]
       storageClassName: longhorn
+
+  podAnnotations:
+    k8s.grafana.com/job: integrations/crowdsec
+    k8s.grafana.com/metrics.portNumber: '6060'
+    k8s.grafana.com/metrics.scrapeInterval: 30s
+    k8s.grafana.com/scrape: 'true'
+
   env:
     # To enroll the Security Engine to the console
     - name: ENROLL_KEY
