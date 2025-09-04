@@ -59,6 +59,12 @@ spec:
                   name: metrics-token
                   key: password
 
+            # OpenID
+            - name: FORGEJO__openid__ENABLE_OPENID_SIGNIN
+              value: 'false'
+            - name: FORGEJO__openid__ENABLE_OPENID_SIGNUP
+              value: 'false'
+
             # Database
             - name: FORGEJO__database__DB_TYPE
               value: postgres
