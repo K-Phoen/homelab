@@ -22,9 +22,9 @@ spec:
           image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
           env:
             - name: POSTGRES_DB
-              value: gitea
+              value: forgejo
             - name: POSTGRES_USER
-              value: gitea
+              value: forgejo
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:

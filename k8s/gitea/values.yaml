@@ -1,9 +1,0 @@
-gitea:
-  tag: "1.24.5-rootless"
-
-runner:
-  tag: "0.2.12-dind-rootless"
-
-postgres:
-  image: postgres
-  tag: "17.4-alpine3.21"

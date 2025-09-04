@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gitea-http
+  name: forgejo-http
   labels:
-    app: gitea
+    app: forgejo
 spec:
   type: ClusterIP
   ports:
@@ -12,14 +12,14 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: gitea
+    app: forgejo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gitea-ssh
+  name: forgejo-ssh
   labels:
-    app: gitea
+    app: forgejo
 spec:
   type: LoadBalancer
   ports:
@@ -28,14 +28,14 @@ spec:
       protocol: TCP
       name: ssh
   selector:
-    app: gitea
+    app: forgejo
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: postgres
   labels:
-    app: gitea
+    app: forgejo
 spec:
   type: ClusterIP
   ports:

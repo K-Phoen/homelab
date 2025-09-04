@@ -1,0 +1,11 @@
+forgejo:
+  image: code.forgejo.org/forgejo/forgejo
+  tag: "12.0.2-rootless"
+
+runner:
+  image: code.forgejo.org/forgejo/runner
+  tag: "10.0.1"
+
+postgres:
+  image: postgres
+  tag: "17.4-alpine3.21"
