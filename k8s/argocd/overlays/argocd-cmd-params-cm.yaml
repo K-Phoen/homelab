@@ -7,3 +7,9 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   server.insecure: "true" # traefik does TLS termination
+  server.log.level: "warn"
+  reposerver.log.level: "warn"
+  controller.log.level: "warn"
+  notificationscontroller.log.level: "warn"
+  dexserver.log.level: "warn"
+  applicationsetcontroller.log.level: "warn"
