@@ -59,6 +59,10 @@ spec:
                   name: metrics-token
                   key: password
 
+            # Service - https://forgejo.org/docs/latest/admin/config-cheat-sheet/#service-service
+            - name: FORGEJO__SERVICE__DISABLE_REGISTRATION
+              value: "true"
+
             # OpenID
             - name: FORGEJO__openid__ENABLE_OPENID_SIGNIN
               value: 'false'
