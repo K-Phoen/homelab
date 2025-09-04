@@ -40,13 +40,13 @@ spec:
             - name: FORGEJO_TEMP
               value: /tmp/forgejo
             - name: FORGEJO__log__LEVEL
-              value: Warn # https://docs.gitea.com/administration/logging-config#the-log-section
+              value: Warn # https://forgejo.org/docs/latest/admin/config-cheat-sheet/#log-log
             - name: FORGEJO__server__PUBLIC_URL_DETECTION
               value: auto
             - name: FORGEJO__server__SSH_DOMAIN
               value: git-ssh.kevingomez.fr
 
-            # Metrics - https://docs.gitea.com/administration/config-cheat-sheet#metrics-metrics
+            # Metrics - https://forgejo.org/docs/latest/admin/config-cheat-sheet/#metrics-metrics
             - name: FORGEJO__metrics__ENABLED
               value: 'true'
             - name: FORGEJO__metrics__ENABLED_ISSUE_BY_LABEL
