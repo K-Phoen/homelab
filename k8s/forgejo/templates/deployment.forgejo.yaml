@@ -45,6 +45,10 @@ spec:
               value: auto
             - name: FORGEJO__server__SSH_DOMAIN
               value: git-ssh.kevingomez.fr
+            - name: FORGEJO__server__SSH_PORT
+              value: '22'
+            - name: FORGEJO__server__SSH_LISTEN_PORT
+              value: '2222'
 
             # Metrics - https://forgejo.org/docs/latest/admin/config-cheat-sheet/#metrics-metrics
             - name: FORGEJO__metrics__ENABLED
