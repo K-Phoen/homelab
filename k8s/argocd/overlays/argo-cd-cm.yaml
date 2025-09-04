@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  url: https://argocd.kevingomez.fr
+  dex.config: |
+    connectors:
+      - type: ldap
+        id: homelab-ldap
+        name: LDAP Homelab
+        config:
+          host: "lldap.lldap.svc.cluster.local:3890"
+          insecureNoSSL: true
+          bindDN: "uid=argocd,ou=people,dc=home,dc=lab"
+          bindPW: "$ldap.ldap_password"
+
+          # Ldap user search attributes
+          userSearch:
+            baseDN: "ou=people,dc=home,dc=lab"
+            filter: ""
+            username: user_id
+            idAttr: uuid
+            emailAttr: mail
+            nameAttr: display_name
+
+          # Ldap group search attributes
+          groupSearch:
+            baseDN: "ou=groups,dc=home,dc=lab"
+            filter: "(objectClass=group)"
+            userMatchers:
+            - userAttr: uuid
+              groupAttr: member
+            nameAttr: uuid
