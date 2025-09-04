@@ -1,0 +1,9 @@
+# https://codeberg.org/wrenix/helm-charts/src/branch/main/forgejo-runner
+
+image:
+  repository: "forgejo/runner"
+  tag: "10.0.1"
+
+runner:
+  config:
+    existingSecret: forgejo-runner-secret
