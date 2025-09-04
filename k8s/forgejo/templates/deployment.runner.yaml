@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: forgejo
+
+  template:
+    metadata:
+      labels:
+        app: forgejo
+    spec:
+
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values: [ssd]
+      volumes:
+        - name: docker-certs
+          emptyDir: {}
+        - name: runner-data
+          emptyDir: {}
+        - name: runner-config
+          configMap:
+            name: forgejo-runner-config
+            items:
+              - key: "config.yaml"
+                path: "config.yaml"
+
+      # Initialize our configuration file using offline registration
+      # https://forgejo.org/docs/latest/admin/actions/runner-installation/#offline-registration
+      initContainers:
+        - name: runner-register
+          image: {{ .Values.runner.image }}:{{ .Values.runner.tag }}
+          command: ["forgejo-runner", "create-runner-file", "--config", "/opt/config.yaml", "--name", "$(RUNNER_NAME)", "--secret", $(RUNNER_SECRET), "--instance", $(FORGEJO_INSTANCE_URL), "--connect"]
+          env:
+            - name: RUNNER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: RUNNER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: runner-secret
+                  key: password
+            - name: FORGEJO_INSTANCE_URL
+              value: http://forgejo-http.forgejo
+          volumeMounts:
+            - name: runner-data
+              mountPath: /data
+            - name: runner-config
+              mountPath: /opt
+              readOnly: true
+
+      containers:
+      - name: runner
+        image: {{ .Values.runner.image }}:{{ .Values.runner.tag }}
+        command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; forgejo-runner daemon --config /opt/config.yaml"]
+        env:
+          - name: DOCKER_HOST
+            value: tcp://localhost:2376
+          - name: DOCKER_CERT_PATH
+            value: /certs/client
+          - name: DOCKER_TLS_VERIFY
+            value: "1"
+        volumeMounts:
+          - name: docker-certs
+            mountPath: /certs
+          - name: runner-data
+            mountPath: /data
+          - name: runner-config
+            mountPath: /opt
+            readOnly: true
+      - name: daemon
+        image: code.forgejo.org/oci/docker:dind
+        env:
+          - name: DOCKER_TLS_CERTDIR
+            value: /certs
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: docker-certs
+            mountPath: /certs
