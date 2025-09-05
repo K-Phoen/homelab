@@ -32,7 +32,7 @@ persistence:
 
 resources:
   requests:
-    memory: "450Mi"
+    memory: "512Mi"
     cpu: "0.5"
 
 volumeMounts:
