@@ -39,7 +39,7 @@ spec:
               mountPath: /downloads
           resources:
             requests:
-              memory: "150Mi"
+              memory: "155Mi"
               cpu: "10m"
 
       volumes:

@@ -36,7 +36,7 @@ spec:
               mountPath: /app/config
           resources:
             requests:
-              memory: "25Mi"
+              memory: "32Mi"
               cpu: "10m"
 
       volumes:

@@ -46,7 +46,7 @@ spec:
 
           resources:
             requests:
-              memory: "16Mi"
+              memory: "24Mi"
               cpu: "5m"
 
           ports:
