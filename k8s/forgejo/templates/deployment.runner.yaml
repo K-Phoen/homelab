@@ -63,31 +63,44 @@ spec:
               readOnly: true
 
       containers:
-      - name: runner
-        image: {{ .Values.runner.image }}:{{ .Values.runner.tag }}
-        command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; forgejo-runner daemon --config /opt/config.yaml"]
-        env:
-          - name: DOCKER_HOST
-            value: tcp://localhost:2376
-          - name: DOCKER_CERT_PATH
-            value: /certs/client
-          - name: DOCKER_TLS_VERIFY
-            value: "1"
-        volumeMounts:
-          - name: docker-certs
-            mountPath: /certs
-          - name: runner-data
-            mountPath: /data
-          - name: runner-config
-            mountPath: /opt
-            readOnly: true
-      - name: daemon
-        image: code.forgejo.org/oci/docker:dind
-        env:
-          - name: DOCKER_TLS_CERTDIR
-            value: /certs
-        securityContext:
-          privileged: true
-        volumeMounts:
-          - name: docker-certs
-            mountPath: /certs
+        - name: runner
+          image: {{ .Values.runner.image }}:{{ .Values.runner.tag }}
+          command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; forgejo-runner daemon --config /opt/config.yaml"]
+          env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2376
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
+            - name: runner-data
+              mountPath: /data
+            - name: runner-config
+              mountPath: /opt
+              readOnly: true
+
+          resources:
+            requests:
+              memory: "16Mi"
+              cpu: "1m"
+
+        - name: daemon
+          image: code.forgejo.org/oci/docker:dind
+          env:
+            - name: DOCKER_TLS_CERTDIR
+              value: /certs
+
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "1m"
+
+          securityContext:
+            privileged: true
+
+          volumeMounts:
+            - name: docker-certs
+              mountPath: /certs
