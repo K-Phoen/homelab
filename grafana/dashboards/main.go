@@ -7,7 +7,7 @@ import (
 	"path"
 
 	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
-	"github.com/K-Phoen/homelab/grafana/dashboards/gitea"
+	"github.com/K-Phoen/homelab/grafana/dashboards/forgejo"
 	"github.com/K-Phoen/homelab/grafana/dashboards/keepalived"
 	"github.com/K-Phoen/homelab/grafana/dashboards/metallb"
 	"github.com/K-Phoen/homelab/grafana/dashboards/rooms"
@@ -42,10 +42,10 @@ func main() {
 			fn:     anubis.BlogDashboard,
 		},
 		{
-			// "Gitea Overview"
-			name:   "gitea-overview",
+			// "Forgejo Overview"
+			name:   "forgejo-overview",
 			folder: "cdl4fwl71924gc",
-			fn:     gitea.OverviewDashboard,
+			fn:     forgejo.OverviewDashboard,
 		},
 		{
 			// "MetalLb Overview"

@@ -1,4 +1,4 @@
-package gitea
+package forgejo
 
 import (
 	"github.com/K-Phoen/homelab/grafana/dashboards/shared"
@@ -28,7 +28,7 @@ func generalStat() *stat.PanelBuilder {
 func versionStat() *stat.PanelBuilder {
 	return shared.StatPanel("Version").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(`gitea_build_info{job="integrations/gitea"}`).Instant().Format(prometheus.PromQueryFormatTable)).
+		WithTarget(shared.PrometheusQuery(`gitea_build_info{job="integrations/forgejo"}`).Instant().Format(prometheus.PromQueryFormatTable)).
 		ReduceOptions(
 			common.NewReduceDataOptionsBuilder().
 				Calcs([]string{"lastNotNull"}).
@@ -39,13 +39,13 @@ func versionStat() *stat.PanelBuilder {
 func uptimeStat() *stat.PanelBuilder {
 	return shared.StatPanel("Uptime").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(`time()-process_start_time_seconds{job="integrations/gitea"}`).Instant()).
+		WithTarget(shared.PrometheusQuery(`time()-process_start_time_seconds{job="integrations/forgejo"}`).Instant()).
 		Unit(units.Seconds)
 }
 
 func memoryUsageTimeseries() *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Memory usage").
-		WithTarget(shared.PrometheusQuery(`process_resident_memory_bytes{job="integrations/gitea"}`)).
+		WithTarget(shared.PrometheusQuery(`process_resident_memory_bytes{job="integrations/forgejo"}`)).
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Unit(units.BytesSI).
 		Min(0).
@@ -54,7 +54,7 @@ func memoryUsageTimeseries() *timeseries.PanelBuilder {
 
 func cpuUsageTimeseries() *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("CPU usage").
-		WithTarget(shared.PrometheusQuery(`rate(process_cpu_seconds_total{job="integrations/gitea"}[$__rate_interval])*100`)).
+		WithTarget(shared.PrometheusQuery(`rate(process_cpu_seconds_total{job="integrations/forgejo"}[$__rate_interval])*100`)).
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Unit(units.Percent).
 		Min(0).
@@ -63,8 +63,8 @@ func cpuUsageTimeseries() *timeseries.PanelBuilder {
 
 func fileDescriptorsUsageTimeseries() *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("File descriptors usage").
-		WithTarget(shared.PrometheusQuery(`process_open_fds{job="integrations/gitea"}`).RefId("A").LegendFormat("Open")).
-		WithTarget(shared.PrometheusQuery(`process_max_fds{job="integrations/gitea"}`).RefId("B").LegendFormat("Maximum")).
+		WithTarget(shared.PrometheusQuery(`process_open_fds{job="integrations/forgejo"}`).RefId("A").LegendFormat("Open")).
+		WithTarget(shared.PrometheusQuery(`process_max_fds{job="integrations/forgejo"}`).RefId("B").LegendFormat("Maximum")).
 		Datasource(shared.DefaultPrometheusDatasource()).
 		Min(0).
 		Legend(common.NewVizLegendOptionsBuilder().ShowLegend(false)).
@@ -85,7 +85,7 @@ func fileDescriptorsUsageTimeseries() *timeseries.PanelBuilder {
 }
 
 func OverviewDashboard() *dashboard.DashboardBuilder {
-	return dashboard.NewDashboardBuilder("Gitea Overview").
+	return dashboard.NewDashboardBuilder("Forgejo Overview").
 		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
