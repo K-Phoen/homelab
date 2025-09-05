@@ -4,12 +4,12 @@ controller:
   logLevel: warn
   resources:
     requests:
-      memory: "45Mi"
-      cpu: 1m
+      memory: "64Mi"
+      cpu: 3m
 
 speaker:
   logLevel: warn
   resources:
     requests:
-      memory: "100Mi"
-      cpu: 1m
+      memory: "110Mi"
+      cpu: 3m
