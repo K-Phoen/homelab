@@ -63,9 +63,9 @@ data:
               cache: 1m
               title: Services
               sites:
-                - title: Gitea
+                - title: Forgejo
                   url: https://git.kevingomez.fr/
-                  icon: di:gitea
+                  icon: di:forgejo
                 - title: Grafana
                   url: https://potatopi.grafana.net/
                   icon: di:grafana
@@ -160,9 +160,9 @@ data:
               # token: ...
               repositories:
                 - "0xERR0R/blocky"
+                - argoproj/argo-cd
                 - authelia/authelia
                 - tchapi/davis
-                - go-gitea/gitea
                 - glanceapp/glance
                 - immich-app/immich
                 - jellyfin/jellyfin
