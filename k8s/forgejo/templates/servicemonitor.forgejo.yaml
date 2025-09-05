@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       app: forgejo
+      scheme: http
 
   namespaceSelector:
     matchNames:

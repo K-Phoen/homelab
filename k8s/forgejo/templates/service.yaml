@@ -4,6 +4,7 @@ metadata:
   name: forgejo-http
   labels:
     app: forgejo
+    scheme: http
 spec:
   type: ClusterIP
   ports:
