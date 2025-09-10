@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: www-redirect
+spec:
+  redirectRegex:
+    regex: ^http(s)?://kevingomez.fr/(.*)
+    replacement: https://www.kevingomez.fr/${2}
+    permanent: true

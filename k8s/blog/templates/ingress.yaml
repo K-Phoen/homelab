@@ -20,6 +20,26 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
+  name: blog-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`blog.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - kind: Service
+          name: blog
+          port: {{ if .Values.anubis.enable }}anubis{{ else }}http{{ end }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
   name: www
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -35,3 +55,65 @@ spec:
           port: http
   tls:
     secretName: www-cert
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: www-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`www.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - kind: Service
+          name: blog
+          port: http
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bare-www-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`kevingomez.fr`)
+      middlewares:
+        - name: www-redirect
+          namespace: blog
+      services:
+        - kind: Service
+          name: blog
+          port: http
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bare-www
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`kevingomez.fr`)
+      middlewares:
+        - name: www-redirect
+          namespace: blog
+      services:
+        - kind: Service
+          name: blog
+          port: http
+  tls:
+    secretName: no-www-cert
