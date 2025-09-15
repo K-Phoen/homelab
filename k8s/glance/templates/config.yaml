@@ -119,30 +119,37 @@ data:
                   subreddit: grafana
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: golang
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: kubernetes
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: programming
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: selfhosted
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: homelab
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
                 - type: reddit
                   subreddit: sre
                   show-thumbnails: true
                   collapse-after: 8
+                  sort-by: new
 
         - size: small
           widgets:
