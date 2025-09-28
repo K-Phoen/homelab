@@ -1,7 +1,3 @@
 image:
-  name: ghcr.io/go-shiori/shiori:latest
+  name: ghcr.io/go-shiori/shiori
   tag: "alpine-v1.8.0-1-g06de3f4"
-
-postgres:
-  image: postgres
-  tag: "17.4-alpine3.21"
