@@ -1,0 +1,56 @@
+# https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/README.md
+
+# Init containers to add to the Velero deployment's pod spec. At least one plugin provider image is required.
+# If the value is a string then it is evaluated as a template.
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.13.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+configuration:
+  # Set log-level for Velero pod. Default: info. Other options: debug, warning, error, fatal, panic.
+  logLevel: error
+
+  backupStorageLocation:
+    - name: default
+      provider: aws
+      bucket: kgz-homelab-velero
+      default: true
+      config:
+        region: eu-north-1
+      credential:
+        name: velero-credentials
+        key: notesPlain
+
+  volumeSnapshotLocation: []
+
+# Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
+snapshotsEnabled: false
+
+# Backup schedules to create.
+schedules:
+  full-cluster:
+    disabled: false
+    schedule: "0 0 * * *"
+    #useOwnerReferencesInBackup: false
+    template:
+      ttl: "360h" # 15 days
+      storageLocation: default
+      includedClusterScopedResources:
+        - '*'
+      includedNamespaces:
+        - '*'
+      # See: https://velero.io/docs/v1.14/resource-filtering/#excludes
+      excludedNamespaceScopedResources:
+        - volumesnapshots.snapshot.storage.k8s.io
+      excludedClusterScopedResources:
+        - volumesnapshotcontents.snapshot.storage.k8s.io
+
+podAnnotations:
+  k8s.grafana.com/scrape: 'true'
+  k8s.grafana.com/metrics.portNumber: '8085'
+  k8s.grafana.com/metrics.scrapeInterval: '30s'
+  k8s.grafana.com/job: 'velero'
