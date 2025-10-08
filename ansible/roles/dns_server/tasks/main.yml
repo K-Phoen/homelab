@@ -1,6 +1,3 @@
 ---
 - name: Setup blocky
   ansible.builtin.include_tasks: ./blocky.yml
-
-- name: Setup keepalived
-  ansible.builtin.include_tasks: ./keepalived.yml

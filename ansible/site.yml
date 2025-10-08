@@ -15,6 +15,7 @@
     - alloy_node
     - exit_node
     - dns_server
+    - keepalived
 
 - name: Setup carrot
   hosts: carrot
@@ -31,6 +32,7 @@
     - alloy_node
     - exit_node
     - dns_server
+    - keepalived
 
 - name: Setup bean
   hosts: bean
@@ -47,3 +49,4 @@
     - alloy_node
     - exit_node
     - dns_server
+    - keepalived

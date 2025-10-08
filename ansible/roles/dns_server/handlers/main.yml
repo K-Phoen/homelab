@@ -4,15 +4,3 @@
   ansible.builtin.systemd:
     name: blocky
     state: restarted
-
-- name: Restart keepalived-exporter
-  become: true
-  ansible.builtin.systemd:
-    name: keepalived-exporter
-    state: restarted
-
-- name: Restart keepalived
-  become: true
-  ansible.builtin.systemd:
-    name: keepalived
-    state: restarted

@@ -1,6 +1,6 @@
 ---
 collections:
   - name: artis3n.tailscale
-    version: "0.2.1"
+    version: "1.0.1"
   - name: grafana.grafana
     version: "5.7.0"
