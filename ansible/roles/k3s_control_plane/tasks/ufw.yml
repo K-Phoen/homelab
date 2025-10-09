@@ -95,6 +95,23 @@
     proto: tcp
     src: '10.10.20.1/24'
 
+# https://docs.k3s.io/installation/requirements#inbound-rules-for-k3s-nodes
+- name: k3s HA with embedded etcd - 2379
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '2379'
+    proto: tcp
+    src: '10.10.10.1/24'
+
+- name: k3s HA with embedded etcd - 2380
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '2380'
+    proto: tcp
+    src: '10.10.10.1/24'
+
 - name: Open pods networking
   become: true
   community.general.ufw:

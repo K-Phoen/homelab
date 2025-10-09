@@ -2,15 +2,20 @@
 
 Installed using [K3S](https://docs.k3s.io/)
 
-## Server Setup (carrot)
+## Server first server node
 
-Setup k3s with default options:
+Setup k3s:
 
 ```shell
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san carrot.lab --disable traefik --disable servicelb" sh -
+curl -sfL https://get.k3s.io | sh -s - server \
+  --cluster-init \
+  --tls-san k3s.lab \
+  --tls-san [node-name].lab \
+  --disable traefik \
+  --disable servicelb
 ```
 
-`INSTALL_K3S_EXEC="--tls-san carrot.lab"` ensures that the certificate generated for the API server is valid for `carrot.lab`.
+`--tls-san k3s.lab` ensures that the certificate generated for the API server is valid for `k3s.lab`.
 
 A kubeconfig is written to `/etc/rancher/k3s/k3s.yaml`.
 
@@ -18,18 +23,23 @@ Add a marker indicating that this machine has a fast disk (can be used by some
 deployments that prefer being deployed on fast nodes):
 
 ```shell
-kubectl label nodes carrot disktype=ssd
+kubectl label nodes [node-name] disktype=ssd
 ```
 
-## Node Setup (potato)
+## Additional server nodes
 
-Run on potato:
+Run:
 
 ```shell
-curl -sfL https://get.k3s.io | K3S_URL=https://10.10.10.64:6443 K3S_TOKEN=mynodetoken sh -
+curl -sfL https://get.k3s.io | K3S_TOKEN=mynodetoken sh -s - server \
+    --server https://10.10.10.64:6443 \ # first server node
+    --tls-san k3s.lab \
+    --tls-san [node-name].lab \
+    --disable traefik \
+    --disable servicelb
 ```
 
-Note: `K3S_TOKEN` is stored in `/var/lib/rancher/k3s/server/node-token` on the server node.
+Note: `K3S_TOKEN` is stored in `/var/lib/rancher/k3s/server/token` on the server node.
 
 ## Argo CD
 

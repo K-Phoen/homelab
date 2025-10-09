@@ -12,7 +12,7 @@
 
   roles:
     - common
-    - k3s_node
+    - k3s_control_plane
     - alloy_node
     - exit_node
     - dns_server
@@ -48,7 +48,7 @@
 
   roles:
     - common
-    - k3s_node
+    - k3s_control_plane
     - alloy_node
     - exit_node
     - dns_server
