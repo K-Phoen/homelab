@@ -65,6 +65,17 @@ func main() {
 				})
 			},
 		},
+		{
+			// "Keepalived Overview - k3s"
+			name:   "keepalived-overview-k3s",
+			folder: "cdl4fwl71924gc",
+			fn: func() *dashboard.DashboardBuilder {
+				return keepalived.OverviewDashboard(keepalived.Options{
+					Title:         "k3s",
+					VirtualRouter: 43,
+				})
+			},
+		},
 	}
 
 	for _, factory := range factories {

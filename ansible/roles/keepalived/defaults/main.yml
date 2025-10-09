@@ -6,15 +6,36 @@ keepalived_exporter__download_url: "https://github.com/mehdy/keepalived-exporter
 keepalived_exporter__install_path: /opt/keepalived-exporter
 keepalived_exporter__download_path: /opt/keepalived-exporter
 
-keepalived__vip: '10.10.10.211'
+##########
+# Blocky #
+##########
+
+keepalived__vip__blocky: '10.10.10.211'
 
 # arbitrary unique number from 1 to 255
 # used to differentiate multiple instances of vrrpd
-keepalived__virtual_router_id: 42
+keepalived__virtual_router_id__blocky: 42
 
 # for electing MASTER, highest priority wins.
 # The valid range of values for priority is [1-255], with priority
 # 255 meaning "address owner".
 # To be MASTER, it is recommended to make this 50 more than on
 # other machines.
-keepalived__vrrp_priority: 100
+keepalived__vrrp_priority__blocky: 100
+
+#######
+# k3s #
+#######
+
+keepalived__vip__k3s: '10.10.10.212'
+
+# arbitrary unique number from 1 to 255
+# used to differentiate multiple instances of vrrpd
+keepalived__virtual_router_id__k3s: 43
+
+# for electing MASTER, highest priority wins.
+# The valid range of values for priority is [1-255], with priority
+# 255 meaning "address owner".
+# To be MASTER, it is recommended to make this 50 more than on
+# other machines.
+keepalived__vrrp_priority__k3s: 100

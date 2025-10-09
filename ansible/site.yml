@@ -7,7 +7,8 @@
     blocky_enabled: true
     blocky__arch: armv7
     keepalived_exporter__arch: armv7
-    keepalived__vrrp_priority: 50
+    keepalived__vrrp_priority__blocky: 50
+    keepalived__vrrp_priority__k3s: 50
 
   roles:
     - common
@@ -24,7 +25,8 @@
     docker_users: ["{{ homelab_user }}"]
     blocky_enabled: true
     keepalived_exporter__arch: amd64
-    keepalived__vrrp_priority: 100
+    keepalived__vrrp_priority__blocky: 100
+    keepalived__vrrp_priority__k3s: 150 # higher is better
 
   roles:
     - common
@@ -41,7 +43,8 @@
     docker_users: ["{{ homelab_user }}"]
     blocky_enabled: true
     keepalived_exporter__arch: amd64
-    keepalived__vrrp_priority: 150 # higher is better
+    keepalived__vrrp_priority__blocky: 150 # higher is better
+    keepalived__vrrp_priority__k3s: 100
 
   roles:
     - common

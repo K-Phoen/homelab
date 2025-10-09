@@ -112,12 +112,12 @@ func scriptStatus(opts Options) *stat.PanelBuilder {
 		)
 }
 
-func nodeStatus() *statushistory.PanelBuilder {
+func nodeStatus(opts Options) *statushistory.PanelBuilder {
 	return statushistory.NewPanelBuilder().
 		Title("Node Status").
 		Transparent(true).
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(`keepalived_vrrp_state{instance=~"$instance"}`).LegendFormat("{{ instance }}")).
+		WithTarget(shared.PrometheusQuery(fmt.Sprintf(`keepalived_vrrp_state{instance=~"$instance", vrid="%d"}`, opts.VirtualRouter)).LegendFormat("{{ instance }}")).
 		ColWidth(0.5).
 		RowHeight(0.5).
 		Legend(
@@ -283,7 +283,12 @@ func errorsOverTime(opts Options) *timeseries.PanelBuilder {
 }
 
 func OverviewDashboard(opts Options) *dashboard.DashboardBuilder {
-	return dashboard.NewDashboardBuilder(fmt.Sprintf("Keepalived Overview - %s", opts.Title)).
+	statusSpan := uint32(8)
+	if opts.ScriptName == "" {
+		statusSpan = 12
+	}
+
+	builder := dashboard.NewDashboardBuilder(fmt.Sprintf("Keepalived Overview - %s", opts.Title)).
 		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
@@ -303,13 +308,20 @@ func OverviewDashboard(opts Options) *dashboard.DashboardBuilder {
 					},
 				}),
 		).
-		WithPanel(keepalivedStatus().Span(8).Height(5)).
-		WithPanel(exporterStatus().Span(8).Height(5)).
-		WithPanel(scriptStatus(opts).Span(8).Height(5)).
-		WithPanel(nodeStatus().Span(24).Height(7)).
+		WithPanel(keepalivedStatus().Span(statusSpan).Height(5)).
+		WithPanel(exporterStatus().Span(statusSpan).Height(5))
+
+	if opts.ScriptName != "" {
+		builder = builder.WithPanel(scriptStatus(opts).Span(statusSpan).Height(5))
+	}
+
+	builder = builder.
+		WithPanel(nodeStatus(opts).Span(24).Height(7)).
 		WithPanel(masterChangesOverTime(opts).Height(8)).
 		WithPanel(advertisementsOverTime(opts).Height(8)).
 		WithPanel(priorityZeroOverTime(opts).Height(8)).
 		WithPanel(gratuitousARPDelayOverTime(opts).Height(8)).
 		WithPanel(errorsOverTime(opts).Span(24).Height(8))
+
+	return builder
 }

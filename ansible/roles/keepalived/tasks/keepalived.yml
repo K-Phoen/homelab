@@ -24,9 +24,17 @@
           blocky:
             interface: "{{ ansible_default_ipv4.interface }}"
             state: "BACKUP"
-            virtual_router_id: "{{ keepalived__virtual_router_id }}"
-            priority: "{{ keepalived__vrrp_priority }}"
+            virtual_router_id: "{{ keepalived__virtual_router_id__blocky }}"
+            priority: "{{ keepalived__vrrp_priority__blocky }}"
             vips:
-              - "{{ keepalived__vip }} dev {{ ansible_default_ipv4.interface }}"
+              - "{{ keepalived__vip__blocky }} dev {{ ansible_default_ipv4.interface }}"
             track_scripts:
               - blocky_responding
+
+          k3s:
+            interface: "{{ ansible_default_ipv4.interface }}"
+            state: "BACKUP"
+            virtual_router_id: "{{ keepalived__virtual_router_id__k3s }}"
+            priority: "{{ keepalived__vrrp_priority__k3s }}"
+            vips:
+              - "{{ keepalived__vip__k3s }} dev {{ ansible_default_ipv4.interface }}"
