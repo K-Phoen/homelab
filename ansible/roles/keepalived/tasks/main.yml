@@ -1,3 +1,6 @@
 ---
 - name: Setup keepalived
   ansible.builtin.include_tasks: ./keepalived.yml
+
+- name: Setup keepalived-exporter
+  ansible.builtin.include_tasks: ./exporter.yml

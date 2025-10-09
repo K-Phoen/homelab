@@ -1,79 +1,32 @@
 ---
 - name: Install keepalived
   become: true
-  ansible.builtin.apt:
-    pkg:
-      - keepalived
-    update_cache: true
-  notify: Restart keepalived
+  block:
+    - name: Install keepalived
+      ansible.builtin.include_role:
+        name: ansible-keepalived
+      vars:
+        keepalived_global_defs:
+          # Don't run scripts configured to be run as root if any part of the path
+          # is writable by a non-root user.
+          - enable_script_security
 
-- name: Configure keepalived
-  become: true
-  ansible.builtin.template:
-    src: templates/keepalived.conf.j2
-    dest: /etc/keepalived/keepalived.conf
-  notify: Restart keepalived
+        keepalived_scripts:
+          blocky_responding:
+            check_script: "/usr/bin/dig google.fr @127.0.0.1"
+            timeout:  2 # # seconds after which script is considered to have failed
+            interval: 3 # seconds between script invocations
+            rise:     5 # required number of successes for OK transition
+            fall:     2 # required number of successes for KO transition
+            user:     blocky blocky # user/group names to run script under
 
-- name: Ensure keepalived-exporter install and conf dirs exist
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    mode: "0755"
-    state: directory
-  with_items:
-    - "{{ keepalived_exporter__install_path }}/{{ keepalived_exporter__base }}"
-
-- name: Check if keepalived-exporter has been installed already
-  become: true
-  ansible.builtin.stat:
-    path: "{{ keepalived_exporter__install_path }}/{{ keepalived_exporter__base }}/keepalived-exporter"
-  register: install_status
-
-- name: Download keepalived-exporter archive
-  become: true
-  ansible.builtin.get_url:
-    url: "{{ keepalived_exporter__download_url }}"
-    dest: "{{ keepalived_exporter__download_path }}/{{ keepalived_exporter__base }}.tgz"
-    mode: "0644"
-    force: false
-  when: not install_status.stat.exists
-  register: download_status
-
-- name: Expand keepalived-exporter archive
-  become: true
-  ansible.builtin.unarchive:
-    src: "{{ keepalived_exporter__download_path }}/{{ keepalived_exporter__base }}.tgz"
-    dest: "{{ keepalived_exporter__install_path }}/{{ keepalived_exporter__base }}/"
-    mode: "0755"
-    copy: false
-  when: download_status.changed or not install_status.stat.exists
-
-- name: Create link to keepalived-exporter
-  become: true
-  ansible.builtin.file:
-    src: "{{ keepalived_exporter__install_path }}/{{ keepalived_exporter__base }}/keepalived-exporter"
-    dest: "{{ keepalived_exporter__install_path }}/keepalived-exporter"
-    mode: "0755"
-    state: link
-  notify: Restart keepalived-exporter
-
-- name: Configure keepalived-exporter service
-  become: true
-  ansible.builtin.template:
-    src: keepalived-exporter.service.j2
-    dest: /etc/systemd/system/keepalived-exporter.service
-    owner: root
-    group: root
-    mode: "0644"
-  notify: Restart keepalived-exporter
-
-- name: Ensure keepalived-exporter service is enabled and running
-  become: true
-  ansible.builtin.systemd:
-    name: keepalived-exporter
-    state: started
-    daemon_reload: true
-    enabled: true
-
-- name: Flush handlers
-  ansible.builtin.meta: flush_handlers
+        keepalived_instances:
+          blocky:
+            interface: "{{ ansible_default_ipv4.interface }}"
+            state: "BACKUP"
+            virtual_router_id: "{{ keepalived__virtual_router_id }}"
+            priority: "{{ keepalived__vrrp_priority }}"
+            vips:
+              - "{{ keepalived__vip }} dev {{ ansible_default_ipv4.interface }}"
+            track_scripts:
+              - blocky_responding
