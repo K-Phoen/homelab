@@ -1,0 +1,2 @@
+etcd-snapshot-retention: 15
+etcd-snapshot-dir: /mnt/k3s-backup/etcd-snapshots
