@@ -1,13 +1,6 @@
 ---
-- name: Setup potato
-  hosts: potato
-
-  vars:
-    blocky_enabled: true
-    blocky__arch: armv7
-    keepalived_exporter__arch: armv7
-    keepalived__vrrp_priority__blocky: 50
-    keepalived__vrrp_priority__k3s: 50
+- name: Setup nodes
+  hosts: [potato, bean, carrot]
 
   roles:
     - common
@@ -17,36 +10,3 @@
     - dns_server
     - keepalived
 
-- name: Setup carrot
-  hosts: carrot
-
-  vars:
-    blocky_enabled: true
-    keepalived_exporter__arch: amd64
-    keepalived__vrrp_priority__blocky: 100
-    keepalived__vrrp_priority__k3s: 150 # higher is better
-
-  roles:
-    - common
-    - k3s_control_plane
-    - alloy_node
-    - exit_node
-    - dns_server
-    - keepalived
-
-- name: Setup bean
-  hosts: bean
-
-  vars:
-    blocky_enabled: true
-    keepalived_exporter__arch: amd64
-    keepalived__vrrp_priority__blocky: 150 # higher is better
-    keepalived__vrrp_priority__k3s: 100
-
-  roles:
-    - common
-    - k3s_control_plane
-    - alloy_node
-    - exit_node
-    - dns_server
-    - keepalived

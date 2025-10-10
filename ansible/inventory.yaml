@@ -3,9 +3,27 @@ homelab:
     potato:
       ansible_host: 10.10.10.122
       ansible_port: 4242
+
+      blocky_enabled: true
+      blocky__arch: armv7
+      keepalived_exporter__arch: armv7
+      keepalived__vrrp_priority__blocky: 50
+      keepalived__vrrp_priority__k3s: 50
+
     carrot:
       ansible_host: 10.10.10.64
       ansible_port: 4242
+
+      blocky_enabled: true
+      keepalived_exporter__arch: amd64
+      keepalived__vrrp_priority__blocky: 100
+      keepalived__vrrp_priority__k3s: 150 # higher is better
+
     bean:
       ansible_host: 10.10.10.91
       ansible_port: 4242
+
+      blocky_enabled: true
+      keepalived_exporter__arch: amd64
+      keepalived__vrrp_priority__blocky: 150 # higher is better
+      keepalived__vrrp_priority__k3s: 100
