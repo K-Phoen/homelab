@@ -3,7 +3,6 @@
   hosts: potato
 
   vars:
-    docker_users: ["{{ homelab_user }}"]
     blocky_enabled: true
     blocky__arch: armv7
     keepalived_exporter__arch: armv7
@@ -22,7 +21,6 @@
   hosts: carrot
 
   vars:
-    docker_users: ["{{ homelab_user }}"]
     blocky_enabled: true
     keepalived_exporter__arch: amd64
     keepalived__vrrp_priority__blocky: 100
@@ -40,7 +38,6 @@
   hosts: bean
 
   vars:
-    docker_users: ["{{ homelab_user }}"]
     blocky_enabled: true
     keepalived_exporter__arch: amd64
     keepalived__vrrp_priority__blocky: 150 # higher is better

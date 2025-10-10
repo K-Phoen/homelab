@@ -19,11 +19,11 @@ help: ## Display this help.
 
 .PHONY: ansible
 ansible: deps ## Runs ansible.
-	ansible-playbook -e @./ansible/variables.var -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml
+	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml
 
 .PHONY: ansible-dry-run
 ansible-dry-run: deps ## Runs ansible in dry-run mode.
-	ansible-playbook -e @./ansible/variables.var -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
+	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
 
 ##@ Grafana
 
