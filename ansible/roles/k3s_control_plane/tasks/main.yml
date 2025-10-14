@@ -1,3 +1,6 @@
 ---
 - name: Setup firewall
   ansible.builtin.include_tasks: ./ufw.yml
+
+- name: Setup etcd backups
+  ansible.builtin.include_tasks: ./etcd-backups.yml

@@ -10,8 +10,3 @@
     - dns_server
     - keepalived
 
-- name: Setup backups
-  hosts: [carrot]
-
-  roles:
-    - k3s_etcd_backups

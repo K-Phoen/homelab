@@ -79,3 +79,15 @@ prometheus.scrape "keepalived_exporter_blocky" {
 }
 // End: keepalived_exporter_blocky
 {% endif %}
+
+{% if k3s_master is defined and k3s_master %}
+// Start: k3s
+prometheus.scrape "k3s" {
+  targets = [
+    {"__address__" = "localhost:2381", "job" = "integrations/etcd", "cluster" = "k3s-homelab", "instance" = constants.hostname},
+  ]
+  scrape_interval = "30s"
+  forward_to = [prometheus.remote_write.metrics_service.receiver]
+}
+// End: k3s
+{% endif %}
