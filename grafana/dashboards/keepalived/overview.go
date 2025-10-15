@@ -289,7 +289,7 @@ func OverviewDashboard(opts Options) *dashboard.DashboardBuilder {
 	}
 
 	builder := dashboard.NewDashboardBuilder(fmt.Sprintf("Keepalived Overview - %s", opts.Title)).
-		Tags([]string{"generated"}).
+		Tags([]string{"generated", "keepalived"}).
 		Readonly().
 		Refresh("30s").
 		Time("now-3h", "now").

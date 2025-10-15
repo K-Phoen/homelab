@@ -7,6 +7,7 @@ import (
 	"path"
 
 	"github.com/K-Phoen/homelab/grafana/dashboards/anubis"
+	"github.com/K-Phoen/homelab/grafana/dashboards/etcd"
 	"github.com/K-Phoen/homelab/grafana/dashboards/forgejo"
 	"github.com/K-Phoen/homelab/grafana/dashboards/keepalived"
 	"github.com/K-Phoen/homelab/grafana/dashboards/metallb"
@@ -73,6 +74,17 @@ func main() {
 				return keepalived.OverviewDashboard(keepalived.Options{
 					Title:         "k3s",
 					VirtualRouter: 43,
+				})
+			},
+		},
+		{
+			// "etcd Overview - k3s"
+			name:   "etcd-overview-k3s",
+			folder: "cdl4fwl71924gc",
+			fn: func() *dashboard.DashboardBuilder {
+				return etcd.OverviewDashboard(etcd.Options{
+					Title: "k3s",
+					Cluster: "k3s-homelab",
 				})
 			},
 		},

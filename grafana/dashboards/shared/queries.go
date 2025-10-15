@@ -1,13 +1,15 @@
 package shared
 
 import (
+	"fmt"
+
 	"github.com/grafana/grafana-foundation-sdk/go/loki"
 	"github.com/grafana/grafana-foundation-sdk/go/prometheus"
 )
 
-func PrometheusQuery(expression string) *prometheus.DataqueryBuilder {
+func PrometheusQuery(expressionFormat string, args ...any) *prometheus.DataqueryBuilder {
 	return prometheus.NewDataqueryBuilder().
-		Expr(expression).
+		Expr(fmt.Sprintf(expressionFormat, args...)).
 		Range().
 		Exemplar(false).
 		Format(prometheus.PromQueryFormatTimeSeries).
