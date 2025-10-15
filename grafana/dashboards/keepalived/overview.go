@@ -84,7 +84,7 @@ func exporterStatus() *stat.PanelBuilder {
 func scriptStatus(opts Options) *stat.PanelBuilder {
 	return shared.StatPanel("Script Status").
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(fmt.Sprintf(`keepalived_script_status{instance=~"$instance", name="%s"}`, opts.ScriptName)).Instant().LegendFormat("{{ instance }}")).
+		WithTarget(shared.PrometheusQuery(`keepalived_script_status{instance=~"$instance", name="%s"}`, opts.ScriptName).Instant().LegendFormat("{{ instance }}")).
 		ReduceOptions(common.NewReduceDataOptionsBuilder().
 			Values(false).
 			Calcs([]string{"last"}),
@@ -117,7 +117,7 @@ func nodeStatus(opts Options) *statushistory.PanelBuilder {
 		Title("Node Status").
 		Transparent(true).
 		Datasource(shared.DefaultPrometheusDatasource()).
-		WithTarget(shared.PrometheusQuery(fmt.Sprintf(`keepalived_vrrp_state{instance=~"$instance", vrid="%d"}`, opts.VirtualRouter)).LegendFormat("{{ instance }}")).
+		WithTarget(shared.PrometheusQuery(`keepalived_vrrp_state{instance=~"$instance", vrid="%d"}`, opts.VirtualRouter).LegendFormat("{{ instance }}")).
 		ColWidth(0.5).
 		RowHeight(0.5).
 		Legend(
@@ -144,12 +144,12 @@ func nodeStatus(opts Options) *statushistory.PanelBuilder {
 func masterChangesOverTime(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Master Changes").
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_become_master_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_become_master_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} become").
 				RefId("A"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_release_master_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_release_master_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} release").
 				RefId("B"),
 		).
@@ -163,12 +163,12 @@ func masterChangesOverTime(opts Options) *timeseries.PanelBuilder {
 func advertisementsOverTime(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Advertisements").
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_advertisements_sent_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_advertisements_sent_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} sent").
 				RefId("A"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_advertisements_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_advertisements_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} received").
 				RefId("B"),
 		).
@@ -191,12 +191,12 @@ func advertisementsOverTime(opts Options) *timeseries.PanelBuilder {
 func priorityZeroOverTime(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Priority Zero").
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_priority_zero_sent_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_priority_zero_sent_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} sent").
 				RefId("A"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_priority_zero_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_priority_zero_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }} received").
 				RefId("B"),
 		).
@@ -219,7 +219,7 @@ func priorityZeroOverTime(opts Options) *timeseries.PanelBuilder {
 func gratuitousARPDelayOverTime(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Gratuitous ARP Delay").
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_gratuitous_arp_delay_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_gratuitous_arp_delay_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("{{ instance }}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
@@ -238,35 +238,35 @@ func gratuitousARPDelayOverTime(opts Options) *timeseries.PanelBuilder {
 func errorsOverTime(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Errors").
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_advertisements_interval_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_advertisements_interval_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Advertisement interval errors - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_packet_length_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_packet_length_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Packet length errors - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_ip_ttl_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_ip_ttl_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("IP TTL errors - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_invalid_type_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_invalid_type_received_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Invalid type received - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_address_list_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_address_list_errors_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Address list errors - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_authentication_invalid_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_authentication_invalid_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Authentication invalid - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_authentication_failure_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_authentication_failure_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Authentication failure - {{ instance }}"),
 		).
 		WithTarget(
-			shared.PrometheusQuery(fmt.Sprintf(`rate(keepalived_authentication_mismatch_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter)).
+			shared.PrometheusQuery(`rate(keepalived_authentication_mismatch_total{instance=~"$instance", vrid="%d"}[$__rate_interval])`, opts.VirtualRouter).
 				LegendFormat("Authentication mismatch - {{ instance }}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
