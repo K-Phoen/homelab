@@ -4,11 +4,10 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - github.com/argoproj/argo-cd/manifests/cluster-install?ref=v3.1.8
+  - github.com/argoproj/argo-cd/manifests/cluster-install?ref=v3.1.9
   - overlays/argo-ingress.yaml
 
 patches:
   - path: overlays/argo-cd-cm.yaml
   - path: overlays/argocd-rbac-cm.yaml
   - path: overlays/argocd-cmd-params-cm.yaml
-
