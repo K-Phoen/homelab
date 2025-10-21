@@ -7,10 +7,10 @@ Installed using [K3S](https://docs.k3s.io/)
 Setup k3s:
 
 ```shell
-curl -sfL https://get.k3s.io | sh -s - server \
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.34.1+k3s1 sh -s - server \
   --cluster-init \
   --tls-san k3s.lab \
-  --tls-san [node-name].lab \
+  --tls-san carrot.lab \
   --disable traefik \
   --disable servicelb
 ```
@@ -31,8 +31,8 @@ kubectl label nodes [node-name] disktype=ssd
 Run:
 
 ```shell
-curl -sfL https://get.k3s.io | K3S_TOKEN=mynodetoken sh -s - server \
-    --server https://10.10.10.64:6443 \ # first server node
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.34.1+k3s1 K3S_TOKEN=mynodetoken sh -s - server \
+    --server https://10.10.10.64:6443 \
     --tls-san k3s.lab \
     --tls-san [node-name].lab \
     --disable traefik \
