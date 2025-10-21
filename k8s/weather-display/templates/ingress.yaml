@@ -16,3 +16,23 @@ spec:
           port: http
   tls:
     secretName: weather-display-cert
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: weather-display-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`weather-display.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - kind: Service
+          name: weather-display
+          port: http

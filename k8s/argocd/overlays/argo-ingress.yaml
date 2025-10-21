@@ -35,3 +35,22 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - argocd.kevingomez.fr
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`argocd.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - name: argocd-server
+          port: 80

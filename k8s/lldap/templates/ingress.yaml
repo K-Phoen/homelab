@@ -16,3 +16,23 @@ spec:
           port: 17170
   tls:
     secretName: lldap-cert
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: lldap-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`ldap.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - kind: Service
+          name: lldap
+          port: 17170

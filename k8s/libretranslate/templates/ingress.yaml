@@ -19,3 +19,23 @@ spec:
           port: http
   tls:
     secretName: libretranslate-cert
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: libretranslate-http
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`translate.kevingomez.fr`)
+      middlewares:
+        - name: redirect-to-https
+          namespace: traefik
+      services:
+        - kind: Service
+          name: libretranslate-web
+          port: http
