@@ -8,6 +8,7 @@ spec:
     # Enable HTTP Strict Transport Security (HSTS)
     stsSeconds: 31536000
     stsPreload: true
+    stsIncludeSubdomains: true
 
     # X-Content-Type-Options header
     contentTypeNosniff: true
@@ -18,5 +19,5 @@ spec:
     # X-XSS-Protection header to enable browser-based cross-site scripting protection
     browserXssFilter: true # Adds the header X-XSS-Protection with the value `1; mode=block`
 
-    # Referrer Policy to limit the amount of information the browser sends as referrer
-    referrerPolicy: "no-referrer-when-downgrade"
+    # Send the shortened referrer on cross-origin requests and the full referrer on same-origin requests
+    referrerPolicy: "strict-origin-when-cross-origin"
