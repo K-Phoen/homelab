@@ -21,3 +21,8 @@ spec:
 
     # Send the shortened referrer on cross-origin requests and the full referrer on same-origin requests
     referrerPolicy: "strict-origin-when-cross-origin"
+
+    # strips out unnecessary headers that may leak information 
+    customResponseHeaders:
+      server: ""
+      x-powered-by: ""
