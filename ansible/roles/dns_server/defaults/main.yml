@@ -1,4 +1,4 @@
-blocky__version: v0.25
+blocky__version: v0.27.0
 blocky__arch: "{{ ansible_machine }}"
 blocky__base: "blocky-{{ blocky__version }}"
 blocky__system: "{{ ansible_system }}"
