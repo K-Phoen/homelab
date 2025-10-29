@@ -4,12 +4,7 @@ homelab:
       ansible_host: 10.10.10.122
       ansible_port: 4242
 
-      k3s_master: true
-      blocky_enabled: true
-      blocky__arch: armv7
-      keepalived_exporter__arch: armv7
-      keepalived__vrrp_priority__blocky: 50
-      keepalived__vrrp_priority__k3s: 50
+      alloy_node_exporter_enabled: true
 
     carrot:
       ansible_host: 10.10.10.64
@@ -30,3 +25,13 @@ homelab:
       keepalived_exporter__arch: amd64
       keepalived__vrrp_priority__blocky: 150 # higher is better
       keepalived__vrrp_priority__k3s: 100
+
+    celery:
+      ansible_host: 10.10.10.14
+      ansible_port: 4242
+
+      k3s_master: true
+      blocky_enabled: true
+      keepalived_exporter__arch: amd64
+      keepalived__vrrp_priority__blocky: 80
+      keepalived__vrrp_priority__k3s: 80

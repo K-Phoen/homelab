@@ -1,12 +1,17 @@
 ---
-- name: Setup nodes
-  hosts: [potato, bean, carrot]
+- name: Common setup
+  hosts: [bean, carrot, celery, potato]
 
   roles:
     - common
-    - k3s_control_plane
-    - alloy_node
     - exit_node
+    - alloy_node
+
+- name: Setup k3s nodes
+  hosts: [bean, carrot, celery]
+
+  roles:
+    - k3s_control_plane
     - dns_server
     - keepalived
 
