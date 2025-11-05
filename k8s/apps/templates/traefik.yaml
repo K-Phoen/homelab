@@ -23,7 +23,7 @@ spec:
   sources:
     - chart: traefik
       repoURL: https://traefik.github.io/charts
-      targetRevision: '37.1.2'
+      targetRevision: "37.2.0"
       helm:
         valueFiles:
           - $values/k8s/traefik/values.yaml
@@ -31,3 +31,4 @@ spec:
       targetRevision: {{ .Values.spec.source.targetRevision }}
       path: k8s/traefik
       ref: values
+
