@@ -25,6 +25,18 @@ ansible: deps ## Runs ansible.
 ansible-dry-run: deps ## Runs ansible in dry-run mode.
 	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
 
+##@ Docker
+
+.PHONY: build-forgejo-runners-images
+build-forgejo-runners-images:
+	docker build \
+		-f ./forgejo-runners/Dockerfile.node-trixie \
+		-t kphoen/node-trixie .
+
+.PHONY: publish-forgejo-runners-images
+publish-forgejo-runners-images: build-forgejo-runners-images
+	docker push kphoen/node-trixie
+
 ##@ Grafana
 
 .PHONY: generate-dashboards
