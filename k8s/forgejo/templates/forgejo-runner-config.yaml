@@ -160,7 +160,7 @@ data:
       # Only takes effect if "network" is set to "".
       enable_ipv6: false
       # Whether to use privileged mode or not when launching task containers (privileged mode is required for Docker-in-Docker).
-      privileged: true
+      privileged: false
       # And other options to be used when the container is started (eg, --volume /etc/ssl/certs:/etc/ssl/certs:ro).
       #options:
       options: -v /certs/client:/certs/client
