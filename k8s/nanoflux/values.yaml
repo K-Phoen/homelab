@@ -1,0 +1,7 @@
+image:
+  name: kphoen/nanoflux
+  tag: "latest"
+
+postgres:
+  image: postgres
+  tag: "17.4-alpine3.21"

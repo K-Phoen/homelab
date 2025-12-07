@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  # the PVC used by postgres is defined as ReadWriteOnce, so only one instance
+  # of postgres can access it at any time
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: postgres
+
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      automountServiceAccountToken: false
+
+      containers:
+        - name: postgres
+          image: {{ .Values.postgres.image }}:{{ .Values.postgres.tag }}
+          env:
+            - name: POSTGRES_DB
+              value: nanoflux
+            - name: POSTGRES_USER
+              value: nanoflux
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - name: pg
+              containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pg-data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "10m"
+
+      volumes:
+        - name: pg-data
+          persistentVolumeClaim:
+            claimName: pg-data
+

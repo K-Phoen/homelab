@@ -3,27 +3,27 @@ kind: IngressRoute
 metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
-  name: miniflux
+  name: nanoflux
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`miniflux.kevingomez.fr`)
+      match: Host(`rss.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
           namespace: authelia
       services:
         - kind: Service
-          name: miniflux
+          name: nanoflux
           port: http
   tls:
-    secretName: miniflux-cert
+    secretName: nanoflux-cert
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: miniflux-http
+  name: nanoflux-http
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
@@ -31,11 +31,11 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`miniflux.kevingomez.fr`)
+      match: Host(`rss.kevingomez.fr`)
       middlewares:
         - name: redirect-to-https
           namespace: traefik
       services:
         - kind: Service
-          name: miniflux
+          name: nanoflux
           port: http

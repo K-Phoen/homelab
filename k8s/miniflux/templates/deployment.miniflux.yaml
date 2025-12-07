@@ -52,7 +52,7 @@ spec:
             #- name: METRICS_PASSWORD
             #  value: LALA                                                                                                                                                                  
             - name: BASE_URL
-              value: https://rss.kevingomez.fr
+              value: https://miniflux.kevingomez.fr
             - name: LOG_FORMAT
               value: json
             - name: LOG_LEVEL

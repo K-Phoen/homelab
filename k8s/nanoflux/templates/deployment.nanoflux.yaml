@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nanoflux
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: nanoflux
+
+  template:
+    metadata:
+      labels:
+        app: nanoflux
+    spec:
+      automountServiceAccountToken: false
+
+      containers:
+        - name: nanoflux
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: NF_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: nanoflux-db-url
+                  key: password
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            requests:
+              memory: "80Mi"
+              cpu: "10m"
