@@ -1,7 +1,7 @@
 # See https://github.com/jellyfin/jellyfin-helm/blob/master/charts/jellyfin/README.md
 
 image:
-  tag: 10.11.4
+  tag: 10.11.5
 
 # Enable hardware acceleration
 podSecurityContext:
@@ -36,12 +36,18 @@ resources:
     cpu: "0.5"
 
 volumeMounts:
+  - mountPath: /library/music
+    name: music-library
   - mountPath: /library/video
     name: video-library
   - name: hardware-acceleration
     mountPath: /dev/dri
 
 volumes:
+  - name: music-library
+    nfs:
+      server: beet.lab
+      path: /mnt/main/Music
   - name: video-library
     nfs:
       server: beet.lab
