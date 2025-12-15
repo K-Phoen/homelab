@@ -1,6 +1,6 @@
 umami:
   image: ghcr.io/umami-software/umami
-  tag: "postgresql-v2.19.0"
+  tag: "postgresql-v2.20.2"
 
 postgres:
   image: postgres
