@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: lidarr
+
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      automountServiceAccountToken: false
+
+      containers:
+        - name: lidarr
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: TZ
+              value: 'Europe/Stockholm'
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '3000'
+          ports:
+            - name: http
+              containerPort: 8686
+          volumeMounts:
+            - name: lidarr-config
+              mountPath: /config
+            - name: lidarr-library
+              mountPath: /music
+            - name: downloads
+              mountPath: /downloads
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "30m"
+
+      volumes:
+        - name: lidarr-config
+          persistentVolumeClaim:
+            claimName: config
+        - name: lidarr-library
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Music
+        - name: downloads
+          nfs:
+            server: beet.lab
+            path: /mnt/main/Downloads
