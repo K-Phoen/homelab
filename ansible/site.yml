@@ -14,4 +14,3 @@
     - k3s_control_plane
     - dns_server
     - keepalived
-

@@ -1,11 +1,11 @@
 ---
 - name: Setup tailscale
   ansible.builtin.include_role:
-    name: artis3n.tailscale
+    name: artis3n.tailscale.machine
   vars:
     tailscale_authkey: "{{ vault_tailscale_authkey }}"
     tailscale_tags: ["homelab"]
-    tailscale_args: "--ssh --advertise-exit-node --advertise-routes=10.10.10.0/24"
+    tailscale_args: "--ssh --advertise-exit-node --reset"
     tailscale_oauth_ephemeral: false
 
 - name: Ensure IP forwarding is enabled
