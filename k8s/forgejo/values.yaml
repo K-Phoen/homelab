@@ -1,6 +1,6 @@
 forgejo:
   image: code.forgejo.org/forgejo/forgejo
-  tag: "13.0.1-rootless"
+  tag: "13.0.3-rootless"
 
 runner:
   image: code.forgejo.org/forgejo/runner
@@ -9,3 +9,4 @@ runner:
 postgres:
   image: postgres
   tag: "17.4-alpine3.21"
+
