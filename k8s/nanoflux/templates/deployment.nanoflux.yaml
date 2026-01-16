@@ -12,6 +12,11 @@ spec:
 
   template:
     metadata:
+      annotations:
+        k8s.grafana.com/scrape: 'true'
+        k8s.grafana.com/metrics.portNumber: '3001'
+        k8s.grafana.com/metrics.scrapeInterval: '30s'
+        k8s.grafana.com/job: 'nanoflux'
       labels:
         app: nanoflux
     spec:
@@ -21,6 +26,8 @@ spec:
         - name: nanoflux
           image: {{ .Values.image.name }}:{{ .Values.image.tag }}
           env:
+            - name: NF_METRICS_ENABLED
+              value: 'true'
             - name: NF_DB_URL
               valueFrom:
                 secretKeyRef:
@@ -29,6 +36,8 @@ spec:
           ports:
             - name: http
               containerPort: 3000
+            - name: metrics
+              containerPort: 3001
           resources:
             requests:
               memory: "80Mi"
