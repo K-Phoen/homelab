@@ -104,6 +104,13 @@ data:
             nameAttr: uuid
 ```
 
+Set the LDAP password in `argocd-secret`:
+
+```console
+kubectl -n argocd patch secrets argocd-secret --patch \ 
+  "{\"data\":{\"ldap.ldap_password\":\"$(echo my-password | base64 -w 0)\"}}"
+```
+
 RBAC policy to give the admin role to members of the LDAP group "argocd_admin":
 
 The configuration is automatically reloaded after editing this file:
