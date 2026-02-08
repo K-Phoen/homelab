@@ -1,8 +1,8 @@
 from pyinfra.api.deploy import deploy
 from pyinfra.operations import apt
 
-@deploy("Install packages")
-def install_packages():
+@deploy("Install useful and required packages")
+def install():
     apt.packages(
         name="Install useful packages",
         packages=[

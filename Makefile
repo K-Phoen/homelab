@@ -25,16 +25,6 @@ infra: deps ## Runs pyinfra to setup infrastructure.
 infra-dry-run: deps ## Runs pyinfra in dry-run mode.
 	uv run pyinfra --dry --diff ./infra/inventory.py ./infra/deploy.py
 
-##@ Ansible
-
-.PHONY: ansible
-ansible: deps ## Runs ansible.
-	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml
-
-.PHONY: ansible-dry-run
-ansible-dry-run: deps ## Runs ansible in dry-run mode.
-	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
-
 ##@ Docker
 
 .PHONY: build-forgejo-runners-images
@@ -56,14 +46,8 @@ generate-dashboards: ## Generates Grafana dashboards.
 ##@ Dependencies
 
 .PHONY: deps
-deps: ansible-deps ## Installs the dependencies.
-
-.PHONY: ansible-deps
-ansible-deps: check-binaries ## Installs ansible-related dependencies.
-	ansible-galaxy role install -r ./ansible/requirements.yml
-	ansible-galaxy collection install -r ./ansible/requirements.yml
+deps: check-binaries ## Verifies and installs the dependencies.
 
 .PHONY: check-binaries
 check-binaries: ## Check that the required binaries are present.
-	@ansible --version >/dev/null 2>&1 || (echo "ERROR: ansible is required."; exit 1)
-	@ansible-galaxy --version >/dev/null 2>&1 || (echo "ERROR: ansible-galaxy is required."; exit 1)
+	@uv --version >/dev/null 2>&1 || (echo "ERROR: uv is required. See https://docs.astral.sh/uv/getting-started/installation/"; exit 1)

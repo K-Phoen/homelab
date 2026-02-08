@@ -1,3 +1,5 @@
-from infra.tasks.packages import install_packages
+from infra.tasks import alloy, packages
 
-install_packages()
+packages.install()
+
+alloy.install()
