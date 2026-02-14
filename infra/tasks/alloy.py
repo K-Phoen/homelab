@@ -41,6 +41,7 @@ def install():
         packages=["alloy"],
         no_recommends=True,
         update=True,
+        cache_time=3600, # seconds
     )
 
     alloy_config = files.template(

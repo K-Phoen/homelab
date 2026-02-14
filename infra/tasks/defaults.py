@@ -7,4 +7,7 @@ DEFAULTS = {
     "gcloud_prometheus_username": "",
     "gcloud_loki_username": "",
     "gcloud_token": "",
+
+    # Tailscale
+    "tailscale_args": [],
 }

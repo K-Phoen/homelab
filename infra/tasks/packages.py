@@ -4,8 +4,9 @@ from pyinfra.operations import apt
 @deploy("Install useful and required packages")
 def install():
     apt.packages(
-        name="Install useful packages",
+        name="Install packages",
         packages=[
+          # Useful
           "bat",
           "btop",
           "curl",
@@ -13,18 +14,12 @@ def install():
           "lm-sensors",
           "vim",
           "dnsutils",
-        ],
-        no_recommends=True,
-        update=True,
-    )
-
-    apt.packages(
-        name="Install required packages",
-        packages=[
+          # Required
           "firmware-linux-nonfree",
           "open-iscsi",
           "nfs-common",
         ],
         no_recommends=True,
         update=True,
+        cache_time=3600, # seconds
     )
