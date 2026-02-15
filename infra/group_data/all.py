@@ -6,7 +6,7 @@ decrypt_pwd = getpass("Password (decrypting secrets): ")
 decrypt = lambda val: privy.peek(val, decrypt_pwd).decode("utf-8")
 
 # Globals
-node_exporter_enabled = True
+sudo_password = decrypt("1$2$1ugAONdjXv1or6XhYqJolbWbGYfovmxj8hJAz4h3wQ8=$Z0FBQUFBQnBramw5RmUwMUxRUHdxODFFSmlIOHlZRDZxQk4yUFBQY1dFZnlhX1loY0hiOEVhcXl6aVYzdnRUNXZVdUZ1Q19MRHhLcXRWelR6amd3Z3pKUTdIbUZRYUNTQ0E9PQ==")
 
 # Alloy
 gcloud_prometheus_username = "1021535"

@@ -1,5 +1,5 @@
 DEFAULTS = {
-    "node_exporter_enabled": True,
+    "node_exporter_enabled": False,
     "blocky_enabled": False,
     "k3s_master": False,
 
