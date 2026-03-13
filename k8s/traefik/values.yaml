@@ -36,8 +36,6 @@ logs:
   access:
     enabled: true
 
-globalArguments: [] # To disable new version checks and anonymous usage reports
-
 resources:
   requests:
     memory: "128Mi"
@@ -54,12 +52,14 @@ ports:
   web:
     expose:
       default: true
-    middlewares:
-      - traefik-security-headers@kubernetescrd
+    http:
+      middlewares:
+        - traefik-security-headers@kubernetescrd
 
   websecure:
-    middlewares:
-      - traefik-security-headers@kubernetescrd
+    http:
+      middlewares:
+        - traefik-security-headers@kubernetescrd
 
     transport:
       respondingTimeouts:
