@@ -1,5 +1,4 @@
-from pyinfra import config
-from pyinfra.context import host
+from pyinfra.context import config, host
 from infra.tasks import alloy, packages, tailscale
 
 config.SUDO_PASSWORD = host.data.sudo_password
