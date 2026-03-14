@@ -23,15 +23,15 @@ infra: deps ## Runs pyinfra to setup the infrastructure.
 
 .PHONY: infra-dry-run
 infra-dry-run: deps ## Runs `make infra` in dry-run mode.
-	uv run pyinfra -vvv --dry --diff ./infra/inventory.py ./infra/deploy.py
+	uv run pyinfra -v --dry --diff ./infra/inventory.py ./infra/deploy.py
 
 .PHONY: infra-upgrade
 infra-upgrade: deps ## Runs pyinfra to upgrade the infrastructure (apt packages).
-	uv run pyinfra -vvv -y ./infra/inventory.py ./infra/upgrade.py
+	uv run pyinfra -y ./infra/inventory.py ./infra/upgrade.py
 
 .PHONY: infra-upgrade-dry-run
 infra-upgrade-dry-run: deps ## Runs `make infra-upgrade-dry-run` in dry-run mode.
-	uv run pyinfra -vvv --dry --diff ./infra/inventory.py ./infra/upgrade.py
+	uv run pyinfra -v --dry --diff ./infra/inventory.py ./infra/upgrade.py
 
 ##@ Docker
 
