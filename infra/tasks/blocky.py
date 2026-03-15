@@ -90,6 +90,9 @@ def install():
         group="root",
     )
 
+    if blocky_unit.changed:
+        systemd.daemon_reload(name="Reload systemd daemon")
+
     systemd.service(
         name="Restart and enable the blocky service",
         service="blocky.service",
