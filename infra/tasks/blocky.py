@@ -44,6 +44,7 @@ def install():
             dest=download_dest,
             user="blocky",
             group="blocky",
+            force=True, # always download the file, even if it already exists
             # TODO: parse checksums file and verify checksum
             #sha256sum=urllib.request.urlopen("{}/{}/blocky_checksums.txt".format(host.data.blocky_base_url, host.data.blocky_version)).read(),
         )
