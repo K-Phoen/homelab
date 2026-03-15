@@ -16,7 +16,7 @@ gcloud_token = decrypt("1$2$FS0wznSFBxAE07wR8CyVsxH0ev-p7BlyC1PGXZd8HNA=$Z0FBQUF
 
 # Blocky
 blocky_enabled = False
-blocky_version = "v0.27.0"
+blocky_version = "v0.29.0"
 blocky_dir = "/opt/blocky"
 blocky_install_path = "{}/blocky-{}".format(blocky_dir, blocky_version)
 blocky_base_url = "https://github.com/0xERR0R/blocky/releases/download"
