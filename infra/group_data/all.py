@@ -22,6 +22,25 @@ blocky_install_path = "{}/blocky-{}".format(blocky_dir, blocky_version)
 blocky_base_url = "https://github.com/0xERR0R/blocky/releases/download"
 blocky_tmp_dir = "/tmp"
 
+# Keepalived
+
+keepalived_vip_blocky = '10.10.10.211'
+
+# arbitrary unique number from 1 to 255
+# used to differentiate multiple instances of vrrpd
+keepalived_virtual_router_id_blocky = 42
+
+# for electing MASTER, highest priority wins.
+# The valid range of values for priority is [1-255], with priority
+# 255 meaning "address owner".
+# To be MASTER, it is recommended to make this 50 more than on
+# other machines.
+keepalived_vrrp_priority_blocky = 100
+
+keepalived_vip_k3s = '10.10.10.212'
+keepalived_vrrp_priority_k3s = 100
+keepalived_virtual_router_id_k3s = 43
+
 # Tailscale
 tailscale_authkey = decrypt("1$2$_vg0h9wMwiK4p0kqF7P_Oiq0ifQR7Tlo6aAJzvzJ-Fg=$Z0FBQUFBQnBrT2JYRnE0ak42N3ZMNFpLMDFfY1JVM09iR09vcnNmbFlfREI3RjJ5YktoUGd2MkJZUWVfbzJsQzltYlR2TGZGTm9hOU9GQkZ1TVl5ZXhPTEN4MXFOMnFWM0tHT2xwR0NtYXN0ak9ERHdab1BtYTREMVpObEtBV2ZxLThXQU9PTjVfb05iSDlQLXFHVmhOeDk0dHdjR1plS2xnPT0=")
 tailscale_args = [
