@@ -1,7 +1,8 @@
 from pyinfra.context import host
 from pyinfra.api.deploy import deploy
-from pyinfra.facts.server import Command
-from pyinfra.operations import apt, files, systemd
+from pyinfra.facts.files import File
+from pyinfra.facts.server import Arch, Command, Os
+from pyinfra.operations import apt, files, server, systemd
 
 from .defaults import DEFAULTS
 from .utils import resource_path
@@ -10,6 +11,10 @@ from .utils import resource_path
 def install():
     if not (host.data.blocky_enabled or host.data.k3s_master):
         return
+
+    ##############
+    # Keepalived #
+    ##############
 
     apt.packages(
         name="Install keepalived package",
@@ -51,4 +56,74 @@ def install():
         running=True,
         restarted=config.changed, # Trigger a restart only if the config changed
         enabled=True,
+    )
+
+    ############
+    # Exporter #
+    ############
+
+    files.directory(
+        name="Ensure exporter install dir exists",
+        path=host.data.keepalived_exporter_install_path,
+        present=True,
+        mode="755",
+        recursive=True,
+    )
+
+    exporter_bin = f"{host.data.keepalived_exporter_install_path}/keepalived-exporter"
+
+    if host.get_fact(File, exporter_bin) is None:
+        download_dest = f"{host.data.keepalived_exporter_tmp_dir}/keepalived-exporter.tar.gz"
+
+        files.download(
+            name="Download archive",
+            src=exporter_download_url(),
+            dest=download_dest,
+            force=True, # always download the file, even if it already exists
+        )
+
+        server.shell(
+            name="Expand archive",
+            commands=[
+                f"tar -C {host.data.keepalived_exporter_install_path} -zxvf {download_dest}",
+            ]
+        )
+
+    files.link(
+        name=f"Link {host.data.keepalived_exporter_dir}/keepalived-exporter as {host.data.keepalived_exporter_install_path}/keepalived-exporter",
+        path=f"{host.data.keepalived_exporter_dir}/keepalived-exporter",
+        target=f"{host.data.keepalived_exporter_install_path}/keepalived-exporter",
+    )
+
+    exporter_unit = files.template(
+        name="Configure keepalived-exporter service",
+        src=resource_path("templates/keepalived/keepalived-exporter.service.j2"),
+        dest="/etc/systemd/system/keepalived-exporter.service",
+        mode="644",
+        user="root",
+        group="root",
+        keepalived_exporter_dir=host.data.keepalived_exporter_dir,
+    )
+
+    if exporter_unit.changed:
+        systemd.daemon_reload(name="Reload systemd daemon")
+
+    systemd.service(
+        name="Restart and enable the keepalived-exporter service",
+        service="keepalived-exporter.service",
+        running=True,
+        restarted=exporter_unit.changed, # Trigger a restart only if the config or unit changed
+        enabled=True,
+    )
+
+def exporter_download_url():
+    arch = host.get_fact(Arch)
+    if arch == "x86_64":
+        arch = "amd64"
+
+    return "{0}/v{1}/keepalived-exporter_{1}_{2}_{3}.tar.gz".format(
+        host.data.keepalived_exporter_base_url,
+        host.data.keepalived_exporter_version,
+        host.get_fact(Os).lower(),
+        arch,
     )

@@ -41,6 +41,12 @@ keepalived_vip_k3s = '10.10.10.212'
 keepalived_vrrp_priority_k3s = 100
 keepalived_virtual_router_id_k3s = 43
 
+keepalived_exporter_version = "1.7.0"
+keepalived_exporter_dir = "/opt/keepalived-exporter"
+keepalived_exporter_install_path = f"{keepalived_exporter_dir}/keepalived-exporter-{keepalived_exporter_version}"
+keepalived_exporter_base_url = "https://github.com/mehdy/keepalived-exporter/releases/download"
+keepalived_exporter_tmp_dir = "/opt/keepalived-exporter"
+
 # Tailscale
 tailscale_authkey = decrypt("1$2$_vg0h9wMwiK4p0kqF7P_Oiq0ifQR7Tlo6aAJzvzJ-Fg=$Z0FBQUFBQnBrT2JYRnE0ak42N3ZMNFpLMDFfY1JVM09iR09vcnNmbFlfREI3RjJ5YktoUGd2MkJZUWVfbzJsQzltYlR2TGZGTm9hOU9GQkZ1TVl5ZXhPTEN4MXFOMnFWM0tHT2xwR0NtYXN0ak9ERHdab1BtYTREMVpObEtBV2ZxLThXQU9PTjVfb05iSDlQLXFHVmhOeDk0dHdjR1plS2xnPT0=")
 tailscale_args = [
