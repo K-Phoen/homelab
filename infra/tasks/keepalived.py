@@ -50,6 +50,9 @@ def install():
         virtual_router_id_k3s=host.data.keepalived_virtual_router_id_k3s,
     )
 
+    if config.changed:
+        systemd.daemon_reload(name="Reload systemd daemon")
+
     systemd.service(
         name="Restart and enable the keepalived service",
         service="keepalived.service",

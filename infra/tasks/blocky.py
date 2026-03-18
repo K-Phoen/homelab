@@ -58,7 +58,7 @@ def install():
 
         files.file(
             name="Ensure owner and mode of blocky binary",
-            path=f"{host.data.host.data.blocky_install_path}/blocky",
+            path=f"{host.data.blocky_install_path}/blocky",
             user="blocky",
             group="blocky",
             mode="755",
