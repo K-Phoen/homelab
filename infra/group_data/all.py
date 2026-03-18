@@ -22,6 +22,10 @@ blocky_install_path = "{}/blocky-{}".format(blocky_dir, blocky_version)
 blocky_base_url = "https://github.com/0xERR0R/blocky/releases/download"
 blocky_tmp_dir = "/tmp"
 
+# k3s
+
+k3s_master = False
+
 # Keepalived
 
 keepalived_vip_blocky = '10.10.10.211'
