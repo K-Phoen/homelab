@@ -4,11 +4,19 @@ from pyinfra.facts.server import Arch, Os
 from pyinfra.facts.files import File
 from pyinfra.operations import files, server, systemd
 
-from .defaults import DEFAULTS
 from .utils import resource_path
+
+DEFAULTS = {
+    "blocky_version": "v0.29.0",
+    "blocky_dir": "/opt/blocky",
+    "blocky_base_url": "https://github.com/0xERR0R/blocky/releases/download",
+    "blocky_tmp_dir": "/tmp",
+}
 
 @deploy("Install Blocky", data_defaults=DEFAULTS)
 def install():
+    install_path = f"{host.data.blocky_dir}/blocky-{host.data.blocky_version}"
+
     server.group(
         name="Create blocky group",
         group="blocky",
@@ -25,7 +33,7 @@ def install():
 
     files.directory(
         name="Ensure install dir exists",
-        path=host.data.blocky_install_path,
+        path=install_path,
         present=True,
         user="blocky",
         group="blocky",
@@ -33,7 +41,7 @@ def install():
         recursive=True,
     )
 
-    blocky_bin = f"{host.data.blocky_install_path}/blocky"
+    blocky_bin = f"{install_path}/blocky"
 
     if host.get_fact(File, blocky_bin) is None:
         download_dest = f"{host.data.blocky_tmp_dir}/blocky.tar.gz"
@@ -52,22 +60,22 @@ def install():
         server.shell(
             name="Expand blocky archive",
             commands=[
-                f"tar -C {host.data.blocky_install_path} -zxvf {download_dest}",
+                f"tar -C {install_path} -zxvf {download_dest}",
             ]
         )
 
         files.file(
             name="Ensure owner and mode of blocky binary",
-            path=f"{host.data.blocky_install_path}/blocky",
+            path=f"{install_path}/blocky",
             user="blocky",
             group="blocky",
             mode="755",
         )
 
     files.link(
-        name=f"Link {host.data.blocky_dir}/blocky as {host.data.blocky_install_path}/blocky",
+        name=f"Link {host.data.blocky_dir}/blocky as {install_path}/blocky",
         path=f"{host.data.blocky_dir}/blocky",
-        target=f"{host.data.blocky_install_path}/blocky",
+        target=f"{install_path}/blocky",
         user="blocky",
         group="blocky",
     )

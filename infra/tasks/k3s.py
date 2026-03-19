@@ -1,8 +1,13 @@
+from pyinfra.context import host
 from pyinfra.api.deploy import deploy
 from pyinfra.operations import files, server
 
-from .defaults import DEFAULTS
 from .utils import resource_path
+
+DEFAULTS = {
+    "k3s_etcd_backups_nfs": "beet.lab:/mnt/main/Backups/k3s",
+    "k3s_etcd_backups_dir": "/mnt/k3s-backup",
+}
 
 @deploy("Setup k3s", data_defaults=DEFAULTS)
 def install():
@@ -10,11 +15,9 @@ def install():
 
 @deploy("Setup etcd backups", data_defaults=DEFAULTS)
 def etcd_backups():
-    backups_dir = "/mnt/k3s-backup"
-
     files.directory(
         name="Ensure k3s backup mountpoint exists",
-        path=backups_dir,
+        path=host.data.k3s_etcd_backups_dir,
         present=True,
         user="root",
         group="root",
@@ -25,13 +28,13 @@ def etcd_backups():
     files.line(
         name="Add NFS volume to fstab",
         path="/etc/fstab",
-        line=f"beet.lab:/mnt/main/Backups/k3s {backups_dir} nfs defaults 0 0",
+        line=f"{host.data.k3s_etcd_backups_nfs} {host.data.k3s_etcd_backups_dir} nfs defaults 0 0",
         present=True,
     )
 
     server.shell(
         name="Mount NFS volume",
-        commands=[f"mount {backups_dir}"]
+        commands=[f"mount {host.data.k3s_etcd_backups_dir}"]
     )
 
     files.put(

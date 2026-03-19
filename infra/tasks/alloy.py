@@ -2,8 +2,13 @@ from pyinfra.context import host
 from pyinfra.api.deploy import deploy
 from pyinfra.operations import apt, files, systemd
 
-from .defaults import DEFAULTS
 from .utils import resource_path
+
+DEFAULTS = {
+    "gcloud_prometheus_username": "1021535",
+    "gcloud_loki_username": "613373",
+    "gcloud_token": "",
+}
 
 @deploy("Install Alloy", data_defaults=DEFAULTS)
 def install():

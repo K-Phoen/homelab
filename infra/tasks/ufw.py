@@ -4,11 +4,10 @@ from pyinfra.api.deploy import deploy
 from pyinfra.api.operation import operation
 from pyinfra.operations import apt, files, server
 
-from .defaults import DEFAULTS
 from .utils import resource_path
 
 
-@deploy("Setup UFW", data_defaults=DEFAULTS)
+@deploy("Setup UFW")
 def install():
     apt.packages(
         name="Install ufw",

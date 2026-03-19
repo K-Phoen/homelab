@@ -2,8 +2,11 @@ from pyinfra.context import host
 from pyinfra.api.deploy import deploy
 from pyinfra.operations import apt, files, server, systemd
 
-from .defaults import DEFAULTS
 from .utils import resource_path
+
+DEFAULTS = {
+    "tailscale_args": [],
+}
 
 @deploy("Install Tailscale", data_defaults=DEFAULTS)
 def install():

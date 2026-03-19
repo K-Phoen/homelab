@@ -4,8 +4,32 @@ from pyinfra.facts.files import File
 from pyinfra.facts.server import Arch, Command, Os
 from pyinfra.operations import apt, files, server, systemd
 
-from .defaults import DEFAULTS
 from .utils import resource_path
+
+DEFAULTS = {
+    "keepalived_vip_blocky": "10.10.10.211",
+
+    # arbitrary unique number from 1 to 255
+    # used to differentiate multiple instances of vrrpd
+    "keepalived_virtual_router_id_blocky": 42,
+
+    # for electing MASTER, highest priority wins.
+    # The valid range of values for priority is [1-255], with priority
+    # 255 meaning "address owner".
+    # To be MASTER, it is recommended to make this 50 more than on
+    # other machines.
+    "keepalived_vrrp_priority_blocky": 100,
+
+    "keepalived_vip_k3s": '10.10.10.212',
+    "keepalived_vrrp_priority_k3s": 100,
+    "keepalived_virtual_router_id_k3s": 43,
+
+    # Exporter
+    "keepalived_exporter_version": "1.7.0",
+    "keepalived_exporter_dir": "/opt/keepalived-exporter",
+    "keepalived_exporter_base_url": "https://github.com/mehdy/keepalived-exporter/releases/download",
+    "keepalived_exporter_tmp_dir": "/opt/keepalived-exporter",
+}
 
 @deploy("Install keepalived", data_defaults=DEFAULTS)
 def install():
@@ -65,15 +89,17 @@ def install():
     # Exporter #
     ############
 
+    install_path = f"{host.data.keepalived_exporter_dir}/keepalived-exporter-{host.data.keepalived_exporter_version}"
+
     files.directory(
         name="Ensure exporter install dir exists",
-        path=host.data.keepalived_exporter_install_path,
+        path=install_path,
         present=True,
         mode="755",
         recursive=True,
     )
 
-    exporter_bin = f"{host.data.keepalived_exporter_install_path}/keepalived-exporter"
+    exporter_bin = f"{install_path}/keepalived-exporter"
 
     if host.get_fact(File, exporter_bin) is None:
         download_dest = f"{host.data.keepalived_exporter_tmp_dir}/keepalived-exporter.tar.gz"
@@ -88,14 +114,14 @@ def install():
         server.shell(
             name="Expand archive",
             commands=[
-                f"tar -C {host.data.keepalived_exporter_install_path} -zxvf {download_dest}",
+                f"tar -C {install_path} -zxvf {download_dest}",
             ]
         )
 
     files.link(
-        name=f"Link {host.data.keepalived_exporter_dir}/keepalived-exporter as {host.data.keepalived_exporter_install_path}/keepalived-exporter",
+        name=f"Link {host.data.keepalived_exporter_dir}/keepalived-exporter as {install_path}/keepalived-exporter",
         path=f"{host.data.keepalived_exporter_dir}/keepalived-exporter",
-        target=f"{host.data.keepalived_exporter_install_path}/keepalived-exporter",
+        target=f"{install_path}/keepalived-exporter",
     )
 
     exporter_unit = files.template(
