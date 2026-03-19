@@ -21,8 +21,8 @@ homelab_hosts = [
 
         "keepalived_vrrp_priority_blocky": 100,
         "keepalived_vrrp_priority_k3s": 150, # higher is better
-   }),
-   ("bean", {
+    }),
+    ("bean", {
         "ssh_hostname": "10.10.10.91",
         "ssh_port": 4242,
         "ssh_user": "kevin",
@@ -33,8 +33,8 @@ homelab_hosts = [
 
         "keepalived_vrrp_priority_blocky": 150, # higher is better
         "keepalived_vrrp_priority_k3s": 100,
-   }),
-   ("celery", {
+    }),
+    ("celery", {
         "ssh_hostname": "10.10.10.14",
         "ssh_port": 4242,
         "ssh_user": "kevin",
@@ -45,5 +45,5 @@ homelab_hosts = [
 
         "keepalived_vrrp_priority_blocky": 80,
         "keepalived_vrrp_priority_k3s": 80,
-   }),
+    }),
 ]
