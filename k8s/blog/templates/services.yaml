@@ -17,3 +17,19 @@ spec:
     {{ end }}
   selector:
     app: blog
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-gemini
+  labels:
+    app: blog-gemini
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 1965
+      targetPort: gemini
+      protocol: TCP
+      name: gemini
+  selector:
+    app: blog-gemini

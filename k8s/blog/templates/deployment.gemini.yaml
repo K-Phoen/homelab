@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-gemini
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: blog-gemini
+
+  template:
+    metadata:
+      annotations:
+        k8s.grafana.com/scrape: 'true'
+        k8s.grafana.com/metrics.portNumber: '8090'
+        k8s.grafana.com/metrics.scrapeInterval: '30s'
+        k8s.grafana.com/job: 'integrations/blog-gemini'
+      labels:
+        app: blog-gemini
+    spec:
+      automountServiceAccountToken: false
+
+      volumes:
+        - name: cert-volume
+          secret:
+            secretName: blog-cert
+
+      containers:
+        - name: blog-gemini
+          image: {{ .Values.blog.image_gemini }}:{{ .Values.blog.tag }}
+          volumeMounts:
+            - name: cert-volume
+              readOnly: true
+              mountPath: "/opt/certs"
+          env:
+            - name: "JUNI_CERT_FILE"
+              value: "/opt/certs/tls.crt"
+            - name: "JUNI_KEY_FILE"
+              value: "/opt/certs/tls.key"
+          ports:
+            - name: gemini
+              containerPort: 1965
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: 5m
+          securityContext:
+            runAsUser: 65532
+            runAsGroup: 65532
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault

@@ -1,5 +1,6 @@
 blog:
   image: ghcr.io/k-phoen/blog
+  image_gemini: ghcr.io/k-phoen/blog-gemini
   tag: "6021bd"
 anubis:
   enable: false
