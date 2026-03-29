@@ -31,7 +31,7 @@ ingressRoute:
 
 logs:
   general:
-    level: "WARN" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+    level: "TRACE" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
 
   access:
     enabled: true
