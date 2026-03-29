@@ -55,6 +55,7 @@ def install():
         ufw_allow(name="Allow all access to port 80 - HTTP", port=80, proto="tcp")
         ufw_allow(name="Allow all access to port 443 - HTTPS", port=443, proto="tcp")
         ufw_allow(name="Allow all access to port 22 - gitea", port=22, proto="tcp")
+        ufw_allow(name="Allow all access to port 1965 - gemini", port=1965, proto="tcp")
         ufw_allow(name="Allow transmission port - TCP", port=51413, proto="tcp")
         ufw_allow(name="Allow transmission port - UDP", port=51413, proto="udp")
 
