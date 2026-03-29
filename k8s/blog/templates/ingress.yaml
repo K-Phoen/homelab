@@ -27,15 +27,12 @@ spec:
   entryPoints:
     - gemini
   routes:
-    #- match: HostSNI(`blog.kevingomez`)
-    - match: HostSNI(`*`)
+    - match: HostSNI(`blog.kevingomez`)
       priority: 10
       services:
         - name: blog-gemini
           port: gemini
           weight: 10
-          #nativeLB: true
-          #nodePortLB: true
   tls:
     passthrough: true
 ---
