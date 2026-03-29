@@ -37,8 +37,7 @@ spec:
           #nativeLB: true
           #nodePortLB: true
   tls:
-    secretName: blog-cert
-    passthrough: false
+    passthrough: true
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
