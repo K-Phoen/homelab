@@ -29,13 +29,16 @@ spec:
   routes:
     #- match: HostSNI(`blog.kevingomez`)
     - match: HostSNI(`*`)
+      priority: 10
       services:
         - name: blog-gemini
           port: gemini
-          nativeLB: true
-          nodePortLB: true
+          weight: 10
+          #nativeLB: true
+          #nodePortLB: true
   tls:
-    passthrough: true
+    secretName: blog-cert
+    passthrough: false
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
