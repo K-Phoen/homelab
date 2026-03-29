@@ -35,6 +35,8 @@ spec:
               readOnly: true
               mountPath: "/opt/certs"
           env:
+            - name: "JUNI_LOG_LEVEL"
+              value: "debug"
             - name: "JUNI_CERT_FILE"
               value: "/opt/certs/tls.crt"
             - name: "JUNI_KEY_FILE"
