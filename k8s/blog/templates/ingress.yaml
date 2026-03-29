@@ -27,7 +27,7 @@ spec:
   entryPoints:
     - gemini
   routes:
-    - match: HostSNI(`blog.kevingomez`)
+    - match: HostSNI(`blog.kevingomez.fr`)
       priority: 10
       services:
         - name: blog-gemini
