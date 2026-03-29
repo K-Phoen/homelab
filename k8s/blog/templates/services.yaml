@@ -25,7 +25,7 @@ metadata:
   labels:
     app: blog-gemini
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 1965
       targetPort: gemini

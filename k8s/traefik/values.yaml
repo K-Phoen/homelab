@@ -56,6 +56,11 @@ ports:
       middlewares:
         - traefik-security-headers@kubernetescrd
 
+  gemini:
+    port: 1965
+    exposedPort: 1965
+    protocol: TCP
+
   websecure:
     http:
       middlewares:

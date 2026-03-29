@@ -18,6 +18,24 @@ spec:
     secretName: blog-cert
 ---
 apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: blog-gemini
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - gemini
+  routes:
+    - kind: Rule
+      match: HostSNI(`blog.kevingomez.fr`)
+      services:
+        - name: blog-gemini
+          port: gemini
+  tls:
+    passthrough: true
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: blog-http
