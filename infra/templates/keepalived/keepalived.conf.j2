@@ -1,0 +1,43 @@
+global_defs {
+  # Don't run scripts configured to be run as root if any part of the path
+  # is writable by a non-root user.
+  enable_script_security
+}
+
+{% if blocky_enabled is defined and blocky_enabled %}
+vrrp_script blocky_responding {
+  script "/usr/bin/dig google.fr @127.0.0.1"
+  interval 3   # checking every 3 seconds (default: 5 seconds)
+  fall 2           # require 2 failures for KO (default: 3)
+  rise 5           # require 5 successes for OK (default: 6)
+  timeout 2                  # allow scripts like ping to succeed, before timing out
+  user blocky blocky                        # user/group names to run script under.
+}
+
+vrrp_instance blocky {
+  interface {{ ipv4_iface }}
+  state BACKUP
+  virtual_router_id {{ virtual_router_id_blocky }}
+  priority {{ vrrp_priority_blocky }}
+
+  virtual_ipaddress {
+    {{ vip_blocky }} dev {{ ipv4_iface }}
+  }
+  track_script {
+    blocky_responding
+  }
+}
+{% endif %}
+
+{% if k3s_master is defined and k3s_master %}
+vrrp_instance k3s {
+  interface {{ ipv4_iface }}
+  state BACKUP
+  virtual_router_id {{ virtual_router_id_k3s }}
+  priority {{ vrrp_priority_k3s }}
+
+  virtual_ipaddress {
+    {{ vip_k3s }} dev {{ ipv4_iface }}
+  }
+}
+{% endif %}

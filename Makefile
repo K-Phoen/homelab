@@ -15,15 +15,23 @@
 help: ## Display this help.
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
-##@ Ansible
+##@ Infra
 
-.PHONY: ansible
-ansible: deps ## Runs ansible.
-	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml
+.PHONY: infra
+infra: deps ## Runs pyinfra to setup the infrastructure.
+	uv run pyinfra -y ./infra/inventory.py ./infra/deploy.py
 
-.PHONY: ansible-dry-run
-ansible-dry-run: deps ## Runs ansible in dry-run mode.
-	ansible-playbook -e @./ansible/secrets.encrypted --ask-vault-pass -i ./ansible/inventory.yaml ./ansible/site.yml --check --diff
+.PHONY: infra-dry-run
+infra-dry-run: deps ## Runs `make infra` in dry-run mode.
+	uv run pyinfra -v --dry --diff ./infra/inventory.py ./infra/deploy.py
+
+.PHONY: infra-upgrade
+infra-upgrade: deps ## Runs pyinfra to upgrade the infrastructure (apt packages).
+	uv run pyinfra -y ./infra/inventory.py ./infra/upgrade.py
+
+.PHONY: infra-upgrade-dry-run
+infra-upgrade-dry-run: deps ## Runs `make infra-upgrade-dry-run` in dry-run mode.
+	uv run pyinfra -v --dry --diff ./infra/inventory.py ./infra/upgrade.py
 
 ##@ Docker
 
@@ -46,14 +54,8 @@ generate-dashboards: ## Generates Grafana dashboards.
 ##@ Dependencies
 
 .PHONY: deps
-deps: ansible-deps ## Installs the dependencies.
-
-.PHONY: ansible-deps
-ansible-deps: check-binaries ## Installs ansible-related dependencies.
-	ansible-galaxy role install -r ./ansible/requirements.yml
-	ansible-galaxy collection install -r ./ansible/requirements.yml
+deps: check-binaries ## Verifies and installs the dependencies.
 
 .PHONY: check-binaries
 check-binaries: ## Check that the required binaries are present.
-	@ansible --version >/dev/null 2>&1 || (echo "ERROR: ansible is required."; exit 1)
-	@ansible-galaxy --version >/dev/null 2>&1 || (echo "ERROR: ansible-galaxy is required."; exit 1)
+	@uv --version >/dev/null 2>&1 || (echo "ERROR: uv is required. See https://docs.astral.sh/uv/getting-started/installation/"; exit 1)

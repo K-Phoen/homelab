@@ -1,8 +1,8 @@
 # Notes
 
-## Ansible
+## Infra as code
 
 ```shell
-$ make ansible-dry-run
-$ make ansible
+$ make infra-dry-run
+$ make infra
 ```

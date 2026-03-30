@@ -1,3 +1,0 @@
----
-- name: Setup blocky
-  ansible.builtin.include_tasks: ./blocky.yml
