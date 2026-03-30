@@ -1,7 +1,7 @@
 blog:
   image: ghcr.io/k-phoen/blog
   image_gemini: ghcr.io/k-phoen/blog-gemini
-  tag: "ca4380"
+  tag: "c06abf"
 anubis:
   enable: false
   image: ghcr.io/techarohq/anubis
