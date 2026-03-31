@@ -1,7 +1,7 @@
 blog:
   image: docker.io/kphoen/blog
   image_gemini: docker.io/kphoen/blog-gemini
-  tag: "6520bb"
+  tag: "ed4d8b"
 anubis:
   enable: false
   image: ghcr.io/techarohq/anubis
