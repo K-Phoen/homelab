@@ -1,6 +1,6 @@
 blog:
-  image: ghcr.io/k-phoen/blog
-  image_gemini: ghcr.io/k-phoen/blog-gemini
+  image: docker.io/kphoen/blog
+  image_gemini: docker.io/kphoen/blog-gemini
   tag: "6520bb"
 anubis:
   enable: false
