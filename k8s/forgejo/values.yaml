@@ -10,3 +10,7 @@ postgres:
   image: postgres
   tag: "17.4-alpine3.21"
 
+anubis:
+  enable: true
+  image: ghcr.io/techarohq/anubis
+  tag: "v1.25.0"

@@ -15,6 +15,13 @@ spec:
 
   template:
     metadata:
+      {{ if .Values.anubis.enable }}
+      annotations:
+        k8s.grafana.com/scrape: 'true'
+        k8s.grafana.com/metrics.portNumber: '9090'
+        k8s.grafana.com/metrics.scrapeInterval: '30s'
+        k8s.grafana.com/job: 'integrations/anubis-forgejo'
+      {{ end }}
       labels:
         app: forgejo
     spec:
@@ -33,6 +40,47 @@ spec:
       terminationGracePeriodSeconds: 30
 
       containers:
+        {{ if .Values.anubis.enable }}
+        - name: anubis
+          image: {{ .Values.anubis.image }}:{{ .Values.anubis.tag }}
+          ports:
+            - name: anubis
+              containerPort: 8081
+          env:
+            - name: "BIND"
+              value: ":8081"
+            - name: "DIFFICULTY"
+              value: "4"
+            - name: ED25519_PRIVATE_KEY_HEX
+              valueFrom:
+                secretKeyRef:
+                  name: anubis-private-key
+                  key: password
+            - name: "METRICS_BIND"
+              value: ":9090"
+            - name: "SERVE_ROBOTS_TXT"
+              value: "true"
+            - name: "TARGET"
+              value: "http://localhost:3000"
+            - name: "OG_PASSTHROUGH"
+              value: "true"
+            - name: "OG_EXPIRY_TIME"
+              value: "24h"
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+        {{ end }}
         - name: forgejo
           image: {{ .Values.forgejo.image }}:{{ .Values.forgejo.tag }}
           env:
