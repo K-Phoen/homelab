@@ -14,7 +14,7 @@ import (
 
 func requestRatesTimeseries(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Request rates").
-		WithTarget(shared.PrometheusQuery("sum(rate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__rate_interval])) by (action)", opts.Integration).
+		WithTarget(shared.PrometheusQuery("sum(irate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__rate_interval])) by (action)", opts.Integration).
 			LegendFormat("{{action}}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
@@ -81,7 +81,7 @@ func challengeResultsPieChart(opts Options) *piechart.PanelBuilder {
 		)
 }
 
-func allowedRequestsLogs(opts Options) *logs.PanelBuilder {
+func logsViewer(opts Options) *logs.PanelBuilder {
 	return shared.LogPanel("Allowed requests").
 		WithTarget(shared.LokiQuery(fmt.Sprintf("{cluster=~\"homelab\", namespace=\"%s\", container=\"%s\"}", opts.Namespace, opts.Container))).
 		Datasource(shared.DefaultLokiDatasource())
@@ -131,6 +131,6 @@ func Dashboard(opts Options) *dashboard.DashboardBuilder {
 		WithPanel(requestRatesTimeseries(opts).Span(12).Height(8)).
 		WithPanel(verdictsPieChart(opts).Span(6).Height(8)).
 		WithPanel(challengeResultsPieChart(opts).Span(6).Height(8)).
-		WithPanel(allowedRequestsLogs(opts).Span(12).Height(8)).
-		WithPanel(logsVolumeTimeseries(opts).Span(12).Height(8))
+		WithPanel(logsVolumeTimeseries(opts).Span(24).Height(6)).
+		WithPanel(logsViewer(opts).Span(24).Height(14))
 }
