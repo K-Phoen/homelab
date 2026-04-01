@@ -35,6 +35,7 @@ logs:
 
   access:
     enabled: true
+    format: genericCLF
 
 resources:
   requests:
