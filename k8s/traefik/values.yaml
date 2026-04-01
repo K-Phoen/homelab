@@ -37,6 +37,29 @@ logs:
     enabled: true
     format: json
 
+    fields:
+      general:
+        defaultMode: keep
+        names:
+          StartLocal: drop
+          StartUTC: drop
+          TLSCipher: drop
+          TLSVersion: drop
+          ServiceURL: drop
+          ServiceAddr: drop
+          ServiceName: drop
+          RetryAttempts: drop
+          RequestPort: drop
+          RequestCount: drop
+          Overhead: drop
+          ClientAddr: drop
+          ClientPort: drop
+          ClientUsername: drop
+      headers:
+        defaultMode: drop
+        names:
+          User-Agent: keep
+
 resources:
   requests:
     memory: "128Mi"
