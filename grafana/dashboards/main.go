@@ -40,7 +40,27 @@ func main() {
 			// "Anubis – blog.kevingomez.fr"
 			name:   "een0nilkaqpz4a",
 			folder: "cdl4fwl71924gc",
-			fn:     anubis.BlogDashboard,
+			fn: func() *dashboard.DashboardBuilder {
+				return anubis.Dashboard(anubis.Options{
+					Namespace:   "blog",
+					Container:   "blog",
+					Integration: "integrations/anubis-blog",
+					Website:     "blog.kevingomez.fr",
+				})
+			},
+		},
+		{
+			// "Anubis – git.kevingomez.fr"
+			name:   "anubis-forgejo",
+			folder: "cdl4fwl71924gc",
+			fn: func() *dashboard.DashboardBuilder {
+				return anubis.Dashboard(anubis.Options{
+					Namespace:   "forgejo",
+					Container:   "forgejo",
+					Integration: "integrations/anubis-forgejo",
+					Website:     "git.kevingomez.fr",
+				})
+			},
 		},
 		{
 			// "Forgejo Overview"
@@ -83,7 +103,7 @@ func main() {
 			folder: "cdl4fwl71924gc",
 			fn: func() *dashboard.DashboardBuilder {
 				return etcd.OverviewDashboard(etcd.Options{
-					Title: "k3s",
+					Title:   "k3s",
 					Cluster: "k3s-homelab",
 				})
 			},

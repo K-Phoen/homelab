@@ -1,6 +1,8 @@
 package anubis
 
 import (
+	"fmt"
+
 	"github.com/K-Phoen/homelab/grafana/dashboards/shared"
 	"github.com/grafana/grafana-foundation-sdk/go/common"
 	"github.com/grafana/grafana-foundation-sdk/go/dashboard"
@@ -10,9 +12,9 @@ import (
 	"github.com/grafana/grafana-foundation-sdk/go/units"
 )
 
-func requestRatesTimeseries() *timeseries.PanelBuilder {
+func requestRatesTimeseries(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Request rates").
-		WithTarget(shared.PrometheusQuery("sum(rate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"integrations/anubis-blog\"}[$__rate_interval])) by (action)").
+		WithTarget(shared.PrometheusQuery("sum(rate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__rate_interval])) by (action)", opts.Integration).
 			LegendFormat("{{action}}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
@@ -30,9 +32,9 @@ func requestRatesTimeseries() *timeseries.PanelBuilder {
 		PointSize(5)
 }
 
-func verdictsPieChart() *piechart.PanelBuilder {
+func verdictsPieChart(opts Options) *piechart.PanelBuilder {
 	return shared.PieChartPanel("Verdicts").
-		WithTarget(shared.PrometheusQuery("sum by(action) (increase(anubis_policy_results{instance=~\"$instance\",container=\"anubis\", job=\"integrations/anubis-blog\"}[$__range]))").
+		WithTarget(shared.PrometheusQuery("sum by(action) (increase(anubis_policy_results{instance=~\"$instance\",container=\"anubis\", job=\"%s\"}[$__range]))", opts.Integration).
 			LegendFormat("{{action}}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
@@ -55,15 +57,15 @@ func verdictsPieChart() *piechart.PanelBuilder {
 		)
 }
 
-func challengeResultsPieChart() *piechart.PanelBuilder {
+func challengeResultsPieChart(opts Options) *piechart.PanelBuilder {
 	return shared.PieChartPanel("Challenge results").
-		WithTarget(shared.PrometheusQuery("increase(anubis_challenges_validated{instance=~\"$instance\",container=\"anubis\",job=\"integrations/anubis-blog\"}[$__range])").
+		WithTarget(shared.PrometheusQuery("increase(anubis_challenges_validated{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__range])", opts.Integration).
 			LegendFormat("Validated"),
 		).
-		WithTarget(shared.PrometheusQuery("increase(anubis_failed_validations{instance=~\"$instance\",container=\"anubis\",job=\"integrations/anubis-blog\"}[$__range])").
+		WithTarget(shared.PrometheusQuery("increase(anubis_failed_validations{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__range])", opts.Integration).
 			LegendFormat("Failed"),
 		).
-		WithTarget(shared.PrometheusQuery("sum by(job, instance) (increase(anubis_challenges_issued{job=\"integrations/anubis-blog\",container=\"anubis\",instance=~\"$instance\"}[$__range])) -  increase(anubis_challenges_validated{job=\"integrations/anubis-blog\",instance=~\"$instance\"}[$__range]) - increase(anubis_failed_validations{job=\"integrations/anubis-blog\",instance=~\"$instance\"}[$__range])").
+		WithTarget(shared.PrometheusQuery("sum by(job, instance) (increase(anubis_challenges_issued{job=\"%[1]s\",container=\"anubis\",instance=~\"$instance\"}[$__range])) -  increase(anubis_challenges_validated{job=\"%[1]s\",instance=~\"$instance\"}[$__range]) - increase(anubis_failed_validations{job=\"%[1]s\",instance=~\"$instance\"}[$__range])", opts.Integration).
 			LegendFormat("No response"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
@@ -79,15 +81,15 @@ func challengeResultsPieChart() *piechart.PanelBuilder {
 		)
 }
 
-func allowedRequestsLogs() *logs.PanelBuilder {
+func allowedRequestsLogs(opts Options) *logs.PanelBuilder {
 	return shared.LogPanel("Allowed requests").
-		WithTarget(shared.LokiQuery("{cluster=~\"homelab\", namespace=\"blog\", container=\"blog\"}")).
+		WithTarget(shared.LokiQuery(fmt.Sprintf("{cluster=~\"homelab\", namespace=\"%s\", container=\"%s\"}", opts.Namespace, opts.Container))).
 		Datasource(shared.DefaultLokiDatasource())
 }
 
-func logsVolumeTimeseries() *timeseries.PanelBuilder {
+func logsVolumeTimeseries(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Logs volume").
-		WithTarget(shared.LokiQuery("sum (count_over_time({cluster=~\"homelab\", namespace=\"blog\", container=\"blog\"} [$__auto]))").
+		WithTarget(shared.LokiQuery(fmt.Sprintf("sum (count_over_time({cluster=~\"homelab\", namespace=\"%s\", container=\"%s\"} [$__auto]))", opts.Namespace, opts.Container)).
 			LegendFormat("Logs"),
 		).
 		Datasource(shared.DefaultLokiDatasource()).
@@ -97,8 +99,15 @@ func logsVolumeTimeseries() *timeseries.PanelBuilder {
 		Legend(common.NewVizLegendOptionsBuilder().ShowLegend(false))
 }
 
-func BlogDashboard() *dashboard.DashboardBuilder {
-	return dashboard.NewDashboardBuilder("Anubis – blog.kevingomez.fr").
+type Options struct {
+	Namespace   string
+	Container   string
+	Website     string
+	Integration string
+}
+
+func Dashboard(opts Options) *dashboard.DashboardBuilder {
+	return dashboard.NewDashboardBuilder(fmt.Sprintf("Anubis – %s", opts.Website)).
 		Tags([]string{"generated"}).
 		Readonly().
 		Refresh("30s").
@@ -109,7 +118,7 @@ func BlogDashboard() *dashboard.DashboardBuilder {
 			Query(dashboard.StringOrMap{
 				Map: map[string]any{
 					"qryType": 1,
-					"query":   "label_values(anubis_challenges_issued{job=~\"integrations/anubis-blog\"},instance)", "refId": "PrometheusVariableQueryEditor-VariableQuery",
+					"query":   fmt.Sprintf("label_values(anubis_challenges_issued{job=~\"%s\"},instance)", opts.Integration), "refId": "PrometheusVariableQueryEditor-VariableQuery",
 				},
 			}).
 			Datasource(shared.DefaultPrometheusDatasource()).
@@ -119,9 +128,9 @@ func BlogDashboard() *dashboard.DashboardBuilder {
 			Sort(dashboard.VariableSortNaturalAsc).
 			IncludeAll(true),
 		).
-		WithPanel(requestRatesTimeseries().Span(12).Height(8)).
-		WithPanel(verdictsPieChart().Span(6).Height(8)).
-		WithPanel(challengeResultsPieChart().Span(6).Height(8)).
-		WithPanel(allowedRequestsLogs().Span(12).Height(8)).
-		WithPanel(logsVolumeTimeseries().Span(12).Height(8))
+		WithPanel(requestRatesTimeseries(opts).Span(12).Height(8)).
+		WithPanel(verdictsPieChart(opts).Span(6).Height(8)).
+		WithPanel(challengeResultsPieChart(opts).Span(6).Height(8)).
+		WithPanel(allowedRequestsLogs(opts).Span(12).Height(8)).
+		WithPanel(logsVolumeTimeseries(opts).Span(12).Height(8))
 }
