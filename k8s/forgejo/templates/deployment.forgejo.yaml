@@ -82,6 +82,8 @@ spec:
               value: "repo.packages"
             - name: FORGEJO__repository__MAX_CREATION_LIMIT
               value: "0"
+            - name: FORGEJO__repository__ALLOW_FORK_WITHOUT_MAXIMUM_LIMIT
+              value: "false"
 
             # OpenID
             - name: FORGEJO__openid__ENABLE_OPENID_SIGNIN
