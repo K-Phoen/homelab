@@ -65,7 +65,23 @@ spec:
 
             # Service - https://forgejo.org/docs/latest/admin/config-cheat-sheet/#service-service
             - name: FORGEJO__SERVICE__DISABLE_REGISTRATION
+              value: "false"
+            - name: FORGEJO__SERVICE__ENABLE_BASIC_AUTHENTICATION
               value: "true"
+            - name: FORGEJO__SERVICE__DEFAULT_KEEP_EMAIL_PRIVATE
+              value: "true"
+            - name: FORGEJO__SERVICE__DEFAULT_ALLOW_CREATE_ORGANIZATION
+              value: "false"
+
+            # Service Explore - https://forgejo.org/docs/latest/admin/config-cheat-sheet/#service---explore-serviceexplore
+            - name: FORGEJO__service.explore__DISABLE_USERS_PAGE
+              value: "true"
+
+            # Repository
+            - name: FORGEJO__repository__DISABLED_REPO_UNITS
+              value: "repo.packages"
+            - name: FORGEJO__repository__MAX_CREATION_LIMIT
+              value: "0"
 
             # OpenID
             - name: FORGEJO__openid__ENABLE_OPENID_SIGNIN
