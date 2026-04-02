@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`miniflux.kevingomez.fr`)
+      match: Host(`rss.kevingomez.fr`)
       middlewares:
         - name: forwardauth-authelia
           namespace: authelia
@@ -31,7 +31,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`miniflux.kevingomez.fr`)
+      match: Host(`rss.kevingomez.fr`)
       middlewares:
         - name: redirect-to-https
           namespace: traefik
