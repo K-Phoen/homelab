@@ -8,4 +8,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - rss.kevingomez.fr
+    - nanoflux.kevingomez.fr
