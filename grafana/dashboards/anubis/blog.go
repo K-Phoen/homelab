@@ -14,15 +14,10 @@ import (
 
 func requestRatesTimeseries(opts Options) *timeseries.PanelBuilder {
 	return shared.TimeseriesPanel("Request rates").
-		WithTarget(shared.PrometheusQuery("sum(irate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__rate_interval])) by (action)", opts.Integration).
-			LegendFormat("{{action}}"),
+		WithTarget(shared.PrometheusQuery("sum(irate(anubis_policy_results{instance=~\"$instance\",container=\"anubis\",job=\"%s\"}[$__rate_interval])) by (action, rule)", opts.Integration).
+			LegendFormat("{{action}} - {{rule}}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
-		Transformations([]dashboard.DataTransformerConfig{
-			{Id: "renameByRegex", Options: map[string]any{"regex": "ALLOW", "renamePattern": "Allowed"}},
-			{Id: "renameByRegex", Options: map[string]any{"renamePattern": "Challenged", "regex": "CHALLENGE"}},
-			{Id: "renameByRegex", Options: map[string]any{"renamePattern": "Denied", "regex": "DENY"}}},
-		).
 		Unit(units.RequestsPerSecond).
 		Min(0).
 		GradientMode(common.GraphGradientModeNone).
@@ -38,21 +33,19 @@ func verdictsPieChart(opts Options) *piechart.PanelBuilder {
 			LegendFormat("{{action}}"),
 		).
 		Datasource(shared.DefaultPrometheusDatasource()).
-		Transformations([]dashboard.DataTransformerConfig{
-			{Id: "renameByRegex", Options: map[string]any{"regex": "CHALLENGE", "renamePattern": "Challenge"}},
-			{Id: "renameByRegex", Options: map[string]any{"regex": "ALLOW", "renamePattern": "Allow"}},
-			{Id: "renameByRegex", Options: map[string]any{"regex": "DENY", "renamePattern": "Deny"}}},
-		).
 		Unit(units.NoUnit).
 		Min(0).
 		ColorScheme(dashboard.NewFieldColorBuilder().Mode("palette-classic")).
-		OverrideByName("Challenge", []dashboard.DynamicConfigValue{
+		OverrideByName("WEIGH", []dashboard.DynamicConfigValue{
+			{Id: "color", Value: map[string]any{"fixedColor": "yellow", "mode": "fixed"}},
+		}).
+		OverrideByName("CHALLENGE", []dashboard.DynamicConfigValue{
 			{Id: "color", Value: map[string]any{"fixedColor": "light-orange", "mode": "fixed"}},
 		}).
-		OverrideByName("Deny", []dashboard.DynamicConfigValue{
+		OverrideByName("DENY", []dashboard.DynamicConfigValue{
 			{Id: "color", Value: map[string]any{"fixedColor": "red", "mode": "fixed"}}},
 		).
-		OverrideByName("Allow", []dashboard.DynamicConfigValue{
+		OverrideByName("ALLOW", []dashboard.DynamicConfigValue{
 			{Id: "color", Value: map[string]any{"fixedColor": "green", "mode": "fixed"}}},
 		)
 }
@@ -118,7 +111,7 @@ func Dashboard(opts Options) *dashboard.DashboardBuilder {
 			Query(dashboard.StringOrMap{
 				Map: map[string]any{
 					"qryType": 1,
-					"query":   fmt.Sprintf("label_values(anubis_challenges_issued{job=~\"%s\"},instance)", opts.Integration), "refId": "PrometheusVariableQueryEditor-VariableQuery",
+					"query":   fmt.Sprintf("label_values(anubis_policy_results{job=~\"%s\"},instance)", opts.Integration), "refId": "PrometheusVariableQueryEditor-VariableQuery",
 				},
 			}).
 			Datasource(shared.DefaultPrometheusDatasource()).
@@ -126,6 +119,7 @@ func Dashboard(opts Options) *dashboard.DashboardBuilder {
 			Multi(true).
 			Refresh(dashboard.VariableRefreshOnDashboardLoad).
 			Sort(dashboard.VariableSortNaturalAsc).
+			AllValue(".+").
 			IncludeAll(true),
 		).
 		WithPanel(requestRatesTimeseries(opts).Span(12).Height(8)).
