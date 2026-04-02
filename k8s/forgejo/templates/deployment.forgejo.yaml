@@ -47,6 +47,8 @@ spec:
             - name: anubis
               containerPort: 8081
           env:
+            - name: "SLOG_LEVEL"
+              value: "DEBUG"
             - name: "BIND"
               value: ":8081"
             - name: "DIFFICULTY"
