@@ -1,6 +1,6 @@
 forgejo:
   image: code.forgejo.org/forgejo/forgejo
-  tag: "14.0.4-rootless"
+  tag: "15.0.0-rootless"
 
 runner:
   image: code.forgejo.org/forgejo/runner
