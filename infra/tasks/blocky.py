@@ -7,7 +7,7 @@ from pyinfra.operations import files, server, systemd
 from .utils import resource_path
 
 DEFAULTS = {
-    "blocky_version": "v0.29.0",
+    "blocky_version": "v0.30.0",
     "blocky_dir": "/opt/blocky",
     "blocky_base_url": "https://github.com/0xERR0R/blocky/releases/download",
     "blocky_tmp_dir": "/tmp",
