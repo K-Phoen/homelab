@@ -1,7 +1,0 @@
-umami:
-  image: ghcr.io/umami-software/umami
-  tag: "3.0.3"
-
-postgres:
-  image: postgres
-  tag: "17.4-alpine3.21"
