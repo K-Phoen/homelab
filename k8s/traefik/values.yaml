@@ -29,36 +29,34 @@ ingressRoute:
     tls:
       secretName: traefik-cert
 
-logs:
-  general:
-    level: "INFO" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
+log:
+  level: "INFO" # TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC. Default is: "INFO"
 
-  access:
-    enabled: true
-    format: json
+accessLog:
+  enabled: true
+  format: json
 
-    fields:
-      general:
-        defaultMode: keep
-        names:
-          StartLocal: drop
-          StartUTC: drop
-          TLSCipher: drop
-          TLSVersion: drop
-          ServiceURL: drop
-          ServiceAddr: drop
-          ServiceName: drop
-          RetryAttempts: drop
-          RequestPort: drop
-          RequestCount: drop
-          Overhead: drop
-          ClientAddr: drop
-          ClientPort: drop
-          ClientUsername: drop
-      headers:
-        defaultMode: drop
-        names:
-          User-Agent: keep
+  fields:
+    defaultMode: keep
+    names:
+      StartLocal: drop
+      StartUTC: drop
+      TLSCipher: drop
+      TLSVersion: drop
+      ServiceURL: drop
+      ServiceAddr: drop
+      ServiceName: drop
+      RetryAttempts: drop
+      RequestPort: drop
+      RequestCount: drop
+      Overhead: drop
+      ClientAddr: drop
+      ClientPort: drop
+      ClientUsername: drop
+    headers:
+      defaultMode: drop
+      names:
+        User-Agent: keep
 
 resources:
   requests:
