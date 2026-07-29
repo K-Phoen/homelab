@@ -4,7 +4,7 @@ forgejo:
 
 runner:
   image: code.forgejo.org/forgejo/runner
-  tag: "12.13.0"
+  tag: "12.13.2"
 
 postgres:
   image: postgres
