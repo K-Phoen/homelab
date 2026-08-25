@@ -1,0 +1,21 @@
+# https://artifacthub.io/packages/helm/ananace-charts/matrix-synapse
+# https://gitlab.com/ananace/charts/-/tree/master/charts/matrix-synapse?ref_type=heads
+
+serverName: kevingomez.fr
+publicServerName: matrix.kevingomez.fr
+
+ingress:
+  tls:
+    - secretName: synapse-cert
+
+serviceAccount:
+  create: true
+
+postgresql:
+  auth:
+    existingSecret: postgres-password
+
+  primary:
+    persistence:
+      storageClass: longhorn
+      size: 16Gi
