@@ -23,3 +23,9 @@ externalPostgresql:
   existingSecretPasswordKey: password
 
   database: synapse
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  accessMode: ReadWriteMany
+  size: 10Gi
