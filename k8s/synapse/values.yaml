@@ -12,10 +12,14 @@ serviceAccount:
   create: true
 
 postgresql:
-  auth:
-    existingSecret: postgres-password
+  enabled: false
 
-  primary:
-    persistence:
-      storageClass: longhorn
-      size: 16Gi
+externalPostgresql:
+  host: postgres
+  port: 5432
+  username: synapse
+
+  existingSecret: postgres-password
+  existingSecretPasswordKey: password
+
+  database: synapse
