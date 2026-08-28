@@ -11,6 +11,12 @@ ingress:
 serviceAccount:
   create: true
 
+synapse:
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "10m"
+
 postgresql:
   enabled: false
 
