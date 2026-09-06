@@ -1721,7 +1721,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "blocky_denylist_cache_entries{instance=~\"$instance\"}",
+            "expr": "sum(blocky_denylist_cache_entries{instance=~\"$instance\"}) by (group)",
             "format": "time_series",
             "instant": true,
             "interval": "",
