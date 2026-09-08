@@ -149,7 +149,7 @@ This app can be added via the CLI or via the UI.
 argocd app create apps \
     --dest-namespace argocd \
     --dest-server https://kubernetes.default.svc \
-    --repo https://github.com/K-Phoen/homelab.git \
+    --repo https://codeberg.org/K-Phoen/homelab.git \
     --path k8s/apps
 argocd app sync apps 
 ```

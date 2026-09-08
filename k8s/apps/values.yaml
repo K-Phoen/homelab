@@ -2,5 +2,5 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/K-Phoen/homelab
+    repoURL: https://codeberg.org/K-Phoen/homelab.git
     targetRevision: HEAD
